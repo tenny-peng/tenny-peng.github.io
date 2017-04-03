@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-04-03T05:43:42.984Z</updated>
+  <updated>2017-04-03T13:20:28.589Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -16,11 +16,155 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MarkDown设置字体颜色</title>
+    <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2/"/>
+    <id>https://tenny-peng.github.io/2017/04/03/MarkDown字体颜色/</id>
+    <published>2017-04-03T13:15:12.000Z</published>
+    <updated>2017-04-03T13:20:28.589Z</updated>
+    
+    <content type="html"><![CDATA[<p>记录一下如何设置字体颜色和大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;font color=red size=5&gt;gray&lt;/font&gt;</div><div class="line">&lt;font color=&quot;#4590a3&quot; size=&quot;6px&quot;&gt;文字&lt;/font&gt;</div></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<font color="red" size="5">red</font><br><font color="#4590a3" size="6px">文字</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一下如何设置字体颜色和大小&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;
+    
+    </summary>
+    
+      <category term="markdown" scheme="https://tenny-peng.github.io/categories/markdown/"/>
+    
+    
+      <category term="markdown，字体颜色" scheme="https://tenny-peng.github.io/tags/markdown%EF%BC%8C%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo引用本地图片</title>
+    <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"/>
+    <id>https://tenny-peng.github.io/2017/04/03/MarkDown引用本地图片/</id>
+    <published>2017-04-03T12:03:30.000Z</published>
+    <updated>2017-04-03T13:12:20.758Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="markdown文章里引用图片有两种方式。"><a href="#markdown文章里引用图片有两种方式。" class="headerlink" title="markdown文章里引用图片有两种方式。"></a>markdown文章里引用图片有两种方式。</h3><p>一种是直接引用互联网上的图片，使用绝对路径  <a href="http://xxx.com/xxx.jpg" target="_blank" rel="external">http://xxx.com/xxx.jpg</a></p>
+<p>一种是使用本地图片。</p>
+<p>因为最后要发布到网上，所以引用本地图片路径必须是相对路径../image/xx.png</p>
+<h3 id="这里讲如何引用本地图片。"><a href="#这里讲如何引用本地图片。" class="headerlink" title="这里讲如何引用本地图片。"></a>这里讲如何引用本地图片。</h3><p>首先。我们需要在source目录下新建一个image目录</p>
+<p><img src="../images/20170403200959.png" alt="新建images目录"></p>
+<p>然后把你要引用的图片放在这里目录下</p>
+<p><img src="../images/20170403201525.png" alt="放入图片"></p>
+<p>然后如下引用即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片说明，如果图片不存在会显示此文字](../images/xxxxxx.png)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;markdown文章里引用图片有两种方式。&quot;&gt;&lt;a href=&quot;#markdown文章里引用图片有两种方式。&quot; class=&quot;headerlink&quot; title=&quot;markdown文章里引用图片有两种方式。&quot;&gt;&lt;/a&gt;markdown文章里引用图片有两种方式。&lt;/
+    
+    </summary>
+    
+      <category term="markdown" scheme="https://tenny-peng.github.io/categories/markdown/"/>
+    
+    
+      <category term="markdown" scheme="https://tenny-peng.github.io/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git简单教程</title>
+    <link href="https://tenny-peng.github.io/2017/04/03/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
+    <id>https://tenny-peng.github.io/2017/04/03/Git简单教程/</id>
+    <published>2017-04-03T05:45:13.000Z</published>
+    <updated>2017-04-03T13:58:40.803Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,</p>
+<p>可以有效、高速的处理从很小到非常大的项目版本管理。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>由于本人是Windows平台，所以这里安装的是Windows平台下的工具。</p>
+<p>点击<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a>下载</p>
+<p>如果网速太慢可以百度搜索“git下载”。</p>
+<p>下载完成之后一路next就可以了，  </p>
+<p>安装完成后，开始菜单找到”git”-&gt;”Git Bash”，</p>
+<p>在命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
+<p>看到类似如下结果，说明我们安装成功了。</p>
+<p><img src="../images/20170403201939.png" alt="git_bash_img"></p>
+<p>安装完成后，还需要一点设置，在打开的git bash命令行中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Your Name&quot;</div><div class="line">$ git config --global user.email &quot;email@example.com&quot;</div></pre></td></tr></table></figure></p>
+<p><strong>注意把上面改成自己的名字和邮箱地址</strong></p>
+<p>git config命令的–global参数，表示你这台机器上所有的Git仓库都会使用这个配置，</p>
+<p>当然也可以对某个仓库指定不同的用户名和Email地址。</p>
+<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。</p>
+<h1 id="使用github"><a href="#使用github" class="headerlink" title="使用github"></a>使用github</h1><p>我们希望项目不只是在本地，只有有网，哪里都可以获取自己的项目，<br>GitHub 正是这样一个面向开源及私有软件项目的托管平台。<br>我们可以把自己的项目放在这个平台上，可以和其他人维护项目。</p>
+<p>后面会讲git的基本操作，你也可以直接到后面查看。作为一般流程，这里让我们先注册一个github账号</p>
+<p>进入<a href="https://github.com/" target="_blank" rel="external">github</a>网站,点击sign up</p>
+<p><img src="../images/20170403203407.png" alt="注册github"></p>
+<p>填写信息后点击”create an account” 按钮</p>
+<p><img src="../images/20170403203655.png" alt="注册github"></p>
+<p>之后进入到我们的首页</p>
+<p><img src="../images/20170403204148.png" alt="github首页"></p>
+<p>这样我们已经成功拥有了一个github账号，让我们正式开始吧~</p>
+<p>简单说下仓库的概念，仓库的英文名是repository，你可以简单理解成一个目录，<br>这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，<br>以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
+<p>点击上面的+号，新建一个仓库<br><img src="../images/20170403204148.png" alt="github首页"></p>
+<p>输入我们的仓库名称后，点击下面”create repository”按钮即可创建一个仓库<br><img src="../images/0170403204526.png" alt="仓库信息"></p>
+<p>我们可以看到这个仓库是空的，什么都没有。<br><img src="../images/20170403205231.png" alt="空仓库"></p>
+<p>接下来，我们回到本地git上。</p>
+<h1 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h1><p>回到git bash命令窗口</p>
+<p>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd e:</div></pre></td></tr></table></figure></p>
+<p>切换目录，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:tenny-peng/test.git</div></pre></td></tr></table></figure></p>
+<p>稍等一会，就可将github上的项目克隆到本地</p>
+<p><img src="../images/20170403212928.png" alt="本地仓库"></p>
+<p>这里我选的e盘根目录，你可以自己修改，<strong>注意：选择的目录下不可以有仓库同名目录</strong><br>如我的e盘下不能有test这个目录，不然在克隆时会报错。</p>
+<p><img src="../images/20170403210357.png" alt="克隆仓库"><br>这里有一个警告，说我们的仓库是空的，不用管它，我们马上会添加文件。</p>
+<h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><font color="red" size="5">使用Windows的童鞋要特别注意：</font>
+
+<p>千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了<br>一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf<br>（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，<br>明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。建议你下载<br>Notepad++代替记事本，不但功能强大，而且免费！记得把notepad++的默认编码设置为UTF-8<br>without BOM即可。</p>
+<p>在仓库test文件目录下，我们先编写一个readme.txt文件，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Git is a version control system.</div><div class="line">Git is free software.</div></pre></td></tr></table></figure></p>
+<p><img src="../images/20170403213141.png" alt="新建文件"></p>
+<p>这里我们可以看到test目录下有一个隐藏的.git目录(看不到可自行百度“windows查看隐藏文件方法”)，这个就说明此目录是由git管理的仓库了，如果删除了这个隐藏的目录，那个git也就不认识这个目录了，也不能对此目录下的文件进行管理了。</p>
+<p>回到命令行，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add readme.txt</div></pre></td></tr></table></figure></p>
+<p><img src="../images/20170403213613.png" alt="添加文件"></p>
+<p>什么反馈信息也没有？那就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
+<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure></p>
+<p>可查看当前仓库状态</p>
+<p><img src="../images/20170403213822.png" alt="添加状态"></p>
+<p>我们发现提示有新文件，但是这样还不够。</p>
+<p>我们继续输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;add readme.txt&quot;</div></pre></td></tr></table></figure></p>
+<p>这样才把文件提交到仓库，再次输入”git status”查看状态</p>
+<p><img src="../images/20170403214113.png" alt="提交状态"></p>
+<p>简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
+<p>git commit命令执行成功后会告诉你，1个文件被改动（我们新添加的readme.txt文件），插入了两行内容（readme.txt有两行内容）。</p>
+<h1 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h1><p>这里我就在仓库里新增了一个文件，当然还会有修改，删除操作。其实这样就可以管理自己的项目了。但是，我们似乎忘记了github。对，我们需要的是随时随处可获取，所以我们需要把本地仓库的内容同步到github这个托管平台。</p>
+<p>当你从远程仓库克隆时，实际上Git自动把本地的master分支(分支后面再讲，简单理解为仓库的多个版本，默认一个主分支)和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。</p>
+<p>要查看远程库的信息，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote</div></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v</div></pre></td></tr></table></figure></p>
+<p>获取更详细信息</p>
+<p><img src="../images/20170403214855.png" alt="远程信息"></p>
+<p>上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。</p>
+<p>接下来我们把本地改动(这里新增了一个文件，对于git，新增，修改，删除，都属于改动)推送到远程仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure></p>
+<p><img src="../images/20170403215328.png" alt="推送分支"></p>
+<p>刷新浏览器中我们的github主页，可以看到，readme.txt文件已经同步到远程仓库了。<br><img src="../images/20170403215427.png" alt="查看远程分支"></p>
+<font size="5">以上我们就使用git创建了自己的仓库，并将其同步到远程服务器上，以便我们在其它地方，或其他人获取。</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,&lt;/p&gt;
+&lt;p&gt;可以有效、高速的处理从很小到非常大的项目版
+    
+    </summary>
+    
+      <category term="git" scheme="https://tenny-peng.github.io/categories/git/"/>
+    
+    
+      <category term="git" scheme="https://tenny-peng.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Markdown基础语法</title>
     <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
     <id>https://tenny-peng.github.io/2017/04/03/MarkDown基础语法/</id>
     <published>2017-04-03T02:21:15.000Z</published>
-    <updated>2017-04-03T05:43:42.984Z</updated>
+    <updated>2017-04-03T13:14:56.524Z</updated>
     
     <content type="html"><![CDATA[<h1 id="标准mrakdown语法"><a href="#标准mrakdown语法" class="headerlink" title="标准mrakdown语法"></a>标准mrakdown语法</h1><h2 id="加粗和斜体"><a href="#加粗和斜体" class="headerlink" title="加粗和斜体"></a>加粗和斜体</h2><h3 id="字体加粗以两个-或两个-开头结尾"><a href="#字体加粗以两个-或两个-开头结尾" class="headerlink" title="字体加粗以两个*或两个_开头结尾"></a>字体加粗以两个*或两个_开头结尾</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__重要的事情说三遍！！！__   **重要的事情说三遍！！！**</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
@@ -36,7 +180,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#109;&#x70;&#x65;&#x6e;&#x67;&#116;&#x61;&#x6f;&#x71;&#x69;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#109;&#x70;&#x65;&#x6e;&#x67;&#116;&#x61;&#x6f;&#x71;&#x69;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>。</p>
+<p>这是我的邮箱<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#109;&#112;&#x65;&#110;&#x67;&#116;&#97;&#x6f;&#113;&#105;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;">&#109;&#112;&#x65;&#110;&#x67;&#116;&#97;&#x6f;&#113;&#105;&#x40;&#x31;&#x36;&#x33;&#46;&#99;&#x6f;&#x6d;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>
@@ -116,32 +260,12 @@
     
     </summary>
     
-      <category term="搭建博客" scheme="https://tenny-peng.github.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+      <category term="markdown" scheme="https://tenny-peng.github.io/categories/markdown/"/>
     
     
       <category term="markdown" scheme="https://tenny-peng.github.io/tags/markdown/"/>
     
-      <category term="hexo" scheme="https://tenny-peng.github.io/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中文名</title>
-    <link href="https://tenny-peng.github.io/2017/04/03/%E5%BC%80%E9%80%9A%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://tenny-peng.github.io/2017/04/03/开通博客/</id>
-    <published>2017-04-03T02:21:15.000Z</published>
-    <updated>2017-04-03T06:39:37.130Z</updated>
-    
-    <content type="html"><![CDATA[<p>开通博客了，非常开心，以后的学习都记录在此。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;开通博客了，非常开心，以后的学习都记录在此。&lt;/p&gt;
-
-    
-    </summary>
-    
+      <category term="语法" scheme="https://tenny-peng.github.io/tags/%E8%AF%AD%E6%B3%95/"/>
     
   </entry>
   

@@ -76,7 +76,7 @@
     <link href="https://tenny-peng.github.io/2017/04/03/Git%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"/>
     <id>https://tenny-peng.github.io/2017/04/03/Git简单教程/</id>
     <published>2017-04-03T05:45:13.000Z</published>
-    <updated>2017-04-03T13:58:40.803Z</updated>
+    <updated>2017-04-03T14:15:57.802Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,</p>
 <p>可以有效、高速的处理从很小到非常大的项目版本管理。</p>
@@ -143,6 +143,11 @@
 <p><img src="../images/20170403215328.png" alt="推送分支"></p>
 <p>刷新浏览器中我们的github主页，可以看到，readme.txt文件已经同步到远程仓库了。<br><img src="../images/20170403215427.png" alt="查看远程分支"></p>
 <font size="5">以上我们就使用git创建了自己的仓库，并将其同步到远程服务器上，以便我们在其它地方，或其他人获取。</font>
+
+<p><br><br>参考：</p>
+<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的git教程</a></p>
+<p><a href="http://www.baike.com/wiki/GIT" target="_blank" rel="external">git互动百科</a></p>
+<p><a href="http://www.baike.com/wiki/github" target="_blank" rel="external">github互动百科</a></p>
 ]]></content>
     
     <summary type="html">

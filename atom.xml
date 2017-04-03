@@ -45,7 +45,7 @@
     <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"/>
     <id>https://tenny-peng.github.io/2017/04/03/MarkDown引用本地图片/</id>
     <published>2017-04-03T12:03:30.000Z</published>
-    <updated>2017-04-03T14:52:35.625Z</updated>
+    <updated>2017-04-03T14:55:43.892Z</updated>
     
     <content type="html"><![CDATA[<h3 id="markdown文章里引用图片有两种方式。"><a href="#markdown文章里引用图片有两种方式。" class="headerlink" title="markdown文章里引用图片有两种方式。"></a>markdown文章里引用图片有两种方式。</h3><p>一种是直接引用互联网上的图片，使用绝对路径  <a href="http://xxx.com/xxx.jpg" target="_blank" rel="external">http://xxx.com/xxx.jpg</a></p>
 <p>一种是使用本地图片。</p>

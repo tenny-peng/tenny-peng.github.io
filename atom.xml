@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-04-03T13:20:28.589Z</updated>
+  <updated>2017-04-04T04:02:13.575Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修复TortoiseGit图标不显示</title>
+    <link href="https://tenny-peng.github.io/2017/04/04/%E4%BF%AE%E5%A4%8DTortoiseGit%E5%9B%BE%E6%A0%87%E4%B8%8D%E6%98%BE%E7%A4%BA/"/>
+    <id>https://tenny-peng.github.io/2017/04/04/修复TortoiseGit图标不显示/</id>
+    <published>2017-04-04T03:35:14.000Z</published>
+    <updated>2017-04-04T04:02:13.575Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p>win + r 打开运行，输入regedit.exe打开注册表</p>
+</li>
+<li><p>找到HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer</p>
+</li>
+<li><p>修改符串值 “Max Cached Icons” (如没有则新建)值为 “10000”(切换到十进制)。<br><img src="/2017/04/04/修复TortoiseGit图标不显示/20170404114101.png" alt="注册表"></p>
+</li>
+<li><p>Ctrl + Alt + Del 打开任务管理器,找到explorer.explorer<br><img src="/2017/04/04/修复TortoiseGit图标不显示/20170404114741.png" alt="任务管理器"></p>
+</li>
+<li><p>右键选中explorer.exe，在弹出选项中选择”结束进程”,这个时候会发现电脑底部状态栏没有了，不用担心。</p>
+</li>
+<li><p>任务管理器上方的”文件”选项，点击”新建任务(运行)”，输入explorer.exe，确定即可。<br><img src="/2017/04/04/修复TortoiseGit图标不显示/20170404115205.png" alt="重启explorer"></p>
+</li>
+</ol>
+<p>由于Windows Explorer Shell 支持的 Overlay Icon 最多 15 个，Windows 自身使用了 4 个，只剩 11 个可扩展使用。我们在这里调节了它的最大图标数。<br>explorer.exe是Windows程序管理器或者文件资源管理器，它用于管理Windows图形壳，包括桌面和文件管理，重启explorer.exe就可以看到我们的修改了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;win + r 打开运行，输入regedit.exe打开注册表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;找到HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer&lt;/p&gt;
+&lt;/l
+    
+    </summary>
+    
+      <category term="TortoiseGit" scheme="https://tenny-peng.github.io/categories/TortoiseGit/"/>
+    
+    
+      <category term="TortoiseGit" scheme="https://tenny-peng.github.io/tags/TortoiseGit/"/>
+    
+  </entry>
   
   <entry>
     <title>MarkDown设置字体颜色</title>
@@ -45,7 +86,7 @@
     <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%BC%95%E7%94%A8%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"/>
     <id>https://tenny-peng.github.io/2017/04/03/MarkDown引用本地图片/</id>
     <published>2017-04-03T12:03:30.000Z</published>
-    <updated>2017-04-03T15:08:22.872Z</updated>
+    <updated>2017-04-03T15:13:04.345Z</updated>
     
     <content type="html"><![CDATA[<h3 id="markdown文章里引用图片有两种方式。"><a href="#markdown文章里引用图片有两种方式。" class="headerlink" title="markdown文章里引用图片有两种方式。"></a>markdown文章里引用图片有两种方式。</h3><p>一种是直接引用互联网上的图片，使用绝对路径  <a href="http://xxx.com/xxx.jpg" target="_blank" rel="external">http://xxx.com/xxx.jpg</a></p>
 <p>一种是使用本地图片。</p>
@@ -186,7 +227,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#109;&#x70;&#101;&#x6e;&#x67;&#116;&#97;&#111;&#x71;&#105;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;">&#109;&#x70;&#101;&#x6e;&#x67;&#116;&#97;&#111;&#x71;&#105;&#x40;&#49;&#54;&#x33;&#46;&#x63;&#x6f;&#109;</a>。</p>
+<p>这是我的邮箱<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x6d;&#112;&#101;&#x6e;&#x67;&#x74;&#x61;&#111;&#113;&#105;&#64;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#x6d;">&#x6d;&#112;&#101;&#x6e;&#x67;&#x74;&#x61;&#111;&#113;&#105;&#64;&#x31;&#54;&#x33;&#46;&#x63;&#111;&#x6d;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>

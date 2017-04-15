@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-04-15T08:53:49.282Z</updated>
+  <updated>2017-04-15T09:02:00.664Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://tenny-peng.github.io/2017/04/15/redis%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     <id>https://tenny-peng.github.io/2017/04/15/redis学习记录/</id>
     <published>2017-04-15T00:54:10.000Z</published>
-    <updated>2017-04-15T08:53:49.282Z</updated>
+    <updated>2017-04-15T09:02:00.664Z</updated>
     
     <content type="html"><![CDATA[<h1 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h1><p>Redis 是一个高性能的key-value数据库。</p>
 <ul>
@@ -30,7 +30,7 @@
 <li>Redis的所有操作都是原子性的，Redis还支持几个操作合并后的原子性执行。</li>
 </ul>
 <h1 id="Redis-下载安装"><a href="#Redis-下载安装" class="headerlink" title="Redis 下载安装"></a>Redis 下载安装</h1><p>Redis官方并不支持Windows。 但是，微软针对Win64自己开发了一个windows版的redis并共享到github上。</p>
-<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>下载。</p>
+<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>进入下载页面。</p>
 <p>选择你喜欢的安装方式，这里我选择压缩版。<br><img src="/2017/04/15/redis学习记录/20170415092253.png" alt="下载redis"></p>
 <p>安装/解压缩后到redis目录找到redis-server.exe和redis-cli.exe<br><img src="/2017/04/15/redis学习记录/20170415094655.png" alt="redis目录"></p>
 <p>双击redis-server.exe启动redis服务<br><img src="/2017/04/15/redis学习记录/20170415095002.png" alt="redis服务"></p>
@@ -668,7 +668,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#109;&#x70;&#101;&#110;&#x67;&#116;&#97;&#111;&#113;&#x69;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#109;&#x70;&#101;&#110;&#x67;&#116;&#97;&#111;&#113;&#x69;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
+<p>这是我的邮箱<a href="&#109;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#109;&#112;&#101;&#110;&#103;&#116;&#97;&#111;&#113;&#105;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;">&#109;&#112;&#101;&#110;&#103;&#116;&#97;&#111;&#113;&#105;&#x40;&#x31;&#x36;&#51;&#x2e;&#x63;&#111;&#109;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>

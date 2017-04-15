@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-04-08T10:34:28.877Z</updated>
+  <updated>2017-04-15T08:53:49.282Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -14,6 +14,124 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis学习记录</title>
+    <link href="https://tenny-peng.github.io/2017/04/15/redis%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <id>https://tenny-peng.github.io/2017/04/15/redis学习记录/</id>
+    <published>2017-04-15T00:54:10.000Z</published>
+    <updated>2017-04-15T08:53:49.282Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h1><p>Redis 是一个高性能的key-value数据库。</p>
+<ul>
+<li>Redis可基于内存亦可持久化。</li>
+<li>Redis 支持存储的value类型丰富，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）</li>
+<li>Redis性能极高，读的速度可高达110000次/s，写的速度可高达81000次/s 。</li>
+<li>Redis的所有操作都是原子性的，Redis还支持几个操作合并后的原子性执行。</li>
+</ul>
+<h1 id="Redis-下载安装"><a href="#Redis-下载安装" class="headerlink" title="Redis 下载安装"></a>Redis 下载安装</h1><p>Redis官方并不支持Windows。 但是，微软针对Win64自己开发了一个windows版的redis并共享到github上。</p>
+<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>下载。</p>
+<p>选择你喜欢的安装方式，这里我选择压缩版。<br><img src="/2017/04/15/redis学习记录/20170415092253.png" alt="下载redis"></p>
+<p>安装/解压缩后到redis目录找到redis-server.exe和redis-cli.exe<br><img src="/2017/04/15/redis学习记录/20170415094655.png" alt="redis目录"></p>
+<p>双击redis-server.exe启动redis服务<br><img src="/2017/04/15/redis学习记录/20170415095002.png" alt="redis服务"></p>
+<p>双击redis-cli.exe启动客户端，用来访问redis服务。<br><img src="/2017/04/15/redis学习记录/20170415095226.png" alt="redis客户端"></p>
+<p>测试一下，设置x的值为1并获取x。<br><img src="/2017/04/15/redis学习记录/20170415095445.png" alt="redis测试"></p>
+<h1 id="使用redis"><a href="#使用redis" class="headerlink" title="使用redis"></a>使用redis</h1><p>redis使用key-value来存储数据。</p>
+<h2 id="set-amp-get"><a href="#set-amp-get" class="headerlink" title="set &amp; get"></a>set &amp; get</h2><p>使用set命令设置值，并用get命令获取值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; get name</div><div class="line">&quot;tenny&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="del"><a href="#del" class="headerlink" title="del"></a>del</h2><p>del删除一个key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; del name</div><div class="line">(integer) 1</div><div class="line">&gt; get name</div><div class="line">(nil)</div></pre></td></tr></table></figure></p>
+<h2 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h2><p>incr递增一个值，如果key不存在则创造它并初始化值为1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; set connections 10</div><div class="line">OK</div><div class="line">&gt; incr connections</div><div class="line">(integer) 11</div><div class="line">&gt; incr connections</div><div class="line">(integer) 12</div><div class="line"></div><div class="line">&gt; del connections</div><div class="line">(integer) 1</div><div class="line">&gt; incr connections    //connections不存在，初始化为1</div><div class="line">(integer) 1</div></pre></td></tr></table></figure></p>
+<h2 id="setnx"><a href="#setnx" class="headerlink" title="setnx"></a>setnx</h2><p>setnx(set-if-not-exists)，如果key不存在才改变值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;panda&quot;</div><div class="line">OK</div><div class="line">&gt; get name</div><div class="line">&quot;panda&quot;</div><div class="line">&gt; setnx name &quot;tenny&quot;    //因为name存在所以不会改变值</div><div class="line">(integer) 0</div><div class="line">&gt; get name</div><div class="line">&quot;panda&quot;</div><div class="line"></div><div class="line">&gt; get age</div><div class="line">(nil)</div><div class="line">&gt; setnx age 22    //age不存在，赋值为22</div><div class="line">(integer) 1</div><div class="line">&gt; get age</div><div class="line">&quot;22&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="expire-amp-ttl"><a href="#expire-amp-ttl" class="headerlink" title="expire &amp; ttl"></a>expire &amp; ttl</h2><p>expire设置生存时间，ttl查看剩余时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; expire name 120   //设置name生存时间为120秒</div><div class="line">(integer) 1</div><div class="line">&gt; ttl name</div><div class="line">(integer) 80    //剩余80秒</div><div class="line">&gt; ttl name      //2分钟后</div><div class="line">(integer) -2    //-2表示name这个key已经不存在了。</div><div class="line">&gt; get name</div><div class="line">(nil)</div><div class="line"></div><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; ttl name</div><div class="line">(integer) -1    //默认-1表示永久存在</div><div class="line">&gt; expire name 120</div><div class="line">(integer) 1</div><div class="line">&gt; ttl name</div><div class="line">(integer) 118</div><div class="line">&gt; get name</div><div class="line">&quot;tenny&quot;</div><div class="line">&gt; set name &quot;panda&quot;    //设置值会重置存在时间</div><div class="line">OK</div><div class="line">&gt; ttl name</div><div class="line">(integer) -1</div></pre></td></tr></table></figure></p>
+<h2 id="list操作：rpush-amp-lpush-amp-llen-amp-lrange-amp-lpop-amp-rpop"><a href="#list操作：rpush-amp-lpush-amp-llen-amp-lrange-amp-lpop-amp-rpop" class="headerlink" title="list操作：rpush &amp; lpush &amp; llen &amp; lrange &amp; lpop &amp; rpop"></a>list操作：rpush &amp; lpush &amp; llen &amp; lrange &amp; lpop &amp; rpop</h2><ul>
+<li><p>rpush在list末尾添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; rpush color &quot;blue&quot;    //[bule]</div><div class="line">(integer) 1</div><div class="line">&gt; rpush color &quot;red&quot;   //[bule, red]</div><div class="line">(integer) 2</div></pre></td></tr></table></figure>
+</li>
+<li><p>lpush在list开头添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; lpush color &quot;yellow&quot;    //[yellow, bule, red]</div><div class="line">(integer) 3</div></pre></td></tr></table></figure>
+</li>
+<li><p>llen查看list长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; llen color</div><div class="line">(integer) 3</div></pre></td></tr></table></figure>
+</li>
+<li><p>lrange查看list内容，接受两个参数，开始index和结尾index，如果结尾index为-1，表示直到list末尾。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; lrange color 0 2</div><div class="line">1) &quot;yellow&quot;</div><div class="line">2) &quot;blue&quot;</div><div class="line">3) &quot;red&quot;</div><div class="line">&gt; lrange color 0 1</div><div class="line">1) &quot;yellow&quot;</div><div class="line">2) &quot;blue&quot;</div><div class="line">&gt; lrange color 1 2</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div><div class="line">&gt; lrange color 1 2</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>lpop移除list第一个元素并返回它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; lpop color</div><div class="line">&quot;yellow&quot;</div><div class="line">&gt; llen color</div><div class="line">(integer) 2</div><div class="line">&gt; lrange color 0 -1</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>rpop移除list最后一个元素并返回它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; rpop color</div><div class="line">&quot;red&quot;</div><div class="line">&gt; llen color</div><div class="line">(integer) 1</div><div class="line">&gt; lrange color 0 -1</div><div class="line">1) &quot;blue&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="set操作：sadd-amp-srem-amp-sismember-amp-smembers-amp-sunion"><a href="#set操作：sadd-amp-srem-amp-sismember-amp-smembers-amp-sunion" class="headerlink" title="set操作：sadd &amp; srem &amp; sismember &amp; smembers &amp; sunion"></a>set操作：sadd &amp; srem &amp; sismember &amp; smembers &amp; sunion</h2><p>set类似list，但是元素没有顺序且只能出现一次。</p>
+<ul>
+<li><p>sadd添加一个元素到set</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; sadd superpowers &quot;flight&quot;   //[&quot;flight&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; sadd superpowers &quot;x-ray vision&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; sadd superpowers &quot;reflexes&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;, &quot;reflexes&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; SADD superpowers &quot;flight&quot;   //重复添加无效</div><div class="line">(integer) 0</div></pre></td></tr></table></figure>
+</li>
+<li><p>srem从set中移除一个元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; srem superpowers &quot;reflexes&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;]</div><div class="line">1</div></pre></td></tr></table></figure>
+</li>
+<li><p>sismember测试一个元素是否存在于set，存在返回1，不存在返回0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; sismember superpowers &quot;flight&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; sismember superpowers &quot;reflexes&quot;</div><div class="line">(integer) 0</div></pre></td></tr></table></figure>
+</li>
+<li><p>smembers查看set所有元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; sismember superpowers</div><div class="line">1) &quot;x-ray vision&quot;</div><div class="line">2) &quot;flight&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>sunion联合多个set并返回它们的合集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; sadd birdpowers &quot;pecking&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; sadd birdpowers &quot;flight&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; smembers birdpowers</div><div class="line">1) &quot;pecking&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">&gt; smembers superpowers</div><div class="line">1) &quot;x-ray vision&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">&gt; sunion superpowers birdpowers   //无序的 sunion birdpowers superpowers结果一样</div><div class="line">1) &quot;pecking&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">3) &quot;x-ray vision&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="sorted-set操作：zadd-zrange"><a href="#sorted-set操作：zadd-zrange" class="headerlink" title="sorted set操作：zadd zrange"></a>sorted set操作：zadd zrange</h2><p>有序集合(sorted set)类似集合，不过它每个元素有一个关联值，通过这个关联值对元素进行排序。</p>
+<ul>
+<li><p>zadd为一个有序集合添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; zadd hackers 1940 &quot;Alan Kay&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1906 &quot;Grace Hopper&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1953 &quot;Richard Stallman&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1965 &quot;Yukihiro Matsumoto&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1916 &quot;Claude Shannon&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1969 &quot;Linus Torvalds&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1957 &quot;Sophie Wilson&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1912 &quot;Alan Turing&quot;</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
+</li>
+<li><p>zrange类似于lrange，查看sorted set元素。接受两个参数，开始index和结尾index，如果结尾index为-1，表示直到末尾</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; zrange hackers 0 -1</div><div class="line">1) &quot;Grace Hopper&quot;</div><div class="line">2) &quot;Alan Turing&quot;</div><div class="line">3) &quot;Claude Shannon&quot;</div><div class="line">4) &quot;Alan Kay&quot;</div><div class="line">5) &quot;Richard Stallman&quot;</div><div class="line">6) &quot;Sophie Wilson&quot;</div><div class="line">7) &quot;Yukihiro Matsumoto&quot;</div><div class="line">8) &quot;Linus Torvalds&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看到元素以年份递增排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; ZRANGE hackers 2 4</div><div class="line">1) &quot;Claude Shannon&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Richard Stallman&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="hash操作：hset-amp-hget-amp-hgetall-amp-hmset-amp-hincrby-amp-hdel"><a href="#hash操作：hset-amp-hget-amp-hgetall-amp-hmset-amp-hincrby-amp-hdel" class="headerlink" title="hash操作：hset &amp; hget &amp; hgetall &amp; hmset &amp; hincrby &amp; hdel"></a>hash操作：hset &amp; hget &amp; hgetall &amp; hmset &amp; hincrby &amp; hdel</h2><p> hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p>
+<ul>
+<li>hset添加值<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; hset user name &quot;tenny&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; hset user email &quot;tenny@example.com&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; hset user password &quot;cutepanda&quot;</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>hget获取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; hget user name</div><div class="line">&quot;tenny&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>hgetall获取所有值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; hgetall user</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny&quot;</div><div class="line">3) &quot;email&quot;</div><div class="line">4) &quot;tenny@example.com&quot;</div><div class="line">5) &quot;password&quot;</div><div class="line">6) &quot;cutepanda&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>hmset一次性设置多个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; hmset user1 name &quot;tenny1&quot; password &quot;cutepanda1&quot; email &quot;tenny1@example.com&quot;</div><div class="line">OK</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以使用hset继续添加或修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; hset user1 age 22</div><div class="line">(integer) 1</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div><div class="line">7) &quot;age&quot;</div><div class="line">8) &quot;22&quot;</div><div class="line">&gt; hset user1 age 24   //已存在的值重复设定返回0，新值返回1</div><div class="line">(integer) 0</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div><div class="line">7) &quot;age&quot;</div><div class="line">8) &quot;24&quot;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>hincrby增加数值型域的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; hset user visits 10</div><div class="line">(integer) 1</div><div class="line">&gt; hincrby user visits 1</div><div class="line">(integer) 11</div><div class="line">&gt; hincrby user visits 1</div><div class="line">(integer) 12</div></pre></td></tr></table></figure>
+</li>
+<li><p>hdel删除指定的域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; hdel user visits</div><div class="line">(integer) 1</div><div class="line">&gt; hdel user age   //删除不存在的域返回0</div><div class="line">(integer) 0</div><div class="line">&gt; hdel user visits</div><div class="line">(integer) 0</div><div class="line">&gt; hincrby user visits 20    //字段不存在则默认设置为0后再执行此增加操作</div><div class="line">(integer) 20</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<font size="5">以上介绍了redis的一些简单命令，可以访问<a href="http://www.redis.cn/commands.html" target="_blank" rel="external">redis中文官方网站</a>了解更多。</font>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;redis简介&quot;&gt;&lt;a href=&quot;#redis简介&quot; class=&quot;headerlink&quot; title=&quot;redis简介&quot;&gt;&lt;/a&gt;redis简介&lt;/h1&gt;&lt;p&gt;Redis 是一个高性能的key-value数据库。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Redis可基于内存
+    
+    </summary>
+    
+      <category term="redis" scheme="https://tenny-peng.github.io/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="https://tenny-peng.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>2-Hello World!</title>
@@ -550,7 +668,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#109;&#112;&#101;&#x6e;&#103;&#x74;&#x61;&#111;&#x71;&#105;&#64;&#49;&#x36;&#x33;&#46;&#99;&#111;&#109;">&#109;&#112;&#101;&#x6e;&#103;&#x74;&#x61;&#111;&#x71;&#105;&#64;&#49;&#x36;&#x33;&#46;&#99;&#111;&#109;</a>。</p>
+<p>这是我的邮箱<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#58;&#109;&#x70;&#101;&#110;&#x67;&#116;&#97;&#111;&#113;&#x69;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;">&#109;&#x70;&#101;&#110;&#x67;&#116;&#97;&#111;&#113;&#x69;&#64;&#49;&#x36;&#x33;&#x2e;&#99;&#111;&#x6d;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>

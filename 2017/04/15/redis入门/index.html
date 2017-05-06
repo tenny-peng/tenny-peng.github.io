@@ -96,8 +96,8 @@ Redis 支持存储的value类型丰富，包括string(字符串)、list(链表)�
 Redis性能极高，读的速度可高达110000次/s，写的速度可高达81000次/s 。
 Redis的所有操作都是原子性的，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis学习记录">
-<meta property="og:url" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/index.html">
+<meta property="og:title" content="redis入门">
+<meta property="og:url" content="https://tenny-peng.github.io/2017/04/15/redis入门/index.html">
 <meta property="og:site_name" content="Tenny's Blog">
 <meta property="og:description" content="redis简介Redis 是一个高性能的key-value数据库。
 
@@ -105,21 +105,21 @@ Redis可基于内存亦可持久化。
 Redis 支持存储的value类型丰富，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）
 Redis性能极高，读的速度可高达110000次/s，写的速度可高达81000次/s 。
 Redis的所有操作都是原子性的，">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415092253.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415094655.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415095002.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415095226.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415095445.png">
-<meta property="og:updated_time" content="2017-04-15T09:02:00.664Z">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415092253.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415094655.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415095002.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415095226.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415095445.png">
+<meta property="og:updated_time" content="2017-05-06T02:12:43.691Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis学习记录">
+<meta name="twitter:title" content="redis入门">
 <meta name="twitter:description" content="redis简介Redis 是一个高性能的key-value数据库。
 
 Redis可基于内存亦可持久化。
 Redis 支持存储的value类型丰富，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）
 Redis性能极高，读的速度可高达110000次/s，写的速度可高达81000次/s 。
 Redis的所有操作都是原子性的，">
-<meta name="twitter:image" content="https://tenny-peng.github.io/2017/04/15/redis学习记录/20170415092253.png">
+<meta name="twitter:image" content="https://tenny-peng.github.io/2017/04/15/redis入门/20170415092253.png">
 
 
 
@@ -147,13 +147,13 @@ Redis的所有操作都是原子性的，">
 
 
 
-  <link rel="canonical" href="https://tenny-peng.github.io/2017/04/15/redis学习记录/"/>
+  <link rel="canonical" href="https://tenny-peng.github.io/2017/04/15/redis入门/"/>
 
 
 
 
 
-  <title> redis学习记录 | Tenny's Blog </title>
+  <title> redis入门 | Tenny's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -336,7 +336,7 @@ Redis的所有操作都是原子性的，">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/15/redis学习记录/">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/15/redis入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tenny Peng">
@@ -357,7 +357,7 @@ Redis的所有操作都是原子性的，">
             
             
               
-                redis学习记录
+                redis入门
               
             
           </h1>
@@ -443,12 +443,12 @@ Redis的所有操作都是原子性的，">
 <li>Redis的所有操作都是原子性的，Redis还支持几个操作合并后的原子性执行。</li>
 </ul>
 <h1 id="Redis-下载安装"><a href="#Redis-下载安装" class="headerlink" title="Redis 下载安装"></a>Redis 下载安装</h1><p>Redis官方并不支持Windows。 但是，微软针对Win64自己开发了一个windows版的redis并共享到github上。</p>
-<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>进入下载页面。</p>
-<p>选择你喜欢的安装方式，这里我选择压缩版。<br><img src="/2017/04/15/redis学习记录/20170415092253.png" alt="下载redis"></p>
-<p>安装/解压缩后到redis目录找到redis-server.exe和redis-cli.exe<br><img src="/2017/04/15/redis学习记录/20170415094655.png" alt="redis目录"></p>
-<p>双击redis-server.exe启动redis服务<br><img src="/2017/04/15/redis学习记录/20170415095002.png" alt="redis服务"></p>
-<p>双击redis-cli.exe启动客户端，用来访问redis服务。<br><img src="/2017/04/15/redis学习记录/20170415095226.png" alt="redis客户端"></p>
-<p>测试一下，设置x的值为1并获取x。<br><img src="/2017/04/15/redis学习记录/20170415095445.png" alt="redis测试"></p>
+<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>下载。</p>
+<p>选择你喜欢的安装方式，这里我选择压缩版。<br><img src="/2017/04/15/redis入门/20170415092253.png" alt="下载redis"></p>
+<p>安装/解压缩后到redis目录找到redis-server.exe和redis-cli.exe<br><img src="/2017/04/15/redis入门/20170415094655.png" alt="redis目录"></p>
+<p>双击redis-server.exe启动redis服务<br><img src="/2017/04/15/redis入门/20170415095002.png" alt="redis服务"></p>
+<p>双击redis-cli.exe启动客户端，用来访问redis服务。<br><img src="/2017/04/15/redis入门/20170415095226.png" alt="redis客户端"></p>
+<p>测试一下，设置x的值为1并获取x。<br><img src="/2017/04/15/redis入门/20170415095445.png" alt="redis测试"></p>
 <h1 id="使用redis"><a href="#使用redis" class="headerlink" title="使用redis"></a>使用redis</h1><p>redis使用key-value来存储数据。</p>
 <h2 id="set-amp-get"><a href="#set-amp-get" class="headerlink" title="set &amp; get"></a>set &amp; get</h2><p>使用set命令设置值，并用get命令获取值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; get name</div><div class="line">&quot;tenny&quot;</div></pre></td></tr></table></figure></p>
 <h2 id="del"><a href="#del" class="headerlink" title="del"></a>del</h2><p>del删除一个key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; del name</div><div class="line">(integer) 1</div><div class="line">&gt; get name</div><div class="line">(nil)</div></pre></td></tr></table></figure></p>
@@ -592,8 +592,8 @@ Redis的所有操作都是原子性的，">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/08/2-HelloWorld/" rel="next" title="2-Hello World!">
-                <i class="fa fa-chevron-left"></i> 2-Hello World!
+              <a href="/2017/04/08/HelloWorld/" rel="next" title="Hello World!">
+                <i class="fa fa-chevron-left"></i> Hello World!
               </a>
             
           </div>
@@ -601,6 +601,10 @@ Redis的所有操作都是原子性的，">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/19/redis设置密码/" rel="prev" title="redis设置密码">
+                redis设置密码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -672,7 +676,7 @@ Redis的所有操作都是原子性的，">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -683,7 +687,7 @@ Redis的所有操作都是原子性的，">
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -694,7 +698,7 @@ Redis的所有操作都是原子性的，">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

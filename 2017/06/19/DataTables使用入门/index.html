@@ -1,0 +1,1026 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DataTables," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tenny's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="简介Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。
+
+分页，即时搜索和排序
+几乎支持任何数据源：DOM， javascript， Ajax 和 服务器处理
+支持不同主题 DataTables, jQuery UI, Bootstrap, Foundation
+各式各样的扩展: Editor, TableTools, FixedCo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataTables使用入门">
+<meta property="og:url" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/index.html">
+<meta property="og:site_name" content="Tenny's Blog">
+<meta property="og:description" content="简介Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。
+
+分页，即时搜索和排序
+几乎支持任何数据源：DOM， javascript， Ajax 和 服务器处理
+支持不同主题 DataTables, jQuery UI, Bootstrap, Foundation
+各式各样的扩展: Editor, TableTools, FixedCo">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619120130.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619120519.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619122034.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619121636.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619122557.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619144830.png">
+<meta property="og:updated_time" content="2017-06-19T07:20:44.202Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DataTables使用入门">
+<meta name="twitter:description" content="简介Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。
+
+分页，即时搜索和排序
+几乎支持任何数据源：DOM， javascript， Ajax 和 服务器处理
+支持不同主题 DataTables, jQuery UI, Bootstrap, Foundation
+各式各样的扩展: Editor, TableTools, FixedCo">
+<meta name="twitter:image" content="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/20170619120130.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'tenny'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/"/>
+
+
+
+
+
+  <title> DataTables使用入门 | Tenny's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4e7825ab6c77d042c1802be5638b2acb";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tenny's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                DataTables使用入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T11:35:03+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataTables/" itemprop="url" rel="index">
+                    <span itemprop="name">DataTables</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。</p>
+<ul>
+<li>分页，即时搜索和排序</li>
+<li>几乎支持任何数据源：DOM， javascript， Ajax 和 服务器处理</li>
+<li>支持不同主题 DataTables, jQuery UI, Bootstrap, Foundation</li>
+<li>各式各样的扩展: Editor, TableTools, FixedColumns ……</li>
+<li>丰富多样的option和强大的API</li>
+<li>支持国际化</li>
+<li>超过2900+个单元测试</li>
+<li>免费开源 （ MIT license ）！ 商业支持</li>
+<li>更多特性请到<a href="http://www.datatables.club/" target="_blank" rel="external">DataTables中文网</a>查看</li>
+</ul>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>可以到<a href="http://www.datatables.club/" target="_blank" rel="external">DataTables中文网</a>下载最新版本的文档。</p>
+<p>下载完目录如下：<br><img src="/2017/06/19/DataTables使用入门/20170619120130.png" alt="DataTables目录"></p>
+<p>我们将使用media目录下的文件。<br><img src="/2017/06/19/DataTables使用入门/20170619120519.png" alt="media目录"></p>
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><p>在项目中使用Datatables，只需要引用三个文件即可，jQuery库，一个DT的核心js文件和一个DT的css文件。</p>
+<h2 id="demo目录"><a href="#demo目录" class="headerlink" title="demo目录"></a>demo目录</h2><p><img src="/2017/06/19/DataTables使用入门/20170619122034.png" alt="demo目录"></p>
+<h2 id="demo-html"><a href="#demo-html" class="headerlink" title="demo.html"></a>demo.html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;</div><div class="line">		&lt;title&gt;DataTables Demo&lt;/title&gt;</div><div class="line">		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">		&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jquery.dataTables.css&quot;&gt;&lt;/link&gt;</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&lt;table id=&quot;table_id_example&quot; class=&quot;display&quot;&gt;</div><div class="line">			&lt;caption&gt;最近交易记录&lt;/caption&gt;</div><div class="line">		&lt;/table&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">	</div><div class="line">	&lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/demo.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="demo-js"><a href="#demo-js" class="headerlink" title="demo.js"></a>demo.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line">$(document).ready( function () &#123;</div><div class="line">	var data = [</div><div class="line">        [</div><div class="line">            &quot;20170527150032890&quot;,</div><div class="line">            &quot;-0.10  CNY&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">            &quot;失败&quot;,</div><div class="line">            &quot;2017-05-27 15:00:32&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">        [</div><div class="line">            &quot;20170527145824609&quot;,</div><div class="line">            &quot;-3.00  CNY&quot;,</div><div class="line">            &quot;冻结&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">            &quot;2017-05-27 14:58:24&quot;,</div><div class="line">            &quot;冻结金额&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">		[</div><div class="line">            &quot;20170527145704263&quot;,</div><div class="line">            &quot;-3.00  CNY&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">            &quot;失败&quot;,</div><div class="line">            &quot;2017-05-27 14:57:04&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">		[</div><div class="line">			&quot;20170527145226988&quot;,</div><div class="line">			&quot;-100.00  CNY&quot;,</div><div class="line">			&quot;冻结&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">			&quot;2017-05-27 14:52:26&quot;,</div><div class="line">			&quot;冻结金额&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170525121845479&quot;,</div><div class="line">			&quot;-0.01 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-27 09:28:09&quot;,</div><div class="line">			&quot;重新提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170527144117493&quot;,</div><div class="line">			&quot;-0.11 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">			&quot;2017-05-27 00:00:00&quot;,</div><div class="line">			&quot;虚拟提现(冻结金额)&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165926389&quot;,</div><div class="line">			&quot;-12.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:59:26&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165802358&quot;,</div><div class="line">			&quot;-2.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:58:02&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165520190&quot;,</div><div class="line">			&quot;-1.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:55:20&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526161241519&quot;,</div><div class="line">			&quot;-1.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:12:41&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165802358&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:58:02&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165520190&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:55:20&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526161241519&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:12:41&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		]</div><div class="line">    ];</div><div class="line"> </div><div class="line">    //DataTables 初始化</div><div class="line">    $(&apos;#table_id_example&apos;).DataTable( &#123;</div><div class="line">		data: data,</div><div class="line">		columns: [</div><div class="line">            &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">            &#123; title: &apos;金额&apos; &#125;,</div><div class="line">            &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">            &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">			&#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">			&#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">			&#123; title: &apos;操作&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125; );</div><div class="line">&#125; );</div></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/2017/06/19/DataTables使用入门/20170619121636.png" alt="简单使用结果"></p>
+<h2 id="添加国际化"><a href="#添加国际化" class="headerlink" title="添加国际化"></a>添加国际化</h2><p>Datatables中所使用的语言选项是通过 language 来配置的。 这是一个对象字符串，通过一个参数来描述Datatables的每个部分。</p>
+<p>Datatables默认的是英语，这里我们改成中文。在demo.js文件添加 language 配置项，使其DataTables初始化代码像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">//DataTables 初始化</div><div class="line">$(&apos;#table_id_example&apos;).DataTable( &#123;</div><div class="line">    data: data,</div><div class="line">    columns: [</div><div class="line">        &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">        &#123; title: &apos;金额&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">        &#123; title: &apos;操作&apos; &#125;</div><div class="line">    ],</div><div class="line">    // 国际化</div><div class="line">    language: &#123;</div><div class="line">        &quot;sProcessing&quot;: &quot;处理中...&quot;,</div><div class="line">        &quot;sLengthMenu&quot;: &quot;显示 _MENU_ 项结果&quot;,</div><div class="line">        &quot;sZeroRecords&quot;: &quot;没有匹配结果&quot;,</div><div class="line">        &quot;sInfo&quot;: &quot;显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项&quot;,</div><div class="line">        &quot;sInfoEmpty&quot;: &quot;显示第 0 至 0 项结果，共 0 项&quot;,</div><div class="line">        &quot;sInfoFiltered&quot;: &quot;(由 _MAX_ 项结果过滤)&quot;,</div><div class="line">        &quot;sInfoPostFix&quot;: &quot;&quot;,</div><div class="line">        &quot;sSearch&quot;: &quot;搜索:&quot;,</div><div class="line">        &quot;sUrl&quot;: &quot;&quot;,</div><div class="line">        &quot;sEmptyTable&quot;: &quot;表中数据为空&quot;,</div><div class="line">        &quot;sLoadingRecords&quot;: &quot;载入中...&quot;,</div><div class="line">        &quot;sInfoThousands&quot;: &quot;,&quot;,</div><div class="line">        &quot;oPaginate&quot;: &#123;</div><div class="line">            &quot;sFirst&quot;: &quot;首页&quot;,</div><div class="line">            &quot;sPrevious&quot;: &quot;上页&quot;,</div><div class="line">            &quot;sNext&quot;: &quot;下页&quot;,</div><div class="line">            &quot;sLast&quot;: &quot;末页&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;oAria&quot;: &#123;</div><div class="line">            &quot;sSortAscending&quot;: &quot;: 以升序排列此列&quot;,</div><div class="line">            &quot;sSortDescending&quot;: &quot;: 以降序排列此列&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125; );</div></pre></td></tr></table></figure></p>
+<p>结果如图<br><img src="/2017/06/19/DataTables使用入门/20170619122557.png" alt="国际化"></p>
+<h2 id="关于表列"><a href="#关于表列" class="headerlink" title="关于表列"></a>关于表列</h2><p>上面我们的写法是动态添加title<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">columns: [</div><div class="line">    &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">    &#123; title: &apos;金额&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">    &#123; title: &apos;操作&apos; &#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>官网是另一种写法，首先在table里写好表列字段名，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">        &lt;th&gt;name&lt;/th&gt;</div><div class="line">        &lt;th&gt;position&lt;/th&gt;</div><div class="line">        &lt;th&gt;salary&lt;/th&gt;</div><div class="line">        &lt;th&gt;office&lt;/th&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">&lt;/thead&gt;</div></pre></td></tr></table></figure></p>
+<p>然后上面columns写法稍微有点不同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">columns: [</div><div class="line">    &#123; data: &apos;name&apos; &#125;,</div><div class="line">    &#123; data: &apos;position&apos; &#125;,</div><div class="line">    &#123; data: &apos;salary&apos; &#125;,</div><div class="line">    &#123; data: &apos;office&apos; &#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>这样也是完全OK的，具体怎么用看自己喜好和实际业务了。</p>
+<h1 id="服务器支持"><a href="#服务器支持" class="headerlink" title="服务器支持"></a>服务器支持</h1><p>一次性处理大量数据DataTables性能会下降，因为 DT 需要渲染，数据越多，速度就越慢。</p>
+<p>为了解决这个问题， DataTables 提供了服务器模式，把本来客户端所做的事情交给服务器去处理， 比如排序（order）、分页（paging）、过滤（filter）。</p>
+<p>启用服务器模式时，每次请求 DataTables 会向服务器发送一些参数（当前分页，排序，搜索参数等），服务器则返回组装好的数据。</p>
+<h2 id="demo-html-1"><a href="#demo-html-1" class="headerlink" title="demo.html"></a>demo.html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;</div><div class="line">		&lt;title&gt;DataTables Demo&lt;/title&gt;</div><div class="line">		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">		&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jquery.dataTables.css&quot;&gt;&lt;/link&gt;</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&lt;table id=&quot;city&quot; class=&quot;display&quot;&gt;</div><div class="line">			&lt;caption&gt;city&lt;/caption&gt;</div><div class="line">			&lt;thead&gt;</div><div class="line">				&lt;tr&gt;</div><div class="line">					&lt;th&gt;id&lt;/th&gt;</div><div class="line">					&lt;th&gt;name&lt;/th&gt;</div><div class="line">					&lt;th&gt;countryCode&lt;/th&gt;</div><div class="line">					&lt;th&gt;district&lt;/th&gt;</div><div class="line">					&lt;th&gt;population&lt;/th&gt;</div><div class="line">				&lt;/tr&gt;</div><div class="line">			&lt;/thead&gt;</div><div class="line">		&lt;/table&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">	</div><div class="line">	&lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/demo.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="demo-js-1"><a href="#demo-js-1" class="headerlink" title="demo.js"></a>demo.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">$(document).ready( function () &#123;</div><div class="line">    //DataTables 初始化</div><div class="line">    $(&apos;#country&apos;).DataTable( &#123;</div><div class="line">		&quot;processing&quot;: true,		//开启加载等待提示，提示信息是下面language中的sProcessing配置</div><div class="line">        &quot;serverSide&quot;: true,		//打开服务器模式</div><div class="line">		&quot;ajax&quot;: &#123;</div><div class="line">			&quot;url&quot;: &quot;city/getall&quot;,</div><div class="line">			&quot;type&quot;: &quot;POST&quot;,</div><div class="line">			&quot;data&quot;: function(d)&#123;	//d包含了DataTables发送到服务器的参数，这里还可以根据自己的业务添加参数</div><div class="line">                //可以自定义一些业务参数</div><div class="line">                //d.xxx = &quot;xxx&quot;;</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		&quot;columns&quot;: [</div><div class="line">            &#123; &quot;data&quot;: &apos;id&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;name&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;countryCode&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;district&apos; &#125;,</div><div class="line">			&#123; &quot;data&quot;: &apos;population&apos; &#125;</div><div class="line">        ],</div><div class="line">		// 国际化</div><div class="line">		language: &#123;</div><div class="line">			&quot;sProcessing&quot;: &quot;处理中...&quot;,</div><div class="line">			&quot;sLengthMenu&quot;: &quot;显示 _MENU_ 项结果&quot;,</div><div class="line">			&quot;sZeroRecords&quot;: &quot;没有匹配结果&quot;,</div><div class="line">			&quot;sInfo&quot;: &quot;显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项&quot;,</div><div class="line">			&quot;sInfoEmpty&quot;: &quot;显示第 0 至 0 项结果，共 0 项&quot;,</div><div class="line">			&quot;sInfoFiltered&quot;: &quot;(由 _MAX_ 项结果过滤)&quot;,</div><div class="line">			&quot;sInfoPostFix&quot;: &quot;&quot;,</div><div class="line">			&quot;sSearch&quot;: &quot;搜索:&quot;,</div><div class="line">			&quot;sUrl&quot;: &quot;&quot;,</div><div class="line">			&quot;sEmptyTable&quot;: &quot;表中数据为空&quot;,</div><div class="line">			&quot;sLoadingRecords&quot;: &quot;载入中...&quot;,</div><div class="line">			&quot;sInfoThousands&quot;: &quot;,&quot;,</div><div class="line">			&quot;oPaginate&quot;: &#123;</div><div class="line">				&quot;sFirst&quot;: &quot;首页&quot;,</div><div class="line">				&quot;sPrevious&quot;: &quot;上页&quot;,</div><div class="line">				&quot;sNext&quot;: &quot;下页&quot;,</div><div class="line">				&quot;sLast&quot;: &quot;末页&quot;</div><div class="line">			&#125;,</div><div class="line">			&quot;oAria&quot;: &#123;</div><div class="line">				&quot;sSortAscending&quot;: &quot;: 以升序排列此列&quot;,</div><div class="line">				&quot;sSortDescending&quot;: &quot;: 以降序排列此列&quot;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">    &#125; );</div><div class="line">&#125; );</div></pre></td></tr></table></figure>
+<h2 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h2><p><img src="/2017/06/19/DataTables使用入门/20170619144830.png" alt="服务器模式"><br>在浏览器调试窗口，我们可以看到发送到后台的参数(即上面ajax请求中d的数据)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">draw:1	//确保Ajax从服务器返回的是对应的，服务器接收到此参数后再返回</div><div class="line">columns[0][data]:id</div><div class="line">columns[0][name]:</div><div class="line">columns[0][searchable]:true</div><div class="line">columns[0][orderable]:true</div><div class="line">columns[0][search][value]:</div><div class="line">columns[0][search][regex]:false</div><div class="line">columns[1][data]:name</div><div class="line">columns[1][name]:</div><div class="line">columns[1][searchable]:true</div><div class="line">columns[1][orderable]:true</div><div class="line">columns[1][search][value]:</div><div class="line">columns[1][search][regex]:false</div><div class="line">columns[2][data]:countryCode</div><div class="line">columns[2][name]:</div><div class="line">columns[2][searchable]:true</div><div class="line">columns[2][orderable]:true</div><div class="line">columns[2][search][value]:</div><div class="line">columns[2][search][regex]:false</div><div class="line">columns[3][data]:district</div><div class="line">columns[3][name]:</div><div class="line">columns[3][searchable]:true</div><div class="line">columns[3][orderable]:true</div><div class="line">columns[3][search][value]:</div><div class="line">columns[3][search][regex]:false</div><div class="line">columns[4][data]:population</div><div class="line">columns[4][name]:</div><div class="line">columns[4][searchable]:true</div><div class="line">columns[4][orderable]:true</div><div class="line">columns[4][search][value]:</div><div class="line">columns[4][search][regex]:false</div><div class="line">order[0][column]:0	//告诉后台那些列是需要排序的</div><div class="line">order[0][dir]:asc	//告诉后台列排序的方式， desc 降序 asc 升序</div><div class="line">start:0	//第一条数据的起始位置，比如0代表第一条数据</div><div class="line">length:10	//告诉服务器每页显示的条数</div><div class="line">search[value]:	//全局的搜索条件，此demo为空</div><div class="line">search[regex]:false	//为true代表全局搜索的值是作为正则表达式处理</div></pre></td></tr></table></figure></p>
+<p>服务器返回的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;recordsFiltered&quot;: 4079,	//过滤后的记录数</div><div class="line">    &quot;data&quot;: [	//表格中需要显示的数据。</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Kabol&quot;,</div><div class="line">            &quot;name&quot;: &quot;Kabul&quot;,</div><div class="line">            &quot;id&quot;: 1,</div><div class="line">            &quot;population&quot;: 1780000</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Qandahar&quot;,</div><div class="line">            &quot;name&quot;: &quot;Qandahar&quot;,</div><div class="line">            &quot;id&quot;: 2,</div><div class="line">            &quot;population&quot;: 237500</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Herat&quot;,</div><div class="line">            &quot;name&quot;: &quot;Herat&quot;,</div><div class="line">            &quot;id&quot;: 3,</div><div class="line">            &quot;population&quot;: 186800</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Balkh&quot;,</div><div class="line">            &quot;name&quot;: &quot;Mazar-e-Sharif&quot;,</div><div class="line">            &quot;id&quot;: 4,</div><div class="line">            &quot;population&quot;: 127800</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Amsterdam&quot;,</div><div class="line">            &quot;id&quot;: 5,</div><div class="line">            &quot;population&quot;: 731200</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Zuid-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Rotterdam&quot;,</div><div class="line">            &quot;id&quot;: 6,</div><div class="line">            &quot;population&quot;: 593321</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Zuid-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Haag&quot;,</div><div class="line">            &quot;id&quot;: 7,</div><div class="line">            &quot;population&quot;: 440900</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Utrecht&quot;,</div><div class="line">            &quot;name&quot;: &quot;Utrecht&quot;,</div><div class="line">            &quot;id&quot;: 8,</div><div class="line">            &quot;population&quot;: 234323</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Brabant&quot;,</div><div class="line">            &quot;name&quot;: &quot;Eindhoven&quot;,</div><div class="line">            &quot;id&quot;: 9,</div><div class="line">            &quot;population&quot;: 201843</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Brabant&quot;,</div><div class="line">            &quot;name&quot;: &quot;Tilburg&quot;,</div><div class="line">            &quot;id&quot;: 10,</div><div class="line">            &quot;population&quot;: 193238</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    &quot;draw&quot;: 1,	//Datatables发送的draw是多少那么服务器就返回多少</div><div class="line">    &quot;recordsTotal&quot;: 4079	//数据库里总共记录数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://www.datatables.club/manual/server-side.html" target="_blank" rel="external">点此</a>查看更多服务器处理参数。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>DataTables是一个表格插件。既可以一次性获取大量数据在前端做分页处理（一般不推荐，数据量较大时客户端压力大，处理慢），也可以使用服务器处理分页（只返回当前页面的数据）。</p>
+<p>常用的参数可能就那么几个，我们可以直接使用它们，也可以自己封装参数，比如”search[value]”我们可以改成”keyword”再传给后台，”order[0][column]”可以先在前端转换成对应”orderColumn”再传入后台，还可以加上其它特定的业务参数等。</p>
+<p>其他一些未提及的，比如服务器模式的自定义回调函数，勇敢的去官网或google探索吧。</p>
+<p>总体感觉，使用简单，配置灵活。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Tenny Peng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Tenny Peng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DataTables/" rel="tag"># DataTables</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/19/MyBatis分页插件PageHelper/" rel="next" title="MyBatis分页插件PageHelper">
+                <i class="fa fa-chevron-left"></i> MyBatis分页插件PageHelper
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Tenny Peng" />
+          <p class="site-author-name" itemprop="name">Tenny Peng</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载"><span class="nav-number">2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单使用"><span class="nav-number">3.</span> <span class="nav-text">简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#demo目录"><span class="nav-number">3.1.</span> <span class="nav-text">demo目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-html"><span class="nav-number">3.2.</span> <span class="nav-text">demo.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-js"><span class="nav-number">3.3.</span> <span class="nav-text">demo.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">3.4.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加国际化"><span class="nav-number">3.5.</span> <span class="nav-text">添加国际化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于表列"><span class="nav-number">3.6.</span> <span class="nav-text">关于表列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器支持"><span class="nav-number">4.</span> <span class="nav-text">服务器支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-html-1"><span class="nav-number">4.1.</span> <span class="nav-text">demo.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-js-1"><span class="nav-number">4.2.</span> <span class="nav-text">demo.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看结果"><span class="nav-number">4.3.</span> <span class="nav-text">查看结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tenny Peng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -313,6 +313,187 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/19/DataTables使用入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/19/DataTables使用入门/" itemprop="url">
+                  DataTables使用入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T11:35:03+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataTables/" itemprop="url" rel="index">
+                    <span itemprop="name">DataTables</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Datatables是一款jquery表格插件。它是一个高度灵活的工具，可以将任何HTML表格添加高级的交互功能。</p>
+<ul>
+<li>分页，即时搜索和排序</li>
+<li>几乎支持任何数据源：DOM， javascript， Ajax 和 服务器处理</li>
+<li>支持不同主题 DataTables, jQuery UI, Bootstrap, Foundation</li>
+<li>各式各样的扩展: Editor, TableTools, FixedColumns ……</li>
+<li>丰富多样的option和强大的API</li>
+<li>支持国际化</li>
+<li>超过2900+个单元测试</li>
+<li>免费开源 （ MIT license ）！ 商业支持</li>
+<li>更多特性请到<a href="http://www.datatables.club/" target="_blank" rel="external">DataTables中文网</a>查看</li>
+</ul>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>可以到<a href="http://www.datatables.club/" target="_blank" rel="external">DataTables中文网</a>下载最新版本的文档。</p>
+<p>下载完目录如下：<br><img src="/2017/06/19/DataTables使用入门/20170619120130.png" alt="DataTables目录"></p>
+<p>我们将使用media目录下的文件。<br><img src="/2017/06/19/DataTables使用入门/20170619120519.png" alt="media目录"></p>
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><p>在项目中使用Datatables，只需要引用三个文件即可，jQuery库，一个DT的核心js文件和一个DT的css文件。</p>
+<h2 id="demo目录"><a href="#demo目录" class="headerlink" title="demo目录"></a>demo目录</h2><p><img src="/2017/06/19/DataTables使用入门/20170619122034.png" alt="demo目录"></p>
+<h2 id="demo-html"><a href="#demo-html" class="headerlink" title="demo.html"></a>demo.html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;</div><div class="line">		&lt;title&gt;DataTables Demo&lt;/title&gt;</div><div class="line">		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">		&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jquery.dataTables.css&quot;&gt;&lt;/link&gt;</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&lt;table id=&quot;table_id_example&quot; class=&quot;display&quot;&gt;</div><div class="line">			&lt;caption&gt;最近交易记录&lt;/caption&gt;</div><div class="line">		&lt;/table&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">	</div><div class="line">	&lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/demo.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="demo-js"><a href="#demo-js" class="headerlink" title="demo.js"></a>demo.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line">$(document).ready( function () &#123;</div><div class="line">	var data = [</div><div class="line">        [</div><div class="line">            &quot;20170527150032890&quot;,</div><div class="line">            &quot;-0.10  CNY&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">            &quot;失败&quot;,</div><div class="line">            &quot;2017-05-27 15:00:32&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">        [</div><div class="line">            &quot;20170527145824609&quot;,</div><div class="line">            &quot;-3.00  CNY&quot;,</div><div class="line">            &quot;冻结&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">            &quot;2017-05-27 14:58:24&quot;,</div><div class="line">            &quot;冻结金额&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">		[</div><div class="line">            &quot;20170527145704263&quot;,</div><div class="line">            &quot;-3.00  CNY&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">            &quot;失败&quot;,</div><div class="line">            &quot;2017-05-27 14:57:04&quot;,</div><div class="line">            &quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">        ],</div><div class="line">		[</div><div class="line">			&quot;20170527145226988&quot;,</div><div class="line">			&quot;-100.00  CNY&quot;,</div><div class="line">			&quot;冻结&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">			&quot;2017-05-27 14:52:26&quot;,</div><div class="line">			&quot;冻结金额&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170525121845479&quot;,</div><div class="line">			&quot;-0.01 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-27 09:28:09&quot;,</div><div class="line">			&quot;重新提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170527144117493&quot;,</div><div class="line">			&quot;-0.11 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;成功&quot;,</div><div class="line">			&quot;2017-05-27 00:00:00&quot;,</div><div class="line">			&quot;虚拟提现(冻结金额)&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165926389&quot;,</div><div class="line">			&quot;-12.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:59:26&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165802358&quot;,</div><div class="line">			&quot;-2.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:58:02&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165520190&quot;,</div><div class="line">			&quot;-1.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:55:20&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&lt;button class=&apos;btn btn-warning btn-block&apos; onclick=alert(&apos;haha&apos;) &gt;取消提现&lt;/button&gt;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526161241519&quot;,</div><div class="line">			&quot;-1.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:12:41&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165802358&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:58:02&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526165520190&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:55:20&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		],</div><div class="line">		[</div><div class="line">			&quot;20170526161241519&quot;,</div><div class="line">			&quot;-99.00 CNY&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">            &quot;已受理&quot;,</div><div class="line">			&quot;2017-05-26 16:12:41&quot;,</div><div class="line">			&quot;提现&quot;,</div><div class="line">			&quot;&quot;</div><div class="line">		]</div><div class="line">    ];</div><div class="line"> </div><div class="line">    //DataTables 初始化</div><div class="line">    $(&apos;#table_id_example&apos;).DataTable( &#123;</div><div class="line">		data: data,</div><div class="line">		columns: [</div><div class="line">            &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">            &#123; title: &apos;金额&apos; &#125;,</div><div class="line">            &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">            &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">			&#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">			&#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">			&#123; title: &apos;操作&apos; &#125;</div><div class="line">        ]</div><div class="line">    &#125; );</div><div class="line">&#125; );</div></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/2017/06/19/DataTables使用入门/20170619121636.png" alt="简单使用结果"></p>
+<h2 id="添加国际化"><a href="#添加国际化" class="headerlink" title="添加国际化"></a>添加国际化</h2><p>Datatables中所使用的语言选项是通过 language 来配置的。 这是一个对象字符串，通过一个参数来描述Datatables的每个部分。</p>
+<p>Datatables默认的是英语，这里我们改成中文。在demo.js文件添加 language 配置项，使其DataTables初始化代码像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">//DataTables 初始化</div><div class="line">$(&apos;#table_id_example&apos;).DataTable( &#123;</div><div class="line">    data: data,</div><div class="line">    columns: [</div><div class="line">        &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">        &#123; title: &apos;金额&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">        &#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">        &#123; title: &apos;操作&apos; &#125;</div><div class="line">    ],</div><div class="line">    // 国际化</div><div class="line">    language: &#123;</div><div class="line">        &quot;sProcessing&quot;: &quot;处理中...&quot;,</div><div class="line">        &quot;sLengthMenu&quot;: &quot;显示 _MENU_ 项结果&quot;,</div><div class="line">        &quot;sZeroRecords&quot;: &quot;没有匹配结果&quot;,</div><div class="line">        &quot;sInfo&quot;: &quot;显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项&quot;,</div><div class="line">        &quot;sInfoEmpty&quot;: &quot;显示第 0 至 0 项结果，共 0 项&quot;,</div><div class="line">        &quot;sInfoFiltered&quot;: &quot;(由 _MAX_ 项结果过滤)&quot;,</div><div class="line">        &quot;sInfoPostFix&quot;: &quot;&quot;,</div><div class="line">        &quot;sSearch&quot;: &quot;搜索:&quot;,</div><div class="line">        &quot;sUrl&quot;: &quot;&quot;,</div><div class="line">        &quot;sEmptyTable&quot;: &quot;表中数据为空&quot;,</div><div class="line">        &quot;sLoadingRecords&quot;: &quot;载入中...&quot;,</div><div class="line">        &quot;sInfoThousands&quot;: &quot;,&quot;,</div><div class="line">        &quot;oPaginate&quot;: &#123;</div><div class="line">            &quot;sFirst&quot;: &quot;首页&quot;,</div><div class="line">            &quot;sPrevious&quot;: &quot;上页&quot;,</div><div class="line">            &quot;sNext&quot;: &quot;下页&quot;,</div><div class="line">            &quot;sLast&quot;: &quot;末页&quot;</div><div class="line">        &#125;,</div><div class="line">        &quot;oAria&quot;: &#123;</div><div class="line">            &quot;sSortAscending&quot;: &quot;: 以升序排列此列&quot;,</div><div class="line">            &quot;sSortDescending&quot;: &quot;: 以降序排列此列&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125; );</div></pre></td></tr></table></figure></p>
+<p>结果如图<br><img src="/2017/06/19/DataTables使用入门/20170619122557.png" alt="国际化"></p>
+<h2 id="关于表列"><a href="#关于表列" class="headerlink" title="关于表列"></a>关于表列</h2><p>上面我们的写法是动态添加title<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">columns: [</div><div class="line">    &#123; title: &apos;批次号&apos; &#125;,</div><div class="line">    &#123; title: &apos;金额&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易类型&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易状态&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易时间&apos; &#125;,</div><div class="line">    &#123; title: &apos;交易信息&apos; &#125;,</div><div class="line">    &#123; title: &apos;操作&apos; &#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>官网是另一种写法，首先在table里写好表列字段名，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">        &lt;th&gt;name&lt;/th&gt;</div><div class="line">        &lt;th&gt;position&lt;/th&gt;</div><div class="line">        &lt;th&gt;salary&lt;/th&gt;</div><div class="line">        &lt;th&gt;office&lt;/th&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">&lt;/thead&gt;</div></pre></td></tr></table></figure></p>
+<p>然后上面columns写法稍微有点不同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">columns: [</div><div class="line">    &#123; data: &apos;name&apos; &#125;,</div><div class="line">    &#123; data: &apos;position&apos; &#125;,</div><div class="line">    &#123; data: &apos;salary&apos; &#125;,</div><div class="line">    &#123; data: &apos;office&apos; &#125;</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>这样也是完全OK的，具体怎么用看自己喜好和实际业务了。</p>
+<h1 id="服务器支持"><a href="#服务器支持" class="headerlink" title="服务器支持"></a>服务器支持</h1><p>一次性处理大量数据DataTables性能会下降，因为 DT 需要渲染，数据越多，速度就越慢。</p>
+<p>为了解决这个问题， DataTables 提供了服务器模式，把本来客户端所做的事情交给服务器去处理， 比如排序（order）、分页（paging）、过滤（filter）。</p>
+<p>启用服务器模式时，每次请求 DataTables 会向服务器发送一些参数（当前分页，排序，搜索参数等），服务器则返回组装好的数据。</p>
+<h2 id="demo-html-1"><a href="#demo-html-1" class="headerlink" title="demo.html"></a>demo.html</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE HTML&gt;</div><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;</div><div class="line">		&lt;title&gt;DataTables Demo&lt;/title&gt;</div><div class="line">		&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</div><div class="line">		&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jquery.dataTables.css&quot;&gt;&lt;/link&gt;</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&lt;table id=&quot;city&quot; class=&quot;display&quot;&gt;</div><div class="line">			&lt;caption&gt;city&lt;/caption&gt;</div><div class="line">			&lt;thead&gt;</div><div class="line">				&lt;tr&gt;</div><div class="line">					&lt;th&gt;id&lt;/th&gt;</div><div class="line">					&lt;th&gt;name&lt;/th&gt;</div><div class="line">					&lt;th&gt;countryCode&lt;/th&gt;</div><div class="line">					&lt;th&gt;district&lt;/th&gt;</div><div class="line">					&lt;th&gt;population&lt;/th&gt;</div><div class="line">				&lt;/tr&gt;</div><div class="line">			&lt;/thead&gt;</div><div class="line">		&lt;/table&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">	</div><div class="line">	&lt;script src=&quot;js/jquery.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/jquery.dataTables.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;script src=&quot;js/demo.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<h2 id="demo-js-1"><a href="#demo-js-1" class="headerlink" title="demo.js"></a>demo.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">$(document).ready( function () &#123;</div><div class="line">    //DataTables 初始化</div><div class="line">    $(&apos;#country&apos;).DataTable( &#123;</div><div class="line">		&quot;processing&quot;: true,		//开启加载等待提示，提示信息是下面language中的sProcessing配置</div><div class="line">        &quot;serverSide&quot;: true,		//打开服务器模式</div><div class="line">		&quot;ajax&quot;: &#123;</div><div class="line">			&quot;url&quot;: &quot;city/getall&quot;,</div><div class="line">			&quot;type&quot;: &quot;POST&quot;,</div><div class="line">			&quot;data&quot;: function(d)&#123;	//d包含了DataTables发送到服务器的参数，这里还可以根据自己的业务添加参数</div><div class="line">                //可以自定义一些业务参数</div><div class="line">                //d.xxx = &quot;xxx&quot;;</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">		&quot;columns&quot;: [</div><div class="line">            &#123; &quot;data&quot;: &apos;id&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;name&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;countryCode&apos; &#125;,</div><div class="line">            &#123; &quot;data&quot;: &apos;district&apos; &#125;,</div><div class="line">			&#123; &quot;data&quot;: &apos;population&apos; &#125;</div><div class="line">        ],</div><div class="line">		// 国际化</div><div class="line">		language: &#123;</div><div class="line">			&quot;sProcessing&quot;: &quot;处理中...&quot;,</div><div class="line">			&quot;sLengthMenu&quot;: &quot;显示 _MENU_ 项结果&quot;,</div><div class="line">			&quot;sZeroRecords&quot;: &quot;没有匹配结果&quot;,</div><div class="line">			&quot;sInfo&quot;: &quot;显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项&quot;,</div><div class="line">			&quot;sInfoEmpty&quot;: &quot;显示第 0 至 0 项结果，共 0 项&quot;,</div><div class="line">			&quot;sInfoFiltered&quot;: &quot;(由 _MAX_ 项结果过滤)&quot;,</div><div class="line">			&quot;sInfoPostFix&quot;: &quot;&quot;,</div><div class="line">			&quot;sSearch&quot;: &quot;搜索:&quot;,</div><div class="line">			&quot;sUrl&quot;: &quot;&quot;,</div><div class="line">			&quot;sEmptyTable&quot;: &quot;表中数据为空&quot;,</div><div class="line">			&quot;sLoadingRecords&quot;: &quot;载入中...&quot;,</div><div class="line">			&quot;sInfoThousands&quot;: &quot;,&quot;,</div><div class="line">			&quot;oPaginate&quot;: &#123;</div><div class="line">				&quot;sFirst&quot;: &quot;首页&quot;,</div><div class="line">				&quot;sPrevious&quot;: &quot;上页&quot;,</div><div class="line">				&quot;sNext&quot;: &quot;下页&quot;,</div><div class="line">				&quot;sLast&quot;: &quot;末页&quot;</div><div class="line">			&#125;,</div><div class="line">			&quot;oAria&quot;: &#123;</div><div class="line">				&quot;sSortAscending&quot;: &quot;: 以升序排列此列&quot;,</div><div class="line">				&quot;sSortDescending&quot;: &quot;: 以降序排列此列&quot;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">    &#125; );</div><div class="line">&#125; );</div></pre></td></tr></table></figure>
+<h2 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h2><p><img src="/2017/06/19/DataTables使用入门/20170619144830.png" alt="服务器模式"><br>在浏览器调试窗口，我们可以看到发送到后台的参数(即上面ajax请求中d的数据)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">draw:1	//确保Ajax从服务器返回的是对应的，服务器接收到此参数后再返回</div><div class="line">columns[0][data]:id</div><div class="line">columns[0][name]:</div><div class="line">columns[0][searchable]:true</div><div class="line">columns[0][orderable]:true</div><div class="line">columns[0][search][value]:</div><div class="line">columns[0][search][regex]:false</div><div class="line">columns[1][data]:name</div><div class="line">columns[1][name]:</div><div class="line">columns[1][searchable]:true</div><div class="line">columns[1][orderable]:true</div><div class="line">columns[1][search][value]:</div><div class="line">columns[1][search][regex]:false</div><div class="line">columns[2][data]:countryCode</div><div class="line">columns[2][name]:</div><div class="line">columns[2][searchable]:true</div><div class="line">columns[2][orderable]:true</div><div class="line">columns[2][search][value]:</div><div class="line">columns[2][search][regex]:false</div><div class="line">columns[3][data]:district</div><div class="line">columns[3][name]:</div><div class="line">columns[3][searchable]:true</div><div class="line">columns[3][orderable]:true</div><div class="line">columns[3][search][value]:</div><div class="line">columns[3][search][regex]:false</div><div class="line">columns[4][data]:population</div><div class="line">columns[4][name]:</div><div class="line">columns[4][searchable]:true</div><div class="line">columns[4][orderable]:true</div><div class="line">columns[4][search][value]:</div><div class="line">columns[4][search][regex]:false</div><div class="line">order[0][column]:0	//告诉后台那些列是需要排序的</div><div class="line">order[0][dir]:asc	//告诉后台列排序的方式， desc 降序 asc 升序</div><div class="line">start:0	//第一条数据的起始位置，比如0代表第一条数据</div><div class="line">length:10	//告诉服务器每页显示的条数</div><div class="line">search[value]:	//全局的搜索条件，此demo为空</div><div class="line">search[regex]:false	//为true代表全局搜索的值是作为正则表达式处理</div></pre></td></tr></table></figure></p>
+<p>服务器返回的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;recordsFiltered&quot;: 4079,	//过滤后的记录数</div><div class="line">    &quot;data&quot;: [	//表格中需要显示的数据。</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Kabol&quot;,</div><div class="line">            &quot;name&quot;: &quot;Kabul&quot;,</div><div class="line">            &quot;id&quot;: 1,</div><div class="line">            &quot;population&quot;: 1780000</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Qandahar&quot;,</div><div class="line">            &quot;name&quot;: &quot;Qandahar&quot;,</div><div class="line">            &quot;id&quot;: 2,</div><div class="line">            &quot;population&quot;: 237500</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Herat&quot;,</div><div class="line">            &quot;name&quot;: &quot;Herat&quot;,</div><div class="line">            &quot;id&quot;: 3,</div><div class="line">            &quot;population&quot;: 186800</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;AFG&quot;,</div><div class="line">            &quot;district&quot;: &quot;Balkh&quot;,</div><div class="line">            &quot;name&quot;: &quot;Mazar-e-Sharif&quot;,</div><div class="line">            &quot;id&quot;: 4,</div><div class="line">            &quot;population&quot;: 127800</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Amsterdam&quot;,</div><div class="line">            &quot;id&quot;: 5,</div><div class="line">            &quot;population&quot;: 731200</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Zuid-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Rotterdam&quot;,</div><div class="line">            &quot;id&quot;: 6,</div><div class="line">            &quot;population&quot;: 593321</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Zuid-Holland&quot;,</div><div class="line">            &quot;name&quot;: &quot;Haag&quot;,</div><div class="line">            &quot;id&quot;: 7,</div><div class="line">            &quot;population&quot;: 440900</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Utrecht&quot;,</div><div class="line">            &quot;name&quot;: &quot;Utrecht&quot;,</div><div class="line">            &quot;id&quot;: 8,</div><div class="line">            &quot;population&quot;: 234323</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Brabant&quot;,</div><div class="line">            &quot;name&quot;: &quot;Eindhoven&quot;,</div><div class="line">            &quot;id&quot;: 9,</div><div class="line">            &quot;population&quot;: 201843</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            &quot;countryCode&quot;: &quot;NLD&quot;,</div><div class="line">            &quot;district&quot;: &quot;Noord-Brabant&quot;,</div><div class="line">            &quot;name&quot;: &quot;Tilburg&quot;,</div><div class="line">            &quot;id&quot;: 10,</div><div class="line">            &quot;population&quot;: 193238</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    &quot;draw&quot;: 1,	//Datatables发送的draw是多少那么服务器就返回多少</div><div class="line">    &quot;recordsTotal&quot;: 4079	//数据库里总共记录数</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="http://www.datatables.club/manual/server-side.html" target="_blank" rel="external">点此</a>查看更多服务器处理参数。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>DataTables是一个表格插件。既可以一次性获取大量数据在前端做分页处理（一般不推荐，数据量较大时客户端压力大，处理慢），也可以使用服务器处理分页（只返回当前页面的数据）。</p>
+<p>常用的参数可能就那么几个，我们可以直接使用它们，也可以自己封装参数，比如”search[value]”我们可以改成”keyword”再传给后台，”order[0][column]”可以先在前端转换成对应”orderColumn”再传入后台，还可以加上其它特定的业务参数等。</p>
+<p>其他一些未提及的，比如服务器模式的自定义回调函数，勇敢的去官网或google探索吧。</p>
+<p>总体感觉，使用简单，配置灵活。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/19/MyBatis分页插件PageHelper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1993,247 +2174,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/15/redis入门/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/15/redis入门/" itemprop="url">
-                  redis入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T08:54:10+08:00">
-                2017-04-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h1><p>Redis 是一个高性能的key-value数据库。</p>
-<ul>
-<li>Redis可基于内存亦可持久化。</li>
-<li>Redis 支持存储的value类型丰富，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）</li>
-<li>Redis性能极高，读的速度可高达110000次/s，写的速度可高达81000次/s 。</li>
-<li>Redis的所有操作都是原子性的，Redis还支持几个操作合并后的原子性执行。</li>
-</ul>
-<h1 id="Redis-下载安装"><a href="#Redis-下载安装" class="headerlink" title="Redis 下载安装"></a>Redis 下载安装</h1><p>Redis官方并不支持Windows。 但是，微软针对Win64自己开发了一个windows版的redis并共享到github上。</p>
-<p>点击<a href="https://github.com/MSOpenTech/redis/releases" target="_blank" rel="external">https://github.com/MSOpenTech/redis/releases</a>下载。</p>
-<p>选择你喜欢的安装方式，这里我选择压缩版。<br><img src="/2017/04/15/redis入门/20170415092253.png" alt="下载redis"></p>
-<p>安装/解压缩后到redis目录找到redis-server.exe和redis-cli.exe<br><img src="/2017/04/15/redis入门/20170415094655.png" alt="redis目录"></p>
-<p>双击redis-server.exe启动redis服务<br><img src="/2017/04/15/redis入门/20170415095002.png" alt="redis服务"></p>
-<p>双击redis-cli.exe启动客户端，用来访问redis服务。<br><img src="/2017/04/15/redis入门/20170415095226.png" alt="redis客户端"></p>
-<p>测试一下，设置x的值为1并获取x。<br><img src="/2017/04/15/redis入门/20170415095445.png" alt="redis测试"></p>
-<h1 id="使用redis"><a href="#使用redis" class="headerlink" title="使用redis"></a>使用redis</h1><p>redis使用key-value来存储数据。</p>
-<h2 id="set-amp-get"><a href="#set-amp-get" class="headerlink" title="set &amp; get"></a>set &amp; get</h2><p>使用set命令设置值，并用get命令获取值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; get name</div><div class="line">&quot;tenny&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="del"><a href="#del" class="headerlink" title="del"></a>del</h2><p>del删除一个key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; del name</div><div class="line">(integer) 1</div><div class="line">&gt; get name</div><div class="line">(nil)</div></pre></td></tr></table></figure></p>
-<h2 id="incr"><a href="#incr" class="headerlink" title="incr"></a>incr</h2><p>incr递增一个值，如果key不存在则创造它并初始化值为1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; set connections 10</div><div class="line">OK</div><div class="line">&gt; incr connections</div><div class="line">(integer) 11</div><div class="line">&gt; incr connections</div><div class="line">(integer) 12</div><div class="line"></div><div class="line">&gt; del connections</div><div class="line">(integer) 1</div><div class="line">&gt; incr connections    //connections不存在，初始化为1</div><div class="line">(integer) 1</div></pre></td></tr></table></figure></p>
-<h2 id="setnx"><a href="#setnx" class="headerlink" title="setnx"></a>setnx</h2><p>setnx(set-if-not-exists)，如果key不存在才改变值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;panda&quot;</div><div class="line">OK</div><div class="line">&gt; get name</div><div class="line">&quot;panda&quot;</div><div class="line">&gt; setnx name &quot;tenny&quot;    //因为name存在所以不会改变值</div><div class="line">(integer) 0</div><div class="line">&gt; get name</div><div class="line">&quot;panda&quot;</div><div class="line"></div><div class="line">&gt; get age</div><div class="line">(nil)</div><div class="line">&gt; setnx age 22    //age不存在，赋值为22</div><div class="line">(integer) 1</div><div class="line">&gt; get age</div><div class="line">&quot;22&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="expire-amp-ttl"><a href="#expire-amp-ttl" class="headerlink" title="expire &amp; ttl"></a>expire &amp; ttl</h2><p>expire设置生存时间，ttl查看剩余时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; expire name 120   //设置name生存时间为120秒</div><div class="line">(integer) 1</div><div class="line">&gt; ttl name</div><div class="line">(integer) 80    //剩余80秒</div><div class="line">&gt; ttl name      //2分钟后</div><div class="line">(integer) -2    //-2表示name这个key已经不存在了。</div><div class="line">&gt; get name</div><div class="line">(nil)</div><div class="line"></div><div class="line">&gt; set name &quot;tenny&quot;</div><div class="line">OK</div><div class="line">&gt; ttl name</div><div class="line">(integer) -1    //默认-1表示永久存在</div><div class="line">&gt; expire name 120</div><div class="line">(integer) 1</div><div class="line">&gt; ttl name</div><div class="line">(integer) 118</div><div class="line">&gt; get name</div><div class="line">&quot;tenny&quot;</div><div class="line">&gt; set name &quot;panda&quot;    //设置值会重置存在时间</div><div class="line">OK</div><div class="line">&gt; ttl name</div><div class="line">(integer) -1</div></pre></td></tr></table></figure></p>
-<h2 id="list操作：rpush-amp-lpush-amp-llen-amp-lrange-amp-lpop-amp-rpop"><a href="#list操作：rpush-amp-lpush-amp-llen-amp-lrange-amp-lpop-amp-rpop" class="headerlink" title="list操作：rpush &amp; lpush &amp; llen &amp; lrange &amp; lpop &amp; rpop"></a>list操作：rpush &amp; lpush &amp; llen &amp; lrange &amp; lpop &amp; rpop</h2><ul>
-<li><p>rpush在list末尾添加元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; rpush color &quot;blue&quot;    //[bule]</div><div class="line">(integer) 1</div><div class="line">&gt; rpush color &quot;red&quot;   //[bule, red]</div><div class="line">(integer) 2</div></pre></td></tr></table></figure>
-</li>
-<li><p>lpush在list开头添加元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; lpush color &quot;yellow&quot;    //[yellow, bule, red]</div><div class="line">(integer) 3</div></pre></td></tr></table></figure>
-</li>
-<li><p>llen查看list长度</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; llen color</div><div class="line">(integer) 3</div></pre></td></tr></table></figure>
-</li>
-<li><p>lrange查看list内容，接受两个参数，开始index和结尾index，如果结尾index为-1，表示直到list末尾。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; lrange color 0 2</div><div class="line">1) &quot;yellow&quot;</div><div class="line">2) &quot;blue&quot;</div><div class="line">3) &quot;red&quot;</div><div class="line">&gt; lrange color 0 1</div><div class="line">1) &quot;yellow&quot;</div><div class="line">2) &quot;blue&quot;</div><div class="line">&gt; lrange color 1 2</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div><div class="line">&gt; lrange color 1 2</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>lpop移除list第一个元素并返回它</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; lpop color</div><div class="line">&quot;yellow&quot;</div><div class="line">&gt; llen color</div><div class="line">(integer) 2</div><div class="line">&gt; lrange color 0 -1</div><div class="line">1) &quot;blue&quot;</div><div class="line">2) &quot;red&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>rpop移除list最后一个元素并返回它</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; rpop color</div><div class="line">&quot;red&quot;</div><div class="line">&gt; llen color</div><div class="line">(integer) 1</div><div class="line">&gt; lrange color 0 -1</div><div class="line">1) &quot;blue&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="set操作：sadd-amp-srem-amp-sismember-amp-smembers-amp-sunion"><a href="#set操作：sadd-amp-srem-amp-sismember-amp-smembers-amp-sunion" class="headerlink" title="set操作：sadd &amp; srem &amp; sismember &amp; smembers &amp; sunion"></a>set操作：sadd &amp; srem &amp; sismember &amp; smembers &amp; sunion</h2><p>set类似list，但是元素没有顺序且只能出现一次。</p>
-<ul>
-<li><p>sadd添加一个元素到set</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; sadd superpowers &quot;flight&quot;   //[&quot;flight&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; sadd superpowers &quot;x-ray vision&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; sadd superpowers &quot;reflexes&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;, &quot;reflexes&quot;]</div><div class="line">(integer) 1</div><div class="line">&gt; SADD superpowers &quot;flight&quot;   //重复添加无效</div><div class="line">(integer) 0</div></pre></td></tr></table></figure>
-</li>
-<li><p>srem从set中移除一个元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; srem superpowers &quot;reflexes&quot;   //[&quot;flight&quot;, &quot;x-ray vision&quot;]</div><div class="line">1</div></pre></td></tr></table></figure>
-</li>
-<li><p>sismember测试一个元素是否存在于set，存在返回1，不存在返回0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; sismember superpowers &quot;flight&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; sismember superpowers &quot;reflexes&quot;</div><div class="line">(integer) 0</div></pre></td></tr></table></figure>
-</li>
-<li><p>smembers查看set所有元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; sismember superpowers</div><div class="line">1) &quot;x-ray vision&quot;</div><div class="line">2) &quot;flight&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>sunion联合多个set并返回它们的合集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&gt; sadd birdpowers &quot;pecking&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; sadd birdpowers &quot;flight&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; smembers birdpowers</div><div class="line">1) &quot;pecking&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">&gt; smembers superpowers</div><div class="line">1) &quot;x-ray vision&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">&gt; sunion superpowers birdpowers   //无序的 sunion birdpowers superpowers结果一样</div><div class="line">1) &quot;pecking&quot;</div><div class="line">2) &quot;flight&quot;</div><div class="line">3) &quot;x-ray vision&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="sorted-set操作：zadd-zrange"><a href="#sorted-set操作：zadd-zrange" class="headerlink" title="sorted set操作：zadd zrange"></a>sorted set操作：zadd zrange</h2><p>有序集合(sorted set)类似集合，不过它每个元素有一个关联值，通过这个关联值对元素进行排序。</p>
-<ul>
-<li><p>zadd为一个有序集合添加元素</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; zadd hackers 1940 &quot;Alan Kay&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1906 &quot;Grace Hopper&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1953 &quot;Richard Stallman&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1965 &quot;Yukihiro Matsumoto&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1916 &quot;Claude Shannon&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1969 &quot;Linus Torvalds&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1957 &quot;Sophie Wilson&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; zadd hackers 1912 &quot;Alan Turing&quot;</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
-</li>
-<li><p>zrange类似于lrange，查看sorted set元素。接受两个参数，开始index和结尾index，如果结尾index为-1，表示直到末尾</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; zrange hackers 0 -1</div><div class="line">1) &quot;Grace Hopper&quot;</div><div class="line">2) &quot;Alan Turing&quot;</div><div class="line">3) &quot;Claude Shannon&quot;</div><div class="line">4) &quot;Alan Kay&quot;</div><div class="line">5) &quot;Richard Stallman&quot;</div><div class="line">6) &quot;Sophie Wilson&quot;</div><div class="line">7) &quot;Yukihiro Matsumoto&quot;</div><div class="line">8) &quot;Linus Torvalds&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以看到元素以年份递增排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; ZRANGE hackers 2 4</div><div class="line">1) &quot;Claude Shannon&quot;</div><div class="line">2) &quot;Alan Kay&quot;</div><div class="line">3) &quot;Richard Stallman&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="hash操作：hset-amp-hget-amp-hgetall-amp-hmset-amp-hincrby-amp-hdel"><a href="#hash操作：hset-amp-hget-amp-hgetall-amp-hmset-amp-hincrby-amp-hdel" class="headerlink" title="hash操作：hset &amp; hget &amp; hgetall &amp; hmset &amp; hincrby &amp; hdel"></a>hash操作：hset &amp; hget &amp; hgetall &amp; hmset &amp; hincrby &amp; hdel</h2><p> hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p>
-<ul>
-<li>hset添加值<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; hset user name &quot;tenny&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; hset user email &quot;tenny@example.com&quot;</div><div class="line">(integer) 1</div><div class="line">&gt; hset user password &quot;cutepanda&quot;</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>hget获取值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; hget user name</div><div class="line">&quot;tenny&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>hgetall获取所有值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; hgetall user</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny&quot;</div><div class="line">3) &quot;email&quot;</div><div class="line">4) &quot;tenny@example.com&quot;</div><div class="line">5) &quot;password&quot;</div><div class="line">6) &quot;cutepanda&quot;</div></pre></td></tr></table></figure>
-</li>
-<li><p>hmset一次性设置多个值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; hmset user1 name &quot;tenny1&quot; password &quot;cutepanda1&quot; email &quot;tenny1@example.com&quot;</div><div class="line">OK</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以使用hset继续添加或修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&gt; hset user1 age 22</div><div class="line">(integer) 1</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div><div class="line">7) &quot;age&quot;</div><div class="line">8) &quot;22&quot;</div><div class="line">&gt; hset user1 age 24   //已存在的值重复设定返回0，新值返回1</div><div class="line">(integer) 0</div><div class="line">&gt; hgetall user1</div><div class="line">1) &quot;name&quot;</div><div class="line">2) &quot;tenny1&quot;</div><div class="line">3) &quot;password&quot;</div><div class="line">4) &quot;cutepanda1&quot;</div><div class="line">5) &quot;email&quot;</div><div class="line">6) &quot;tenny1@example.com&quot;</div><div class="line">7) &quot;age&quot;</div><div class="line">8) &quot;24&quot;</div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>hincrby增加数值型域的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; hset user visits 10</div><div class="line">(integer) 1</div><div class="line">&gt; hincrby user visits 1</div><div class="line">(integer) 11</div><div class="line">&gt; hincrby user visits 1</div><div class="line">(integer) 12</div></pre></td></tr></table></figure>
-</li>
-<li><p>hdel删除指定的域</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; hdel user visits</div><div class="line">(integer) 1</div><div class="line">&gt; hdel user age   //删除不存在的域返回0</div><div class="line">(integer) 0</div><div class="line">&gt; hdel user visits</div><div class="line">(integer) 0</div><div class="line">&gt; hincrby user visits 20    //字段不存在则默认设置为0后再执行此增加操作</div><div class="line">(integer) 20</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<font size="5">以上介绍了redis的一些简单命令，可以访问<a href="http://www.redis.cn/commands.html" target="_blank" rel="external">redis中文官方网站</a>了解更多。</font>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2278,7 +2223,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2289,7 +2234,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2300,7 +2245,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

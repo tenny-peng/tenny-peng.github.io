@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-06-19T09:17:01.532Z</updated>
+  <updated>2017-06-19T09:24:41.634Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="https://tenny-peng.github.io/2017/06/19/hessian%E5%85%A5%E9%97%A8%E4%BD%BF%E7%94%A8/"/>
     <id>https://tenny-peng.github.io/2017/06/19/hessian入门使用/</id>
     <published>2017-06-19T08:11:24.000Z</published>
-    <updated>2017-06-19T09:17:01.532Z</updated>
+    <updated>2017-06-19T09:24:41.634Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessian更简单、快捷。采用的是二进制RPC协议，因为采用的是二进制协议，所以它很适合于发送二进制数据。</p>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。</p>
+<p>在Java中使用Hessian：</p>
 <p>服务器端：</p>
 <ul>
 <li>包含Hessian.jar包</li>
@@ -80,7 +81,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessia
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调
     
     </summary>
     

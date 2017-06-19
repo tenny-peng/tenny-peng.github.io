@@ -89,37 +89,40 @@
 
 
 
-<meta name="description" content="简介Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessian更简单、快捷。采用的是二进制RPC协议，因为采用的是二进制协议，所以它很适合于发送二进制数据。
+<meta name="description" content="简介Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。
+在Java中使用Hessian：
 服务器端：
 
 包含Hessian.jar包
 设计一个接口，用来给客户端调用
 实现该接口的功能
 配置web.xml，配好相应的servlet
-由于使用二进制RP">
+由于使用二进制RPC协议传输数据，对象必须进行序列化，实现Seriali">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hessian入门使用">
 <meta property="og:url" content="https://tenny-peng.github.io/2017/06/19/hessian入门使用/index.html">
 <meta property="og:site_name" content="Tenny's Blog">
-<meta property="og:description" content="简介Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessian更简单、快捷。采用的是二进制RPC协议，因为采用的是二进制协议，所以它很适合于发送二进制数据。
+<meta property="og:description" content="简介Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。
+在Java中使用Hessian：
 服务器端：
 
 包含Hessian.jar包
 设计一个接口，用来给客户端调用
 实现该接口的功能
 配置web.xml，配好相应的servlet
-由于使用二进制RP">
-<meta property="og:updated_time" content="2017-06-19T09:17:01.532Z">
+由于使用二进制RPC协议传输数据，对象必须进行序列化，实现Seriali">
+<meta property="og:updated_time" content="2017-06-19T09:24:41.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hessian入门使用">
-<meta name="twitter:description" content="简介Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessian更简单、快捷。采用的是二进制RPC协议，因为采用的是二进制协议，所以它很适合于发送二进制数据。
+<meta name="twitter:description" content="简介Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。
+在Java中使用Hessian：
 服务器端：
 
 包含Hessian.jar包
 设计一个接口，用来给客户端调用
 实现该接口的功能
 配置web.xml，配好相应的servlet
-由于使用二进制RP">
+由于使用二进制RPC协议传输数据，对象必须进行序列化，实现Seriali">
 
 
 
@@ -435,7 +438,8 @@
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hessian是一个轻量级的remoting on http工具，使用简单的方法提供了RMI的功能。 相比WebService，Hessian更简单、快捷。采用的是二进制RPC协议，因为采用的是二进制协议，所以它很适合于发送二进制数据。</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。</p>
+<p>在Java中使用Hessian：</p>
 <p>服务器端：</p>
 <ul>
 <li>包含Hessian.jar包</li>

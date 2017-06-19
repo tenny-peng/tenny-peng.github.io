@@ -313,6 +313,181 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/19/redis设置密码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/19/redis设置密码/" itemprop="url">
+                  redis设置密码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T16:48:43+08:00">
+                2017-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>设置密码有两种方式。</p>
+<ol>
+<li><p>命令行设置密码。</p>
+<p>运行cmd切换到redis根目录，先启动服务端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;redis-server.exe</div></pre></td></tr></table></figure>
+<p>另开一个cmd切换到redis根目录，启动客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;redis-cli.exe -h 127.0.0.1 -p 6379</div></pre></td></tr></table></figure>
+<p>客户端使用config get requirepass命令查看密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;config get requirepass</div><div class="line">1)&quot;requirepass&quot;</div><div class="line">2)&quot;&quot;    //默认空</div></pre></td></tr></table></figure>
+<p>客户端使用config set requirepass yourpassword命令设置密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;config set requirepass 123456</div><div class="line">&gt;OK</div></pre></td></tr></table></figure>
+<p>一旦设置密码，必须先验证通过密码，否则所有操作不可用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;config get requirepass</div><div class="line">(error)NOAUTH Authentication required</div></pre></td></tr></table></figure>
+<p>使用auth password验证密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;auth 123456</div><div class="line">&gt;OK</div><div class="line">&gt;config get requirepass</div><div class="line">1)&quot;requirepass&quot;</div><div class="line">2)&quot;123456&quot;</div></pre></td></tr></table></figure>
+<p>也可以退出重新登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis-cli.exe -h 127.0.0.1 -p 6379 -a 123456</div></pre></td></tr></table></figure>
+<p>命令行设置的密码在服务重启后失效，所以一般不使用这种方式。</p>
+</li>
+<li><p>配置文件设置密码</p>
+<p>在redis根目录下找到redis.windows.conf配置文件，搜索requirepass，找到注释密码行，添加密码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># requirepass foobared</div><div class="line">requirepass tenny     //注意，行前不能有空格</div></pre></td></tr></table></figure>
+<p>重启服务后，客户端重新登录后发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;config get requirepass</div><div class="line">1)&quot;requirepass&quot;</div><div class="line">2)&quot;&quot;</div></pre></td></tr></table></figure>
+<p>密码还是空？</p>
+<p>网上查询后的办法：创建redis-server.exe 的快捷方式， 右键快捷方式属性，在目标后面增加redis.windows.conf， 这里就是关键，你虽然修改了.conf文件，但是exe却没有使用这个conf，所以我们需要<strong>手动指定</strong>一下exe按照<strong>修改后的conf</strong>运行，就OK了。</p>
+<p>所以，这里我再一次重启redis服务(指定配置文件)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;redis-server.exe redis.windows.conf</div></pre></td></tr></table></figure>
+<p>客户端再重新登录，OK了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;redis-cli.exe -h 127.0.0.1 -p 6379 -a 123456</div><div class="line">&gt;config get requirepass</div><div class="line">1)&quot;requirepass&quot;</div><div class="line">2)&quot;123456&quot;</div></pre></td></tr></table></figure>
+<p>疑问: redis目录下有两个配置文件redis.windows.conf和redis.windows-server.conf，看到网上有的人用前者有的人用后者，不清楚到底该用哪一个。看了下两个文件又没啥区别，个人就用前者了。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/15/redis入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1902,224 +2077,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/03/Git简单教程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/03/Git简单教程/" itemprop="url">
-                  Git简单教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T13:45:13+08:00">
-                2017-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,</p>
-<p>可以有效、高速的处理从很小到非常大的项目版本管理。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>由于本人是Windows平台，所以这里安装的是Windows平台下的工具。</p>
-<p>点击<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a>下载</p>
-<p>如果网速太慢可以百度搜索“git下载”。</p>
-<p>下载完成之后一路next就可以了，  </p>
-<p>安装完成后，开始菜单找到”git”-&gt;”Git Bash”，</p>
-<p>在命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
-<p>看到类似如下结果，说明我们安装成功了。</p>
-<p><img src="/2017/04/03/Git简单教程/20170403201939.png" alt="git_bash_img"></p>
-<p>安装完成后，还需要一点设置，在打开的git bash命令行中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Your Name&quot;</div><div class="line">$ git config --global user.email &quot;email@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p><strong>注意把上面改成自己的名字和邮箱地址</strong></p>
-<p>git config命令的–global参数，表示你这台机器上所有的Git仓库都会使用这个配置，</p>
-<p>当然也可以对某个仓库指定不同的用户名和Email地址。</p>
-<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。</p>
-<h1 id="使用github"><a href="#使用github" class="headerlink" title="使用github"></a>使用github</h1><p>我们希望项目不只是在本地，只有有网，哪里都可以获取自己的项目，<br>GitHub 正是这样一个面向开源及私有软件项目的托管平台。<br>我们可以把自己的项目放在这个平台上，可以和其他人维护项目。</p>
-<p>后面会讲git的基本操作，你也可以直接到后面查看。作为一般流程，这里让我们先注册一个github账号</p>
-<p>进入<a href="https://github.com/" target="_blank" rel="external">github</a>网站,点击sign up</p>
-<p><img src="/2017/04/03/Git简单教程/20170403203407.png" alt="注册github"></p>
-<p>填写信息后点击”create an account” 按钮</p>
-<p><img src="/2017/04/03/Git简单教程/20170403203655.png" alt="注册github"></p>
-<p>之后进入到我们的首页</p>
-<p><img src="/2017/04/03/Git简单教程/20170403204148.png" alt="github首页"></p>
-<p>这样我们已经成功拥有了一个github账号，让我们正式开始吧~</p>
-<p>简单说下仓库的概念，仓库的英文名是repository，你可以简单理解成一个目录，<br>这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，<br>以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
-<p>点击上面的+号，新建一个仓库<br><img src="/2017/04/03/Git简单教程/20170403204148.png" alt="github首页"></p>
-<p>输入我们的仓库名称后，点击下面”create repository”按钮即可创建一个仓库<br><img src="/2017/04/03/Git简单教程/0170403204526.png" alt="仓库信息"></p>
-<p>我们可以看到这个仓库是空的，什么都没有。<br><img src="/2017/04/03/Git简单教程/20170403205231.png" alt="空仓库"></p>
-<p>接下来，我们回到本地git上。</p>
-<h1 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h1><p>由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以还需要一点设置：</p>
-<p>回到git bash命令窗口，创建SSH  key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</p>
-<p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p>
-<p>登录你的github，进入setting，点击”SSH and GPG keys”,点击右上角”New SSH Key”,tite随便填，Key文本框里粘贴id_rsa.pub文件的内容，最后点击”Add SSh Key”即可。<br><img src="/2017/04/03/Git简单教程/20170408134106.png" alt="填写公钥"></p>
-<p>可以看到我这里已经有两个了，一个家里一个公司，这样就可以两边同步信息了。</p>
-<p>为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-<p>接下来输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd e:</div></pre></td></tr></table></figure></p>
-<p>切换目录，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:tenny-peng/test.git</div></pre></td></tr></table></figure></p>
-<p>稍等一会，就可将github上的项目克隆到本地</p>
-<p><img src="/2017/04/03/Git简单教程/20170403212928.png" alt="本地仓库"></p>
-<p>这里我选的e盘根目录，你可以自己修改，<strong>注意：选择的目录下不可以有仓库同名目录</strong><br>如我的e盘下不能有test这个目录，不然在克隆时会报错。</p>
-<p><img src="/2017/04/03/Git简单教程/20170403210357.png" alt="克隆仓库"><br>这里有一个警告，说我们的仓库是空的，不用管它，我们马上会添加文件。</p>
-<h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><font color="red" size="5">使用Windows的童鞋要特别注意：</font>
-
-<p>千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了<br>一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf<br>（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，<br>明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。建议你下载<br>Notepad++代替记事本，不但功能强大，而且免费！记得把notepad++的默认编码设置为UTF-8<br>without BOM即可。</p>
-<p>在仓库test文件目录下，我们先编写一个readme.txt文件，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Git is a version control system.</div><div class="line">Git is free software.</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403213141.png" alt="新建文件"></p>
-<p>这里我们可以看到test目录下有一个隐藏的.git目录(看不到可自行百度“windows查看隐藏文件方法”)，这个就说明此目录是由git管理的仓库了，如果删除了这个隐藏的目录，那个git也就不认识这个目录了，也不能对此目录下的文件进行管理了。</p>
-<p>回到命令行，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add readme.txt</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403213613.png" alt="添加文件"></p>
-<p>什么反馈信息也没有？那就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
-<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure></p>
-<p>可查看当前仓库状态</p>
-<p><img src="/2017/04/03/Git简单教程/20170403213822.png" alt="添加状态"></p>
-<p>我们发现提示有新文件，但是这样还不够。</p>
-<p>我们继续输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;add readme.txt&quot;</div></pre></td></tr></table></figure></p>
-<p>这样才把文件提交到仓库，再次输入”git status”查看状态</p>
-<p><img src="/2017/04/03/Git简单教程/20170403214113.png" alt="提交状态"></p>
-<p>简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
-<p>git commit命令执行成功后会告诉你，1个文件被改动（我们新添加的readme.txt文件），插入了两行内容（readme.txt有两行内容）。</p>
-<h1 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h1><p>这里我就在仓库里新增了一个文件，当然还会有修改，删除操作。其实这样就可以管理自己的项目了。但是，我们似乎忘记了github。对，我们需要的是随时随处可获取，所以我们需要把本地仓库的内容同步到github这个托管平台。</p>
-<p>当你从远程仓库克隆时，实际上Git自动把本地的master分支(分支后面再讲，简单理解为仓库的多个版本，默认一个主分支)和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。</p>
-<p>要查看远程库的信息，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote</div></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v</div></pre></td></tr></table></figure></p>
-<p>获取更详细信息</p>
-<p><img src="/2017/04/03/Git简单教程/20170403214855.png" alt="远程信息"></p>
-<p>上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。</p>
-<p>接下来我们把本地改动(这里新增了一个文件，对于git，新增，修改，删除，都属于改动)推送到远程仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403215328.png" alt="推送分支"></p>
-<p>刷新浏览器中我们的github主页，可以看到，readme.txt文件已经同步到远程仓库了。<br><img src="/2017/04/03/Git简单教程/20170403215427.png" alt="查看远程分支"></p>
-<font size="5">以上我们就使用git创建了自己的仓库，并将其同步到远程服务器上，以便我们在其它地方，或其他人获取。</font>
-
-<p><br><br>参考：</p>
-<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的git教程</a></p>
-<p><a href="http://www.baike.com/wiki/GIT" target="_blank" rel="external">git互动百科</a></p>
-<p><a href="http://www.baike.com/wiki/github" target="_blank" rel="external">github互动百科</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2169,7 +2126,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2180,7 +2137,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2191,7 +2148,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

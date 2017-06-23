@@ -313,6 +313,180 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/21/spring整合redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/21/spring整合redis/" itemprop="url">
+                  spring整合redis
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T10:02:06+08:00">
+                2017-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概念简介："><a href="#概念简介：" class="headerlink" title="概念简介："></a>概念简介：</h1><ul>
+<li>Redis：一款开源的Key-Value数据库。</li>
+<li>Jedis：Redis官方推出的一款面向Java的客户端，提供了很多接口供Java语言调用。</li>
+<li>Spring Data Redis：SDR是Spring官方推出，可以算是Spring框架集成Redis操作的一个子框架，封装了Redis的很多命令，可以很方便的使用Spring操作Redis数据库。</li>
+</ul>
+<p>这三个究竟有什么区别呢？可以简单的这么理解，Redis是用ANSI C写的一个基于内存的Key-Value数据库，而Jedis是Redis官方推出的面向Java的Client，提供了很多接口和方法，可以让Java操作使用Redis，而Spring Data Redis是对Jedis进行了封装，集成了Jedis的一些命令和方法，可以与Spring整合。在后面的配置文件（spring-redis.xml）中可以看到，Spring是通过Jedis类来初始化connectionFactory的。</p>
+<h1 id="spring整合redis"><a href="#spring整合redis" class="headerlink" title="spring整合redis"></a>spring整合redis</h1><ol>
+<li><p>maven添加依赖配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;1.4.1.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;2.6.1&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>redis.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># Redis settings</div><div class="line">redis.host=localhost</div><div class="line">redis.port=6379</div><div class="line">redis.pass=tenny</div><div class="line">redis.maxTotal=200</div><div class="line">redis.maxIdle=50</div><div class="line">redis.minIdle=300</div><div class="line">redis.maxWaitMillis=1000</div><div class="line">redis.testOnBorrow=true</div></pre></td></tr></table></figure>
+</li>
+<li><p>spring-redis.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">	xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">	xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</div><div class="line">	xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</div><div class="line">	xmlns:c=&quot;http://www.springframework.org/schema/c&quot;</div><div class="line">	xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans  </div><div class="line">                        http://www.springframework.org/schema/beans/spring-beans.xsd  </div><div class="line">                        http://www.springframework.org/schema/context  </div><div class="line">                        http://www.springframework.org/schema/context/spring-context.xsd  </div><div class="line">                        http://www.springframework.org/schema/mvc  </div><div class="line">                        http://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:redis.properties&quot; /&gt;  </div><div class="line"></div><div class="line">    &lt;bean id=&quot;poolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;  </div><div class="line">        &lt;property name=&quot;maxTotal&quot; value=&quot;$&#123;redis.maxTotal&#125;&quot; /&gt;</div><div class="line">        &lt;property name=&quot;maxIdle&quot; value=&quot;$&#123;redis.maxIdle&#125;&quot; /&gt;</div><div class="line">        &lt;property name=&quot;minIdle&quot; value=&quot;$&#123;redis.minIdle&#125;&quot; /&gt;</div><div class="line">        &lt;property name=&quot;maxWaitMillis&quot; value=&quot;$&#123;redis.maxWaitMillis&#125;&quot; /&gt;</div><div class="line">        &lt;property name=&quot;testOnBorrow&quot; value=&quot;$&#123;redis.testOnBorrow&#125;&quot; /&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;connectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;</div><div class="line">		p:hostName=&quot;$&#123;redis.host&#125;&quot; p:port=&quot;$&#123;redis.port&#125;&quot; p:password=&quot;$&#123;redis.pass&#125;&quot; c:poolConfig-ref=&quot;poolConfig&quot;&gt;</div><div class="line">    &lt;/bean&gt;  </div><div class="line"></div><div class="line">    &lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;  </div><div class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot; /&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;bean id=&quot;cacheManager&quot; class=&quot;org.springframework.data.redis.cache.RedisCacheManager&quot; c:template-ref=&quot;redisTemplate&quot;&gt;</div><div class="line">        &lt;property name=&quot;usePrefix&quot; value=&quot;true&quot; /&gt;</div><div class="line">        &lt;property name=&quot;cacheNames&quot;&gt;</div><div class="line">            &lt;set&gt;</div><div class="line">                &lt;value&gt;t&lt;/value&gt;</div><div class="line">                &lt;value&gt;c&lt;/value&gt;</div><div class="line">            &lt;/set&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义User实体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">import java.io.Serializable;</div><div class="line">import java.util.Date;</div><div class="line"></div><div class="line">public class User implements Serializable &#123;</div><div class="line"></div><div class="line">	private static final long serialVersionUID = -6683628971480535063L;</div><div class="line"></div><div class="line">	private Integer id;</div><div class="line"></div><div class="line">	private String username;</div><div class="line"></div><div class="line">	private String password;</div><div class="line"></div><div class="line">	private Integer type;</div><div class="line"></div><div class="line">	private Date createTime;</div><div class="line"></div><div class="line">	public Integer getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setId(Integer id) &#123;</div><div class="line">		this.id = id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getUsername() &#123;</div><div class="line">		return username;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setUsername(String username) &#123;</div><div class="line">		this.username = username == null ? null : username.trim();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getPassword() &#123;</div><div class="line">		return password;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setPassword(String password) &#123;</div><div class="line">		this.password = password == null ? null : password.trim();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Integer getType() &#123;</div><div class="line">		return type;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setType(Integer type) &#123;</div><div class="line">		this.type = type;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Date getCreateTime() &#123;</div><div class="line">		return createTime;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setCreateTime(Date createTime) &#123;</div><div class="line">		this.createTime = createTime;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import java.util.Date;</div><div class="line">import org.springframework.cache.Cache;</div><div class="line">import org.springframework.cache.Cache.ValueWrapper;</div><div class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line">import org.springframework.data.redis.cache.RedisCacheManager;</div><div class="line">import com.news.pojo.User;</div><div class="line"></div><div class="line">public class TestRedis &#123;</div><div class="line"></div><div class="line">	@SuppressWarnings(&quot;resource&quot;)</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring-redis.xml&quot;);</div><div class="line">		RedisCacheManager cacheManager = (RedisCacheManager) context.getBean(&quot;cacheManager&quot;);</div><div class="line">		System.out.println(&quot;cacheNames: &quot; + cacheManager.getCacheNames());</div><div class="line">		Cache cacheT = cacheManager.getCache(&quot;t&quot;);</div><div class="line">		Cache cacheC = cacheManager.getCache(&quot;c&quot;);</div><div class="line"></div><div class="line">		User user1 = new User();</div><div class="line">		user1.setId(1);</div><div class="line">		user1.setUsername(&quot;tenny&quot;);</div><div class="line">		user1.setPassword(&quot;admin&quot;);</div><div class="line">		user1.setType(1);</div><div class="line">		user1.setCreateTime(new Date());</div><div class="line">		User user2 = new User();</div><div class="line">		user2.setId(2);</div><div class="line">		user2.setUsername(&quot;panda&quot;);</div><div class="line">		user2.setPassword(&quot;xiaobai&quot;);</div><div class="line">		user2.setType(2);</div><div class="line">		user2.setCreateTime(new Date());</div><div class="line"></div><div class="line">		System.out.println(&quot;put two user into cacheT...&quot;);</div><div class="line">		cacheT.put(&quot;user1&quot;, user1);</div><div class="line">		cacheT.put(&quot;user2&quot;, user2);</div><div class="line">		System.out.println(&quot;put name and age into cacheC...&quot;);</div><div class="line">		cacheC.put(&quot;name&quot;, &quot;tenny&quot;);</div><div class="line">		cacheC.put(&quot;age&quot;, 25);</div><div class="line"></div><div class="line">		System.out.println(&quot;get two user from cacheT&quot;);</div><div class="line">		User value1 = cacheT.get(&quot;user1&quot;, User.class);</div><div class="line">		System.out.println(value1.toString());</div><div class="line">		ValueWrapper value2 = cacheT.get(&quot;user2&quot;);</div><div class="line">		System.out.println(value2.get());</div><div class="line"></div><div class="line">		System.out.println(&quot;get two user from cacheC&quot;);</div><div class="line">		ValueWrapper value3 = cacheC.get(&quot;name&quot;);</div><div class="line">		System.out.println(value3.get());</div><div class="line">		ValueWrapper value4 = cacheC.get(&quot;age&quot;);</div><div class="line">		System.out.println(value4.get());</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">cacheNames: [t, c]</div><div class="line">put two user into cacheT...</div><div class="line">put name and age into cacheC...</div><div class="line">get two user from cacheT</div><div class="line">com.news.pojo.User@2ea227af</div><div class="line">com.news.pojo.User@4386f16</div><div class="line">get two field from cacheC</div><div class="line">tenny</div><div class="line">25</div></pre></td></tr></table></figure>
+</li>
+<li><p>直接使用redisTemplate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">@SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">RedisTemplate&lt;String, User&gt; redisTemplate = (RedisTemplate&lt;String, User&gt;) context.getBean(&quot;redisTemplate&quot;);</div><div class="line">System.out.println(&quot;put two user into redisTemplate...&quot;);</div><div class="line">redisTemplate.opsForHash().put(&quot;user&quot;, &quot;user1&quot;, user1);</div><div class="line">redisTemplate.opsForHash().put(&quot;user&quot;, &quot;user2&quot;, user2);</div><div class="line">System.out.println(&quot;gut two user from redisTemplate...&quot;);</div><div class="line">User redisUser1 = (User) redisTemplate.opsForHash().get(&quot;user&quot;, &quot;user1&quot;);</div><div class="line">System.out.println(redisUser1);</div><div class="line">User redisUser2 = (User) redisTemplate.opsForHash().get(&quot;user&quot;, &quot;user2&quot;);</div><div class="line">System.out.println(redisUser2);</div><div class="line"></div><div class="line">@SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">RedisTemplate&lt;String, String&gt; redisTemplate2 = (RedisTemplate&lt;String, String&gt;) context.getBean(&quot;redisTemplate&quot;);</div><div class="line">System.out.println(&quot;put color list into redisTemplate2...&quot;);</div><div class="line">redisTemplate2.opsForList().leftPush(&quot;color&quot;, &quot;blue&quot;);</div><div class="line">redisTemplate2.opsForList().leftPush(&quot;color&quot;, &quot;red&quot;);</div><div class="line">redisTemplate2.opsForList().rightPush(&quot;color&quot;, &quot;yellow&quot;);</div><div class="line">System.out.println(&quot;gut color list from redisTemplate2...&quot;);</div><div class="line">List&lt;String&gt; colorList = redisTemplate2.opsForList().range(&quot;color&quot;, 0, -1);</div><div class="line">System.out.println(colorList);</div></pre></td></tr></table></figure>
+</li>
+<li><p>redisTemplate测试结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">put two user into redisTemplate...</div><div class="line">gut two user from redisTemplate...</div><div class="line">com.news.pojo.User@4313f5bc</div><div class="line">com.news.pojo.User@7f010382</div><div class="line">put color list into redisTemplate2...</div><div class="line">gut color list from redisTemplate2...</div><div class="line">[red, blue, yellow]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/19/redis设置密码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1919,164 +2093,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/03/MarkDown引用本地图片/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/03/MarkDown引用本地图片/" itemprop="url">
-                  hexo引用本地图片
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T20:03:30+08:00">
-                2017-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/markdown/" itemprop="url" rel="index">
-                    <span itemprop="name">markdown</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="markdown文章里引用图片有两种方式。"><a href="#markdown文章里引用图片有两种方式。" class="headerlink" title="markdown文章里引用图片有两种方式。"></a>markdown文章里引用图片有两种方式。</h3><p>一种是直接引用互联网上的图片，使用绝对路径  <a href="http://xxx.com/xxx.jpg" target="_blank" rel="external">http://xxx.com/xxx.jpg</a></p>
-<p>一种是使用本地图片。</p>
-<p>因为最后要发布到网上，所以引用本地图片路径必须是相对路径xxx/xxx.png</p>
-<h3 id="这里讲如何引用本地图片。"><a href="#这里讲如何引用本地图片。" class="headerlink" title="这里讲如何引用本地图片。"></a>这里讲如何引用本地图片。</h3><p>首先在站点_config.yml 中找到”post_asset_folder”属性，将其设置为”true”。Hexo 提供了一种更方便管理 Asset 的设定：post_asset_folder。当设置post_asset_folder为true参数后，在建立文件时，Hexo会自动建立一个与文章同名的文件夹，您可以把与该文章相关的所有资源都放到那个文件夹，如此一来，您便可以更方便的使用资源。</p>
-<p>启动cmd,切换到hexo的目录下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure></p>
-<p>等待一段时即可。</p>
-<p> 安装完成后用hexo新建文章的时候_posts目录下面会多出一个和文章同名的文件夹。图片就可以放在该文件夹下面使用。</p>
-<p><img src="/2017/04/03/MarkDown引用本地图片/20170404161617.png" alt="hexo new1"></p>
-<p><img src="/2017/04/03/MarkDown引用本地图片/20170404161920.png" alt="hexo new2"></p>
-<p>把你要引用的图片放在同名目录下,如下引用即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![xxx](testpic/xxxxxx.png)</div></pre></td></tr></table></figure>
-<p>个人感觉也可以不装这个插件，自己手动建立同名文件夹也可以的。但是装了还是方便，毕竟hexo新建文章能初始化一些信息。</p>
-<p>再说下本人踩过的坑。在source目录下建立images文件夹存放图片，然后通过../images/xxx.png引用，感觉是没什么问题的，实际在本地也没问题。但是上传到github就不对了。github上去找寻的路径类似<br><a href="https://tenny-peng.github.io/2017/04/04/images/xxx.png。">https://tenny-peng.github.io/2017/04/04/images/xxx.png。</a><br>很明显这是找不到的，因为发布后2017/04/04下只有文章，没有其他文件或文件夹。也试过在_posts下建立images,通过images/xxx.png引用，结果是一样的。</p>
-<p>然后建立了同名文件夹，到github上查看发布后的文件才发现，对于每个md文件，生成一个同名的文件夹，里面有一个index.html文件是md文件转化的内容，我们当初自建的同名文件夹下的图片也在该文件夹下，例如，在github上，对于testpic.md,生成一个testpic文件夹，里面有一个index.html,其内容就是我们得testpic.md里编写的内容，而我们当时正好建立了同名的文件夹来存放图片，此时，这些图片也到了github下的同名文件夹。如此一来，引用就没有问题了。</p>
-<p><img src="/2017/04/03/MarkDown引用本地图片/20170404164607.png" alt="本地目录"></p>
-<p><img src="/2017/04/03/MarkDown引用本地图片/20170404164402.png" alt="github目录"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2126,7 +2142,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2137,7 +2153,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2148,7 +2164,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

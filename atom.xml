@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-06-27T01:37:11.356Z</updated>
+  <updated>2017-06-27T01:43:13.235Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://tenny-peng.github.io/2017/06/26/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E9%94%99%E8%AF%AF10060/"/>
     <id>https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/</id>
     <published>2017-06-26T08:55:26.000Z</published>
-    <updated>2017-06-27T01:37:11.356Z</updated>
+    <updated>2017-06-27T01:43:13.235Z</updated>
     
     <content type="html"><![CDATA[<p>在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。</p>
 <p>先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)</p>
@@ -30,7 +30,7 @@
 <ol>
 <li>控制面板-&gt;系统和安全-&gt;防火墙</li>
 <li>点击高级设置-&gt;入站规则，新建规则，选择端口，下一步</li>
-<li>TCP 端口, 特定本地端口(S)：填写 80,3306，下一步</li>
+<li>TCP 端口，特定本地端口(S)：填写80,3306，下一步</li>
 <li>允许连接，下一步</li>
 <li>默认全选，下一步</li>
 <li>填写配置名称，如”mysql局域网访问策略”，完成。</li>

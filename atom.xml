@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-06-23T01:44:16.616Z</updated>
+  <updated>2017-06-27T01:37:11.356Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql远程连接错误10060</title>
+    <link href="https://tenny-peng.github.io/2017/06/26/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E9%94%99%E8%AF%AF10060/"/>
+    <id>https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/</id>
+    <published>2017-06-26T08:55:26.000Z</published>
+    <updated>2017-06-27T01:37:11.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。</p>
+<p>先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)</p>
+<p><img src="/2017/06/26/mysql远程连接错误10060/20170627092348.png" alt="user表Host"></p>
+<p>然后关闭防火墙即可。</p>
+<p>但是为了安全着想，不想关闭防火墙，我们可以在防火墙中添加新的规则。</p>
+<ol>
+<li>控制面板-&gt;系统和安全-&gt;防火墙</li>
+<li>点击高级设置-&gt;入站规则，新建规则，选择端口，下一步</li>
+<li>TCP 端口, 特定本地端口(S)：填写 80,3306，下一步</li>
+<li>允许连接，下一步</li>
+<li>默认全选，下一步</li>
+<li>填写配置名称，如”mysql局域网访问策略”，完成。</li>
+</ol>
+<p>配置范例见：<a href="http://maximumpcguides.com/windows-7/open-a-port-in-windows-7s-firewall/" target="_blank" rel="external">http://maximumpcguides.com/windows-7/open-a-port-in-windows-7s-firewall/</a></p>
+<p>这样你的同事就可以在局域网内访问你的数据库了。</p>
+<p>参考链接：<a href="http://www.cnblogs.com/meetweb/p/3701443.html" target="_blank" rel="external">http://www.cnblogs.com/meetweb/p/3701443.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。&lt;/p&gt;
+&lt;p&gt;先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)&lt;/p&gt;
+&lt;p&gt;&lt;i
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://tenny-peng.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://tenny-peng.github.io/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>web安全入门</title>
@@ -1445,31 +1485,6 @@
     
     
       <category term="TortoiseGit" scheme="https://tenny-peng.github.io/tags/TortoiseGit/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MarkDown设置字体颜色</title>
-    <link href="https://tenny-peng.github.io/2017/04/03/MarkDown%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2/"/>
-    <id>https://tenny-peng.github.io/2017/04/03/MarkDown字体颜色/</id>
-    <published>2017-04-03T13:15:12.000Z</published>
-    <updated>2017-05-06T02:12:43.692Z</updated>
-    
-    <content type="html"><![CDATA[<p>记录一下如何设置字体颜色和大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;font color=red size=5&gt;gray&lt;/font&gt;</div><div class="line">&lt;font color=&quot;#4590a3&quot; size=&quot;6px&quot;&gt;文字&lt;/font&gt;</div></pre></td></tr></table></figure></p>
-<p>效果如下：</p>
-<font color="red" size="5">red</font><br><font color="#4590a3" size="6px">文字</font>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录一下如何设置字体颜色和大小&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;
-    
-    </summary>
-    
-      <category term="markdown" scheme="https://tenny-peng.github.io/categories/markdown/"/>
-    
-    
-      <category term="markdown" scheme="https://tenny-peng.github.io/tags/markdown/"/>
     
   </entry>
   

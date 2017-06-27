@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -89,12 +89,39 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tenny's Blog">
-<meta property="og:url" content="https://tenny-peng.github.io/archives/index.html">
+<meta name="description" content="在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。
+先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)
+
+然后关闭防火墙即可。
+但是为了安全着想，不想关闭防火墙，我们可以在防火墙中添加新的规则。
+
+控制面板-&amp;gt;系统和安全-&amp;gt;防火墙
+点击高级设置-&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql远程连接错误10060">
+<meta property="og:url" content="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/index.html">
 <meta property="og:site_name" content="Tenny's Blog">
+<meta property="og:description" content="在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。
+先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)
+
+然后关闭防火墙即可。
+但是为了安全着想，不想关闭防火墙，我们可以在防火墙中添加新的规则。
+
+控制面板-&amp;gt;系统和安全-&amp;gt;防火墙
+点击高级设置-&amp;g">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/20170627092348.png">
+<meta property="og:updated_time" content="2017-06-27T01:37:11.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tenny's Blog">
+<meta name="twitter:title" content="mysql远程连接错误10060">
+<meta name="twitter:description" content="在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。
+先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)
+
+然后关闭防火墙即可。
+但是为了安全着想，不想关闭防火墙，我们可以在防火墙中添加新的规则。
+
+控制面板-&amp;gt;系统和安全-&amp;gt;防火墙
+点击高级设置-&amp;g">
+<meta name="twitter:image" content="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/20170627092348.png">
 
 
 
@@ -122,13 +149,13 @@
 
 
 
-  <link rel="canonical" href="https://tenny-peng.github.io/archives/"/>
+  <link rel="canonical" href="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/"/>
 
 
 
 
 
-  <title> 归档 | Tenny's Blog </title>
+  <title> mysql远程连接错误10060 | Tenny's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,403 +328,219 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 24 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql远程连接错误10060
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T16:55:26+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>在公司协同开发时，同事需要在局域网内访问我的mysql数据库。但是连接超时，并返回错误代码10060。特此记录一下解决过程。</p>
+<p>先找到数据库mysql中的user表，将对应访问的用户的Host由localhost改为%(允许任何IP地址访问)</p>
+<p><img src="/2017/06/26/mysql远程连接错误10060/20170627092348.png" alt="user表Host"></p>
+<p>然后关闭防火墙即可。</p>
+<p>但是为了安全着想，不想关闭防火墙，我们可以在防火墙中添加新的规则。</p>
+<ol>
+<li>控制面板-&gt;系统和安全-&gt;防火墙</li>
+<li>点击高级设置-&gt;入站规则，新建规则，选择端口，下一步</li>
+<li>TCP 端口, 特定本地端口(S)：填写 80,3306，下一步</li>
+<li>允许连接，下一步</li>
+<li>默认全选，下一步</li>
+<li>填写配置名称，如”mysql局域网访问策略”，完成。</li>
+</ol>
+<p>配置范例见：<a href="http://maximumpcguides.com/windows-7/open-a-port-in-windows-7s-firewall/" target="_blank" rel="external">http://maximumpcguides.com/windows-7/open-a-port-in-windows-7s-firewall/</a></p>
+<p>这样你的同事就可以在局域网内访问你的数据库了。</p>
+<p>参考链接：<a href="http://www.cnblogs.com/meetweb/p/3701443.html" target="_blank" rel="external">http://www.cnblogs.com/meetweb/p/3701443.html</a></p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Tenny Peng WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Tenny Peng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/06/26/mysql远程连接错误10060/" itemprop="url">
-              
-                <span itemprop="name">mysql远程连接错误10060</span>
-              
-            </a>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
         
-      </h1>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-26T16:55:26+08:00"
-              content="2017-06-26" >
-          06-26
-        </time>
-      </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/web安全入门/" rel="next" title="web安全入门">
+                <i class="fa fa-chevron-left"></i> web安全入门
+              </a>
+            
+          </div>
 
-    </header>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
+    <div class="post-spread">
       
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/21/web安全入门/" itemprop="url">
-              
-                <span itemprop="name">web安全入门</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-21T17:10:47+08:00"
-              content="2017-06-21" >
-          06-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/19/hessian入门使用/" itemprop="url">
-              
-                <span itemprop="name">hessian入门使用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-19T16:11:24+08:00"
-              content="2017-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/19/DataTables使用入门/" itemprop="url">
-              
-                <span itemprop="name">DataTables使用入门</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-19T11:35:03+08:00"
-              content="2017-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/19/MyBatis分页插件PageHelper/" itemprop="url">
-              
-                <span itemprop="name">MyBatis分页插件PageHelper</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-19T09:55:19+08:00"
-              content="2017-06-19" >
-          06-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/04/zookeeper入门/" itemprop="url">
-              
-                <span itemprop="name">zookeeper入门</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-04T15:02:06+08:00"
-              content="2017-05-04" >
-          05-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/04/spring整合dubbo-zookeeper/" itemprop="url">
-              
-                <span itemprop="name">spring整合dubbo(zookeeper)</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-04T09:47:17+08:00"
-              content="2017-05-04" >
-          05-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/27/spring加载多个xml遇到的问题/" itemprop="url">
-              
-                <span itemprop="name">spring加载多个xml遇到的问题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-27T09:36:25+08:00"
-              content="2017-04-27" >
-          04-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/25/spring的MessageSource/" itemprop="url">
-              
-                <span itemprop="name">spring的MessageSource</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-25T14:17:54+08:00"
-              content="2017-04-25" >
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/24/spring整合activemq/" itemprop="url">
-              
-                <span itemprop="name">spring整合activemq</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-24T17:04:50+08:00"
-              content="2017-04-24" >
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
+    </div>
+  </div>
 
 
           </div>
@@ -705,6 +548,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -928,11 +775,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   

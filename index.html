@@ -313,6 +313,147 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/30/HttpClient模拟post请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/30/HttpClient模拟post请求/" itemprop="url">
+                  HttpClient模拟post请求
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:24:01+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>因项目需要，使用HttpClient模拟请求，故了解学习，记录在此。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用HttpClient发送请求、接收响应很简单，一般需要如下几步即可：</p>
+<ol>
+<li>创建CloseableHttpClient对象。</li>
+<li>创建请求方法的实例，并指定请求URL。如果需要发送GET请求，创建HttpGet对象；如果需要发送POST请求，创建HttpPost对象。</li>
+<li>如果需要发送请求参数，可调用setEntity(HttpEntity entity)方法来设置请求参数。setParams方法已过时（4.4.1版本）。</li>
+<li>调用HttpGet、HttpPost对象的setHeader(String name, String value)方法设置header信息，或者调用setHeaders(Header[] headers)设置一组header信息。</li>
+<li>调用CloseableHttpClient对象的execute(HttpUriRequest request)发送请求，该方法返回一个CloseableHttpResponse。</li>
+<li>调用HttpResponse的getEntity()方法可获取HttpEntity对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容；调用CloseableHttpResponse的getAllHeaders()、getHeaders(String name)等方法可获取服务器的响应头。</li>
+<li>释放连接。无论执行方法是否成功，都必须释放连接。</li>
+</ol>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>先下载最新的jar包或者maven引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;httpclient&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;4.5.3&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure></p>
+<p>用HttpClient编写自己的请求工具类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">package com.demo.utils;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.UnsupportedEncodingException;</div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.List;</div><div class="line">import java.util.Map;</div><div class="line">import java.util.Map.Entry;</div><div class="line"></div><div class="line">import org.apache.http.HttpEntity;</div><div class="line">import org.apache.http.NameValuePair;</div><div class="line">import org.apache.http.client.ClientProtocolException;</div><div class="line">import org.apache.http.client.entity.UrlEncodedFormEntity;</div><div class="line">import org.apache.http.client.methods.CloseableHttpResponse;</div><div class="line">import org.apache.http.client.methods.HttpPost;</div><div class="line">import org.apache.http.impl.client.CloseableHttpClient;</div><div class="line">import org.apache.http.impl.client.HttpClients;</div><div class="line">import org.apache.http.message.BasicNameValuePair;</div><div class="line">import org.apache.http.util.EntityUtils;</div><div class="line"></div><div class="line">public class HttpClientUtils &#123;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 通过httpClient发送post请求</div><div class="line">	 * @param url 请求地址，非空</div><div class="line">	 * @param map 请求参数</div><div class="line">	 * @param encoding 编码格式，为空则默认UTF-8</div><div class="line">	 */</div><div class="line">	public static String sendPost(String url, Map&lt;String,String&gt; map, String encoding)&#123;</div><div class="line">		String result = &quot;&quot;;</div><div class="line">		if(url == null)&#123;</div><div class="line">			result = &quot;url不能为空&quot;;</div><div class="line">			return result;</div><div class="line">		&#125;</div><div class="line">		if(encoding == null || encoding.isEmpty())&#123;</div><div class="line">			encoding = &quot;UTF-8&quot;;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		// 创建httpClient对象</div><div class="line">        CloseableHttpClient httpclient = HttpClients.createDefault();  </div><div class="line">        // 创建post方式请求对象  </div><div class="line">        HttpPost httpPost = new HttpPost(url);</div><div class="line"></div><div class="line">        // 装填参数</div><div class="line">        List&lt;NameValuePair&gt; nvps = new ArrayList&lt;NameValuePair&gt;();  </div><div class="line">        if(map != null)&#123;</div><div class="line">        	for(Entry&lt;String, String&gt; entry : map.entrySet())&#123;</div><div class="line">        		nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">		try &#123;</div><div class="line">			// 参数转码</div><div class="line">			UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(nvps, encoding);</div><div class="line"></div><div class="line">	        //设置参数到请求对象中</div><div class="line">	        httpPost.setEntity(uefEntity);</div><div class="line"></div><div class="line">	        System.out.println(&quot;--------------------------------------&quot;);</div><div class="line">	        System.out.println(&quot;请求地址： &quot; + httpPost.getURI());  </div><div class="line">	        System.out.println(&quot;请求参数： &quot; + nvps.toString());</div><div class="line">	        System.out.println(&quot;--------------------------------------&quot;);</div><div class="line"></div><div class="line">	        //设置header信息</div><div class="line">	        //指定报文头【Content-type】、【User-Agent】  </div><div class="line">	        httpPost.setHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);  </div><div class="line">	        httpPost.setHeader(&quot;User-Agent&quot;, &quot;Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)&quot;);</div><div class="line"></div><div class="line">	        //执行请求操作，并拿到结果（同步阻塞）</div><div class="line">	        CloseableHttpResponse response = httpclient.execute(httpPost);  </div><div class="line">	        HttpEntity entity = response.getEntity();  </div><div class="line">	        if (entity != null) &#123;</div><div class="line">	        	//按指定编码转换结果实体为String类型</div><div class="line">	        	result = EntityUtils.toString(entity, encoding);</div><div class="line">	        	System.out.println(&quot;返回内容：&quot;);  </div><div class="line">	            System.out.println(&quot;--------------------------------------&quot;);  </div><div class="line">	            System.out.println(result);  </div><div class="line">	            System.out.println(&quot;--------------------------------------&quot;);  </div><div class="line">	        &#125;</div><div class="line">	        EntityUtils.consume(entity);</div><div class="line">	        response.close();</div><div class="line"></div><div class="line">		&#125; catch (UnsupportedEncodingException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; catch (ClientProtocolException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; catch (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;  finally&#123;</div><div class="line">			try &#123;</div><div class="line">				httpclient.close();</div><div class="line">			&#125; catch (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		return result;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编写测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package com.demo;</div><div class="line"></div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">import com.demo.utils.HttpClientUtils;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">		String url = &quot;http://php.weather.sina.com.cn/iframe/index/w_cl.php&quot;;</div><div class="line">		Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</div><div class="line">		map.put(&quot;city&quot;, &quot;深圳&quot;);</div><div class="line">		map.put(&quot;charset&quot;, &quot;utf-8&quot;);</div><div class="line">		HttpClientUtils.sendPost(url, map, null);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>控制台查看结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">--------------------------------------</div><div class="line">请求地址： http://php.weather.sina.com.cn/iframe/index/w_cl.php</div><div class="line">请求参数： [charset=utf-8, city=深圳]</div><div class="line">--------------------------------------</div><div class="line">返回内容：</div><div class="line">--------------------------------------</div><div class="line">(function()&#123;var w=[];w[&apos;深圳&apos;]=[&#123;s1:&apos;阵雨&apos;,s2:&apos;多云&apos;,f1:&apos;zhenyu&apos;,f2:&apos;duoyun&apos;,t1:&apos;32&apos;,t2:&apos;27&apos;,p1:&apos;≤3&apos;,p2:&apos;≤3&apos;,d1:&apos;无持续风向&apos;,d2:&apos;无持续风向&apos;&#125;];var add=&#123;now:&apos;2017-06-30 14:45:59&apos;,time:&apos;1498805159&apos;,update:&apos;北京时间06月30日12:10更新&apos;,error:&apos;0&apos;,total:&apos;1&apos;&#125;;window.SWther=&#123;w:w,add:add&#125;;&#125;)();//0</div><div class="line"></div><div class="line">--------------------------------------</div></pre></td></tr></table></figure></p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>顺便记录一下java直接发送http请求的例子。</p>
+<p>请求工具类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">package com.demo.utils;</div><div class="line"></div><div class="line">import java.io.BufferedReader;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStreamReader;</div><div class="line">import java.io.PrintWriter;</div><div class="line">import java.net.URL;</div><div class="line">import java.net.URLConnection;</div><div class="line"></div><div class="line">public class HttpRequest &#123;</div><div class="line">	/**</div><div class="line">	 * 向指定URL发送GET方法的请求</div><div class="line">	 *</div><div class="line">	 * @param url 发送请求的URL</div><div class="line">	 * @param param 请求参数，请求参数应该是 name1=value1&amp;name2=value2 的形式。</div><div class="line">	 * @return URL 所代表远程资源的响应结果</div><div class="line">	 */</div><div class="line">	public static String sendGet(String url, String param) &#123;</div><div class="line">		String result = &quot;&quot;;</div><div class="line">		BufferedReader in = null;</div><div class="line">		try &#123;</div><div class="line">			String urlNameString = url + &quot;?&quot; + param;</div><div class="line">			URL realUrl = new URL(urlNameString);</div><div class="line">			// 打开和URL之间的连接</div><div class="line">			URLConnection connection = realUrl.openConnection();</div><div class="line">			// 设置通用的请求属性</div><div class="line">			connection.setRequestProperty(&quot;accept&quot;, &quot;*/*&quot;);</div><div class="line">			connection.setRequestProperty(&quot;connection&quot;, &quot;Keep-Alive&quot;);</div><div class="line">			connection.setRequestProperty(&quot;user-agent&quot;, &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;);</div><div class="line">			// 建立实际的连接</div><div class="line">			connection.connect();</div><div class="line">			// 定义 BufferedReader输入流来读取URL的响应</div><div class="line">			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));</div><div class="line">			String line;</div><div class="line">			while ((line = in.readLine()) != null) &#123;</div><div class="line">				result += line;</div><div class="line">			&#125;</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			System.out.println(&quot;发送GET请求出现异常！&quot; + e);</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		// 使用finally块来关闭输入流</div><div class="line">		finally &#123;</div><div class="line">			try &#123;</div><div class="line">				if (in != null) &#123;</div><div class="line">					in.close();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (Exception e2) &#123;</div><div class="line">				e2.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return result;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 向指定 URL 发送POST方法的请求</div><div class="line">	 *</div><div class="line">	 * @param url 发送请求的 URL</div><div class="line">	 * @param param 请求参数，请求参数应该是 name1=value1&amp;name2=value2 的形式。</div><div class="line">	 * @return 所代表远程资源的响应结果</div><div class="line">	 */</div><div class="line">	public static String sendPost(String url, String param) &#123;</div><div class="line">		PrintWriter out = null;</div><div class="line">		BufferedReader in = null;</div><div class="line">		String result = &quot;&quot;;</div><div class="line">		try &#123;</div><div class="line">			URL realUrl = new URL(url);</div><div class="line">			// 打开和URL之间的连接</div><div class="line">			URLConnection conn = realUrl.openConnection();</div><div class="line">			// 设置通用的请求属性</div><div class="line">			conn.setRequestProperty(&quot;accept&quot;, &quot;*/*&quot;);</div><div class="line">			conn.setRequestProperty(&quot;connection&quot;, &quot;Keep-Alive&quot;);</div><div class="line">			conn.setRequestProperty(&quot;user-agent&quot;, &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;);</div><div class="line">			// 发送POST请求必须设置如下两行</div><div class="line">			conn.setDoOutput(true);</div><div class="line">			conn.setDoInput(true);</div><div class="line">			// 获取URLConnection对象对应的输出流</div><div class="line">			out = new PrintWriter(conn.getOutputStream());</div><div class="line">			// 发送请求参数</div><div class="line">			out.print(param);</div><div class="line">			// flush输出流的缓冲</div><div class="line">			out.flush();</div><div class="line">			// 定义BufferedReader输入流来读取URL的响应</div><div class="line">			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));</div><div class="line">			String line;</div><div class="line">			while ((line = in.readLine()) != null) &#123;</div><div class="line">				result += line;</div><div class="line">			&#125;</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			System.out.println(&quot;发送 POST 请求出现异常！&quot; + e);</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		// 使用finally块来关闭输出流、输入流</div><div class="line">		finally &#123;</div><div class="line">			try &#123;</div><div class="line">				if (out != null) &#123;</div><div class="line">					out.close();</div><div class="line">				&#125;</div><div class="line">				if (in != null) &#123;</div><div class="line">					in.close();</div><div class="line">				&#125;</div><div class="line">			&#125; catch (IOException ex) &#123;</div><div class="line">				ex.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return result;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">package com.demo;</div><div class="line"></div><div class="line">import com.demo.utils.HttpRequest;</div><div class="line"></div><div class="line">public class Main &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">    String url = &quot;http://php.weather.sina.com.cn/iframe/index/w_cl.php&quot;;</div><div class="line">		String result = HttpRequest.sendPost(url, &quot;city=深圳&amp;charset=utf-8&quot;);</div><div class="line">		System.out.println(result);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>控制台输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(function()&#123;var w=[];w[&apos;深圳&apos;]=[&#123;s1:&apos;阵雨&apos;,s2:&apos;多云&apos;,f1:&apos;zhenyu&apos;,f2:&apos;duoyun&apos;,t1:&apos;32&apos;,t2:&apos;27&apos;,p1:&apos;≤3&apos;,p2:&apos;≤3&apos;,d1:&apos;无持续风向&apos;,d2:&apos;无持续风向&apos;&#125;];var add=&#123;now:&apos;2017-06-30 14:58:03&apos;,time:&apos;1498805883&apos;,update:&apos;北京时间06月30日12:10更新&apos;,error:&apos;0&apos;,total:&apos;1&apos;&#125;;window.SWther=&#123;w:w,add:add&#125;;&#125;)();//0</div></pre></td></tr></table></figure></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.cnblogs.com/zhuawang/archive/2012/12/08/2809380.html" target="_blank" rel="external">http://www.cnblogs.com/zhuawang/archive/2012/12/08/2809380.html</a><br><a href="http://blog.csdn.net/xiaoxian8023/article/details/49863967" target="_blank" rel="external">http://blog.csdn.net/xiaoxian8023/article/details/49863967</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/26/mysql远程连接错误10060/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2122,180 +2263,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/24/spring整合activemq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/24/spring整合activemq/" itemprop="url">
-                  spring整合activemq
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-24T17:04:50+08:00">
-                2017-04-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/activemq/" itemprop="url" rel="index">
-                    <span itemprop="name">activemq</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-安装activemq"><a href="#1-安装activemq" class="headerlink" title="1.安装activemq"></a>1.安装activemq</h2><p>到<a href="http://activemq.apache.org/" target="_blank" rel="external">http://activemq.apache.org/</a> 下载最新版。我这里下载的是Windows版。</p>
-<p>下载完成之后解压缩，运行bin目录下的activemq.bat，看到类似如下信息说明启动成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">ACTIVEMQ_HOME: D:\devsoft\apache-activemq-5.1.0\bin\..</div><div class="line">ACTIVEMQ_BASE: D:\devsoft\apache-activemq-5.1.0\bin\..</div><div class="line">Loading message broker from: xbean:activemq.xml</div><div class="line">INFO  BrokerService                  - Using Persistence Adapter: AMQPersistenceAdapter(D:\devsoft\apache-activemq-5.1.0\bin\..\data)</div><div class="line">INFO  BrokerService                  - ActiveMQ 5.1.0 JMS Message Broker (localhost) is starting</div><div class="line">INFO  BrokerService                  - For help or more information please see: http://activemq.apache.org/</div><div class="line">INFO  AMQPersistenceAdapter          - AMQStore starting using directory: D:\devsoft\apache-activemq-5.1.0\bin\..\data</div><div class="line">INFO  KahaStore                      - Kaha Store using data directory D:\devsoft\apache-activemq-5.1.0\bin\..\data\kr-store\state</div><div class="line">INFO  AMQPersistenceAdapter          - Active data files: []</div><div class="line">WARN  AMQPersistenceAdapter          - The ReferenceStore is not valid - recovering ...</div><div class="line">INFO  KahaStore                      - Kaha Store successfully deleted data directory D:\devsoft\apache-activemq-5.1.0\bin\..\data\kr-store\data</div><div class="line">INFO  AMQPersistenceAdapter          - Journal Recovery Started from: DataManager:(data-)</div><div class="line">INFO  KahaStore                      - Kaha Store using data directory D:\devsoft\apache-activemq-5.1.0\bin\..\data\kr-store\data</div><div class="line">INFO  AMQPersistenceAdapter          - Recovered 3611 operations from redo log in 0.85 seconds.</div><div class="line">INFO  AMQPersistenceAdapter          - Finished recovering the ReferenceStore</div><div class="line">INFO  TransportServerThreadSupport   - Listening for connections at: tcp://Lenovo-PC:61616</div><div class="line">INFO  TransportConnector             - Connector openwire Started</div><div class="line">INFO  TransportServerThreadSupport   - Listening for connections at: ssl://Lenovo-PC:61617</div><div class="line">INFO  TransportConnector             - Connector ssl Started</div><div class="line">INFO  TransportServerThreadSupport   - Listening for connections at: stomp://Lenovo-PC:61613</div><div class="line">INFO  TransportConnector             - Connector stomp Started</div><div class="line">INFO  TransportServerThreadSupport   - Listening for connections at: xmpp://Lenovo-PC:61222</div><div class="line">INFO  TransportConnector             - Connector xmpp Started</div><div class="line">INFO  NetworkConnector               - Network Connector default-nc Started</div><div class="line">INFO  BrokerService                  - ActiveMQ JMS Message Broker (localhost, ID:Lenovo-PC-51314-1493018577517-0:0) started</div><div class="line">INFO  log                            - Logging to org.slf4j.impl.JCLLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog</div><div class="line">INFO  log                            - jetty-6.1.9</div><div class="line">INFO  WebConsoleStarter              - ActiveMQ WebConsole initialized.</div><div class="line">INFO  /admin                         - Initializing Spring FrameworkServlet &apos;dispatcher&apos;</div><div class="line">INFO  log                            - ActiveMQ Console at http://0.0.0.0:8161/admin</div><div class="line">INFO  log                            - ActiveMQ Web Demos at http://0.0.0.0:8161/demo</div><div class="line">INFO  log                            - RESTful file access application at http://0.0.0.0:8161/fileserver</div><div class="line">INFO  log                            - Started SelectChannelConnector@0.0.0.0:8161</div><div class="line">INFO  FailoverTransport              - Successfully connected to tcp://localhost:61616</div><div class="line">INFO  TransportConnector             - Connector vm://localhost Started</div></pre></td></tr></table></figure></p>
-<p>浏览器输入<a href="http://localhost:8161/admin/" target="_blank" rel="external">http://localhost:8161/admin/</a> 可查看本地activemq运行状态。<br><img src="/2017/04/24/spring整合activemq/20170424171757.png" alt="activemq主页"></p>
-<p>点击”Queues”可查看队列情况。现在没有信息，后面测试的时候会有信息。<br><img src="/2017/04/24/spring整合activemq/20170424172009.png" alt="activemq空queues"></p>
-<h2 id="2-Maven添加依赖"><a href="#2-Maven添加依赖" class="headerlink" title="2.Maven添加依赖"></a>2.Maven添加依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spring-jms&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;  </div><div class="line">  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;  </div><div class="line">  &lt;artifactId&gt;activemq-core&lt;/artifactId&gt;  </div><div class="line">  &lt;version&gt;5.7.0&lt;/version&gt;  </div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.apache.activemq&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;activemq-pool&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;5.7.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h2 id="3-activemp-properties属性文件"><a href="#3-activemp-properties属性文件" class="headerlink" title="3.activemp.properties属性文件"></a>3.activemp.properties属性文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 服务器地址</div><div class="line">activemq.brokerURL=tcp://localhost:61616</div><div class="line"></div><div class="line"># 连接池的最大连接数</div><div class="line">activemq.maxConnections=10</div><div class="line"></div><div class="line"># 目的队列的名称</div><div class="line">activemq.queue.name=tenny:test</div></pre></td></tr></table></figure>
-<h2 id="4-spring-activemq-xml配置文件"><a href="#4-spring-activemq-xml配置文件" class="headerlink" title="4.spring-activemq.xml配置文件"></a>4.spring-activemq.xml配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;  </div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;  </div><div class="line">    xmlns:jms=&quot;http://www.springframework.org/schema/jms&quot;  </div><div class="line">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</div><div class="line">						http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">						http://www.springframework.org/schema/context</div><div class="line">						http://www.springframework.org/schema/context/spring-context.xsd  </div><div class="line">						http://www.springframework.org/schema/beans</div><div class="line">						http://www.springframework.org/schema/beans/spring-beans.xsd  </div><div class="line">						http://www.springframework.org/schema/jms</div><div class="line">						http://www.springframework.org/schema/jms/spring-jms.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:activemq.properties&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供--&gt;  </div><div class="line">	&lt;bean id=&quot;targetConnectionFactory&quot; class=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;&gt;  </div><div class="line">	    &lt;property name=&quot;brokerURL&quot; value=&quot;$&#123;activemq.brokerURL&#125;&quot;/&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;bean id=&quot;pooledConnectionFactory&quot; class=&quot;org.apache.activemq.pool.PooledConnectionFactory&quot; destroy-method=&quot;stop&quot;&gt;  </div><div class="line">	    &lt;property name=&quot;connectionFactory&quot; ref=&quot;targetConnectionFactory&quot;/&gt;  </div><div class="line">	    &lt;property name=&quot;maxConnections&quot; value=&quot;$&#123;activemq.maxConnections&#125;&quot;/&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;bean id=&quot;connectionFactory&quot; class=&quot;org.springframework.jms.connection.SingleConnectionFactory&quot;&gt;  </div><div class="line">	    &lt;property name=&quot;targetConnectionFactory&quot; ref=&quot;pooledConnectionFactory&quot;/&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 --&gt;  </div><div class="line">	&lt;bean id=&quot;jmsTemplate&quot; class=&quot;org.springframework.jms.core.JmsTemplate&quot;&gt;  </div><div class="line">	    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot;/&gt;  </div><div class="line">	    &lt;property name=&quot;defaultDestinationName&quot; value=&quot;$&#123;activemq.queue.name&#125;&quot;/&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;!--队列目的地，点对点模式--&gt;  </div><div class="line">	&lt;bean id=&quot;queueDestination&quot; class=&quot;org.apache.activemq.command.ActiveMQQueue&quot;&gt;  </div><div class="line">	    &lt;constructor-arg&gt;</div><div class="line">	        &lt;value&gt;</div><div class="line">	            $&#123;activemq.queue.name&#125;</div><div class="line">	        &lt;/value&gt;</div><div class="line">	    &lt;/constructor-arg&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line"></div><div class="line">	&lt;!-- 消息监听器 --&gt;  </div><div class="line">	&lt;bean id=&quot;activeMQMessageListener&quot; class=&quot;com.news.common.activemq.ActiveMQMessageListener&quot; /&gt;      </div><div class="line"></div><div class="line">	&lt;!-- 消息监听容器 --&gt;</div><div class="line">	&lt;bean id=&quot;jmsContainer&quot; class=&quot;org.springframework.jms.listener.DefaultMessageListenerContainer&quot;&gt;  </div><div class="line">	    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot; /&gt;  </div><div class="line">	    &lt;property name=&quot;destination&quot; ref=&quot;queueDestination&quot; /&gt;  </div><div class="line">	    &lt;property name=&quot;messageListener&quot; ref=&quot;activeMQMessageListener&quot; /&gt;  </div><div class="line">	&lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
-<p>  其中的ActiveMQMessageListener<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">package com.news.common.activemq;</div><div class="line"></div><div class="line">import javax.jms.JMSException;</div><div class="line">import javax.jms.Message;</div><div class="line">import javax.jms.MessageListener;</div><div class="line">import javax.jms.TextMessage;</div><div class="line"></div><div class="line">/**</div><div class="line"> *</div><div class="line"> * activemq消息监听</div><div class="line"> *</div><div class="line"> * @author Tenny.Peng</div><div class="line"> */</div><div class="line">public class ActiveMQMessageListener implements MessageListener &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void onMessage(Message message) &#123;</div><div class="line">		TextMessage textMsg = (TextMessage) message;</div><div class="line">		try &#123;</div><div class="line">			// 处理消息</div><div class="line">			System.out.println(&quot;receive message from &quot; + textMsg.getJMSDestination() + &quot;: &quot; + textMsg.getText());</div><div class="line">		&#125; catch (JMSException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="5-测试类TestActivemq-java"><a href="#5-测试类TestActivemq-java" class="headerlink" title="5.测试类TestActivemq.java"></a>5.测试类TestActivemq.java</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">package news;</div><div class="line"></div><div class="line">import javax.jms.JMSException;</div><div class="line">import javax.jms.Message;</div><div class="line">import javax.jms.Session;</div><div class="line"></div><div class="line">import org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line">import org.springframework.jms.core.JmsTemplate;</div><div class="line">import org.springframework.jms.core.MessageCreator;</div><div class="line"></div><div class="line">/**</div><div class="line"> * TODO</div><div class="line"> *</div><div class="line"> * @author tenny.peng</div><div class="line"> */</div><div class="line">public class TestActivemq &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		@SuppressWarnings(&quot;resource&quot;)</div><div class="line">		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring-activemq.xml&quot;);</div><div class="line">		JmsTemplate jmsTemplate = (JmsTemplate) context.getBean(&quot;jmsTemplate&quot;);</div><div class="line">		final String destinationName = jmsTemplate.getDefaultDestinationName();</div><div class="line">		jmsTemplate.send(destinationName, new MessageCreator() &#123;</div><div class="line"></div><div class="line">			@Override</div><div class="line">			public Message createMessage(Session session) throws JMSException &#123;</div><div class="line">				// 消息对象</div><div class="line">				String message = &quot;some information...&quot;;</div><div class="line">				return session.createTextMessage(message);</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="6-测试"><a href="#6-测试" class="headerlink" title="6.测试"></a>6.测试</h2><p>运行一次TestActivemq.java，控制台输出如下，监听器已收到消息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">receive message from queue://tenny:test: some information...</div></pre></td></tr></table></figure></p>
-<p>查看Queues界面。没有待处理消息，有1个消费者，已发送/接收了1条信息。<br><img src="/2017/04/24/spring整合activemq/20170424174645.png" alt="Queues一条消息"></p>
-<p>之前的控制台不要关，再运行一次TestActivemq.java，之前的控制台输出如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">receive message from queue://tenny:test: some information...</div></pre></td></tr></table></figure></p>
-<p>说明之前的监听器又收到了消息。</p>
-<p>再查看Queues界面。有2个消费者，已发送/接收了2条消息。<br><img src="/2017/04/24/spring整合activemq/20170424175147.png" alt="Queues两条消息"></p>
-<p>还是不关控制台，修改TestActivemq.java中发送消息的destinationName<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jmsTemplate.send(&quot;panda&quot;, new MessageCreator()</div></pre></td></tr></table></figure></p>
-<p>再运行TestActivemq.java，控制台没有任何输出，再查看Queues<br><img src="/2017/04/24/spring整合activemq/20170424175850.png" alt="Queues额外队列"></p>
-<p>可以看到有一条待处理消息，没有消费者，发出1条消息，接收0条消息。</p>
-<p>这里tenny:test队列的消费者有3个，因为之前启动的监听器都是针对队列tenny:test的，并没有监听这个新的panda队列。</p>
-<p>修改activemq.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 目的队列的名称</div><div class="line">activemq.queue.name=panda</div></pre></td></tr></table></figure></p>
-<p>再运行TestActivemq.java，可以看到控制台输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">receive message from queue://panda: some information...</div><div class="line">receive message from queue://panda: some information...</div></pre></td></tr></table></figure></p>
-<p>说明这次启动的监听器收到了之前的和当前的消息。</p>
-<p>再查看Queues界面，新的队列panda也有一个消费者，发送2条，接收2条(即刚才启动的针对队列panda的监听器接收)。<br><img src="/2017/04/24/spring整合activemq/20170425094743.png" alt="Queues新消费者"></p>
-<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7.总结"></a>7.总结</h2><ul>
-<li><p>消息按队列区分(如这里的tenny:test和panda)，每一个队列有生产者(发送消息)和消费者(接收消息)。当没有消费者的时候，生成者的消息就暂时悬挂起来，一旦有消费者空闲，就会接收消息。</p>
-</li>
-<li><p>在测试中，已启动两次TestActivemq.java后，不修改测试代码，继续运行多次TestActivemq.java。可以发现，每次运行后，发送的消息都是由之前的多个监听器随机接收。</p>
-</li>
-<li><p>这里测试直接使用了jmsTemplate，实际应用中，应该写一个service，将jmsTemplate作为私有变量，通过spring注入。然后根据业务封装自己发送的消息。</p>
-</li>
-<li><p>可以为每个业务模块配置单独的activemq.properties，编写对应的生产者service和监听器。每个模块的消息互不干扰。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2345,7 +2312,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2367,7 +2334,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

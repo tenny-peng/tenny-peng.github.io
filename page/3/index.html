@@ -313,6 +313,163 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/05/多台电脑hexo部署到github的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/05/多台电脑hexo部署到github的坑/" itemprop="url">
+                  多台电脑hexo部署到github的坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T10:54:05+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo-github博客/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo+github博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前在家里搭建了博客，成功部署到github上，并将hexo目录也上传至github/hexo仓库保存。<br>后来到公司想把它们down下来，方便两边修改同步。</p>
+<h2 id="第一个坑是hexo发布博客到github"><a href="#第一个坑是hexo发布博客到github" class="headerlink" title="第一个坑是hexo发布博客到github"></a>第一个坑是hexo发布博客到github</h2><p>同样进行了一系列的node安装，hexo安装等，并且在hexo博客目录下down下了guthub/hexo的资源，本地启动，没问题。<br>但是当我发布想发布到yourname.github.io上时，问题来了，它居然把我的<strong>整个hexo博客目录</strong>扔到了yourname.github.io上，不是说好的只发布<strong>.deploy_git</strong>下的内容呢！！</p>
+<p>于是我就茫然了啊，我去查看hexo下的_config.yml文件，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:tenny-peng/tenny-peng.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>没错啊，是这个地址啊。</p>
+<p>后来一想也不对，就算这里错了也不对，不是目标地址错了，而是发布的内容错了。</p>
+<p>网上查到了这篇博客: <a href="http://www.jianshu.com/p/67c57c70f275" target="_blank" rel="external">hexo部署到github遇到的坑</a>，最后说删除hexo目录下的.git文件，然后我就试了试，重新发布，然后又报错了。。这里想截图可是命令行找不到了，大概就是说没有指定repository，然后我点开<strong>.deploy_git</strong>文件夹，突然想到在家里<strong>.deploy_git</strong>文件夹下面是有.git的，而且还是我自己指定的。</p>
+<p>哈哈，瞬间好像知道了，打开git bash，切换到hexo/.deploy_git，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure></p>
+<p>再绑定远程仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:tenny-peng/tenny-peng.github.io.git</div></pre></td></tr></table></figure></p>
+<p>回到cmd命令行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure></p>
+<p>搞定了，成功提交了正确的博客内容。</p>
+<h2 id="第二个坑是hexo目录与github-hexo同步"><a href="#第二个坑是hexo目录与github-hexo同步" class="headerlink" title="第二个坑是hexo目录与github/hexo同步"></a>第二个坑是hexo目录与github/hexo同步</h2><p>然后再把我的hexo目录和github/hexo同步，刚才把hexo目录下的.git删了。好吧，重新建回来。<br>git bash切换到hexo根目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line"></div><div class="line">git remote add origin git@github.com:tenny-peng/hexo.git</div></pre></td></tr></table></figure></p>
+<p>执行pull指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ git pull origin master</div><div class="line">From github.com:tenny-peng/hexo</div><div class="line"> * branch            master     -&gt; FETCH_HEAD</div><div class="line">error: The following untracked working tree files would be overwritten by merge:</div><div class="line">        .npmignore</div><div class="line">        _config.yml</div><div class="line">        db.json</div><div class="line">        node_modules/.bin/JSONStream</div><div class="line">        node_modules/.bin/JSONStream.cmd</div><div class="line">        node_modules/.bin/acorn</div><div class="line">        node_modules/.bin/acorn.cmd</div><div class="line">        ...</div></pre></td></tr></table></figure></p>
+<p>这里说一下，第一个坑中hexo目录下的内容是我直接从github/hexo上down下来复制过来的，然后本地又进行过hexo生成和发布操作，错误具体原因不太清除(知道的童鞋欢迎指正)，网上查到解决办法是先清理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ git clean -f -d</div><div class="line">Skipping repository .deploy_git/</div><div class="line">Removing .npmignore</div><div class="line">Removing _config.yml</div><div class="line">Removing db.json</div><div class="line">Removing node_modules/</div><div class="line">Removing package.json</div><div class="line">Removing public/</div><div class="line">Removing scaffolds/</div><div class="line">Removing source/</div><div class="line">Removing themes/</div></pre></td></tr></table></figure></p>
+<p>清理后hexo目录下只剩.deploy_git和.git目录，再拉取就可以了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git pull origin master</div><div class="line">From github.com:tenny-peng/hexo</div><div class="line"> * branch            master     -&gt; FETCH_HEAD</div><div class="line">Checking out files: 100% (7651/7651), done.</div></pre></td></tr></table></figure></p>
+<p>所以下次可以先同步好hexo文件夹，这样第二个坑应该就不会出现了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/04/修复TortoiseGit图标不显示/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1104,7 +1261,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6d;&#x70;&#x65;&#x6e;&#x67;&#x74;&#x61;&#111;&#113;&#105;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;">&#x6d;&#x70;&#x65;&#x6e;&#x67;&#x74;&#x61;&#111;&#113;&#105;&#64;&#49;&#x36;&#51;&#46;&#x63;&#111;&#x6d;</a>。</p>
+<p>这是我的邮箱<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#109;&#112;&#101;&#x6e;&#103;&#116;&#x61;&#x6f;&#113;&#x69;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;">&#109;&#112;&#101;&#x6e;&#103;&#116;&#x61;&#x6f;&#113;&#x69;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>
@@ -1297,7 +1454,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1308,7 +1465,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1319,7 +1476,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

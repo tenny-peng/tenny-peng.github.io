@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-12-04T07:14:38.272Z</updated>
+  <updated>2017-12-04T07:25:58.327Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Markdown首行缩进方法</title>
-    <link href="https://tenny-peng.github.io/2017/12/04/Markdown%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B%E6%96%B9%E6%B3%95/"/>
-    <id>https://tenny-peng.github.io/2017/12/04/Markdown首行缩进方法/</id>
+    <title>Markdown行首缩进方法</title>
+    <link href="https://tenny-peng.github.io/2017/12/04/Markdown%E8%A1%8C%E9%A6%96%E7%BC%A9%E8%BF%9B%E6%96%B9%E6%B3%95/"/>
+    <id>https://tenny-peng.github.io/2017/12/04/Markdown行首缩进方法/</id>
     <published>2017-12-04T06:37:43.000Z</published>
-    <updated>2017-12-04T07:14:38.272Z</updated>
+    <updated>2017-12-04T07:25:58.327Z</updated>
     
     <content type="html"><![CDATA[<p>因为markdown的段落定义是由一个或多个连续的文本组成，中间的多个空格和tab会被认为是一个空格。<br>但是有时候确实需要这样的空格或tab缩进格式时怎么办?</p>
 <h3 id="1-全角空格"><a href="#1-全角空格" class="headerlink" title="1.全角空格"></a>1.全角空格</h3><p>将输入法由半角改为全角。两次空格之后就能够有两个汉字的缩进。<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">测试的三句话：1.这是第一句话  //末尾两空格以换行</div><div class="line">　　　　　　　2.这是第二句话  //开头7个全角空格以缩进，末尾两空格以换行</div><div class="line">　　　　　　　3.这是第三句话  //开头7个全角空格以缩进</div></pre></td></tr></table></figure></p>

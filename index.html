@@ -313,6 +313,171 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/12/04/使用Freemarker模板自动生成代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/12/04/使用Freemarker模板自动生成代码/" itemprop="url">
+                  使用Freemarker模板自动生成代码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T09:26:51+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Freemarker/" itemprop="url" rel="index">
+                    <span itemprop="name">Freemarker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因感概业务代码存在大量的增删改查功能，只是针对不同的表数据而已。故想有没有办法，在重复的相同代码中替换某些内容，于是按此思路搜寻，了解到有freemarker这个东西，一番学习后，特记录于此。</p>
+<h1 id="Freemarker简介"><a href="#Freemarker简介" class="headerlink" title="Freemarker简介"></a>Freemarker简介</h1><p>FreeMarker是一款模板引擎： 一种基于模板和要改变的数据，并用来生成输出文本（HTML网页、电子邮件、配置文件、源代码等）的通用工具。即：输出=模板+数据。简单来说，其用法原理类似String的replace方法，或MessageFormat的format方法，都是在一定的代码中改变（替换）某些内容。不过FreeMarker更加强大，模板来源可以是外部文件或字符串格式，替换的数据格式多样，而且支持逻辑判断，如此替换的内容将更加灵活。</p>
+<h1 id="小例子"><a href="#小例子" class="headerlink" title="小例子"></a>小例子</h1><p>比如我们要产生实体类，我们将模板定义如下，模板文件名为entity.flt（flt是freemarker模板的后缀名）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">package com.tenny.$&#123;interfaceName?lower_case&#125;.entity;</div><div class="line"></div><div class="line">import java.util.Date;</div><div class="line"></div><div class="line">public class $&#123;entityName&#125; &#123;</div><div class="line"></div><div class="line">&lt;#list params as param&gt;</div><div class="line">	// $&#123;param.fieldNote&#125;</div><div class="line">    private $&#123;param.fieldType&#125; $&#123;param.fieldName&#125;;</div><div class="line"></div><div class="line">&lt;/#list&gt;</div><div class="line">&lt;#list params as param&gt;</div><div class="line">	public void set$&#123;param.fieldName?cap_first&#125;($&#123;param.fieldType&#125; $&#123;param.fieldName&#125;)&#123;</div><div class="line">        this.$&#123;param.fieldName&#125; = $&#123;param.fieldName&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public $&#123;param.fieldType&#125; get$&#123;param.fieldName?cap_first&#125;()&#123;</div><div class="line">        return this.$&#123;param.fieldName&#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&lt;/#list&gt;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中的${xxx}就是变量了，由外部传入。可以看到模板还有类似java for each循环的语法。</p>
+<p>接下来我们要填充数据了。数据来源后面详细说，先假定我们有了数据。其格式为Map，内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, Object&gt; beanMap = new HashMap&lt;String, Object&gt;();</div><div class="line">beanMap.put(&quot;beanName&quot;, &quot;User&quot;);// 实体类名</div><div class="line">beanMap.put(&quot;interfaceName&quot;, &quot;User&quot;);// 接口名</div><div class="line">List&lt;Map&lt;String, String&gt;&gt; paramsList = new ArrayList&lt;Map&lt;String, String&gt;&gt;();</div><div class="line">for (int i = 0; i &lt; 4; i++) &#123;</div><div class="line">      Map&lt;String, String&gt; tmpParamMap = new HashMap&lt;String, String&gt;();</div><div class="line">      tmpParamMap.put(&quot;fieldNote&quot;, &quot;fieldNote&quot; + i);</div><div class="line">      tmpParamMap.put(&quot;fieldType&quot;, &quot;String&quot;);</div><div class="line">      tmpParamMap.put(&quot;fieldName&quot;, &quot;fieldName&quot; + i);</div><div class="line">      paramsList.add(tmpParamMap);</div><div class="line">&#125;</div><div class="line">beanMap.put(&quot;params&quot;, paramsList);</div></pre></td></tr></table></figure></p>
+<p>最后我们使用模板替换数据(这里我的模板放在resources/model/下，目标文件放在resources/class/下)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Configuration config = new Configuration();</div><div class="line">config.setObjectWrapper(new DefaultObjectWrapper());</div><div class="line">Template template = config.getTemplate(&quot;src/main/resources/model/entity.ftl&quot;, &quot;UTF-8&quot;);</div><div class="line">Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(&quot;src/main/resources/class/User.java&quot;), &quot;UTF-8&quot;));</div><div class="line">template.process(rootMap, out);</div><div class="line">out.flush();</div><div class="line">out.close();</div></pre></td></tr></table></figure></p>
+<p>这样最后生成的User.java的内容大概如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">package com.tenny.user.entity;</div><div class="line"></div><div class="line">import java.util.Date;</div><div class="line"></div><div class="line">public class User &#123;</div><div class="line"></div><div class="line">	// 主键id</div><div class="line">    private Integer id;</div><div class="line"></div><div class="line">	// 用户名</div><div class="line">    private String username;</div><div class="line"></div><div class="line">	// 密码</div><div class="line">    private String password;</div><div class="line"></div><div class="line">	// 用户类型#1、管理员；2、普通用户</div><div class="line">    private Integer type;</div><div class="line"></div><div class="line">	// 创建时间</div><div class="line">    private Date createtime;</div><div class="line"></div><div class="line">	public void setId(Integer id)&#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer getId()&#123;</div><div class="line">        return this.id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	public void setUsername(String username)&#123;</div><div class="line">        this.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getUsername()&#123;</div><div class="line">        return this.username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	public void setPassword(String password)&#123;</div><div class="line">        this.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getPassword()&#123;</div><div class="line">        return this.password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	public void setType(Integer type)&#123;</div><div class="line">        this.type = type;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer getType()&#123;</div><div class="line">        return this.type;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	public void setCreatetime(Date createtime)&#123;</div><div class="line">        this.createtime = createtime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Date getCreatetime()&#123;</div><div class="line">        return this.createtime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>其实上面已经基本将Freemarker的用法展现了。但是我们还可以做更多改进。</p>
+<h2 id="使用数据库作为数据来源"><a href="#使用数据库作为数据来源" class="headerlink" title="使用数据库作为数据来源"></a>使用数据库作为数据来源</h2><p>模板中要替换的数据，我们可以从外部手动输入，然后由程序拼装成模板引擎需要的格式。但因为我们最开始也说了，大部分相同的是增删改查，不同的是业务数据库表，所以我们可以直接将数据库表字段作为数据来源。</p>
+<p>假如你使用的是mysql，可以写一个mysql工具类，获取数据库字段信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line">package utils;</div><div class="line"></div><div class="line">import java.sql.Connection;</div><div class="line">import java.sql.DatabaseMetaData;</div><div class="line">import java.sql.DriverManager;</div><div class="line">import java.sql.ResultSet;</div><div class="line">import java.sql.SQLException;</div><div class="line">import java.sql.Statement;</div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.List;</div><div class="line">import java.util.Map;</div><div class="line"></div><div class="line">public class MysqlUtil &#123;</div><div class="line">	private static String DRIVER_CLASS = &quot;com.mysql.jdbc.Driver&quot;;</div><div class="line">    private static String DATABASE_URL = &quot;jdbc:mysql://localhost:3306/news&quot;;</div><div class="line">    private static String DATABASE_URL_PREFIX = &quot;jdbc:mysql://&quot;;</div><div class="line">    private static String DATABASE_USER = &quot;root&quot;;</div><div class="line">    private static String DATABASE_PASSWORD = &quot;tenny123&quot;;</div><div class="line">    private static Connection con = null;</div><div class="line">    private static DatabaseMetaData dbmd = null;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 初始化数据库链接</div><div class="line">     * @param db_url 数据库地址(ex: localhost:3306/news)</div><div class="line">     * @param db_user 用户名</div><div class="line">     * @param db_pw 密码</div><div class="line">     */</div><div class="line">    public static void init(String db_url, String db_user, String db_pw)&#123;</div><div class="line">    	try &#123;</div><div class="line">    		DATABASE_URL = DATABASE_URL_PREFIX + db_url;</div><div class="line">    		DATABASE_USER = db_user;</div><div class="line">    		DATABASE_PASSWORD = db_pw;</div><div class="line">    		Class.forName(DRIVER_CLASS);</div><div class="line">    		con = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);</div><div class="line">    		dbmd = con.getMetaData();</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获取当前用户所有表</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;String&gt; getTables()&#123;</div><div class="line">    	List&lt;String&gt; tables = new ArrayList&lt;String&gt;();</div><div class="line"></div><div class="line">    	try &#123;</div><div class="line">			ResultSet rs = dbmd.getTables(null, DATABASE_USER, null, new String[] &#123; &quot;TABLE&quot; &#125;);</div><div class="line">			while (rs.next()) &#123;</div><div class="line">				tables.add(rs.getString(&quot;TABLE_NAME&quot;));</div><div class="line">			&#125;</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">    	return tables;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获取表字段信息</div><div class="line">     * @param tableName</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static List&lt;Map&lt;String,String&gt;&gt; getTableCloumns(String tableName)&#123;</div><div class="line">    	List&lt;Map&lt;String,String&gt;&gt; columns = new ArrayList&lt;Map&lt;String,String&gt;&gt;();</div><div class="line">    	try&#123;</div><div class="line">            Statement stmt = con.createStatement();</div><div class="line"></div><div class="line">            String sql = &quot;select column_name, data_type, column_key, is_nullable, column_comment from information_schema.columns where table_name=&apos;&quot; + tableName + &quot;&apos;and table_schema=&apos;&quot; + DATABASE_URL.substring(DATABASE_URL.lastIndexOf(&quot;/&quot;) + 1, DATABASE_URL.length()) + &quot;&apos;&quot;;</div><div class="line">            ResultSet rs = stmt.executeQuery(sql);</div><div class="line">            while (rs.next())&#123;</div><div class="line">                HashMap&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</div><div class="line">                map.put(&quot;columnName&quot;, rs.getString(&quot;column_name&quot;));</div><div class="line">                map.put(&quot;dataType&quot;, rs.getString(&quot;data_type&quot;));</div><div class="line">                map.put(&quot;isKey&quot;, ParamUtil.isEmpty(rs.getString(&quot;column_key&quot;))?&quot;false&quot;:&quot;true&quot;);</div><div class="line">                map.put(&quot;notNull&quot;, rs.getString(&quot;is_nullable&quot;).equals(&quot;YES&quot;)?&quot;false&quot;:&quot;true&quot;);</div><div class="line">                map.put(&quot;comment&quot;, rs.getString(&quot;column_comment&quot;));</div><div class="line">                columns.add(map);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        catch (SQLException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally&#123;</div><div class="line">        	if(null != con)&#123;</div><div class="line">	            try &#123;</div><div class="line">	        		con.close();</div><div class="line">				&#125; catch (SQLException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">		return columns;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>获取了数据表字段信息，再加上自己需要的一些属性，就可以给模板引擎生成最终代码文件了。</p>
+<h2 id="将freemarker转为字符串模板"><a href="#将freemarker转为字符串模板" class="headerlink" title="将freemarker转为字符串模板"></a>将freemarker转为字符串模板</h2><p>还可以在一开始就将模板数据读取出来，存放在内存中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	 * 将模板内容转成字符串</div><div class="line">	 * @param modle 模板名【eg：entity.ftl】</div><div class="line">	 * @return</div><div class="line">	 */</div><div class="line">	public static String file2Str(String modle)&#123;</div><div class="line">		StringBuffer buffer = new StringBuffer();</div><div class="line">		try &#123;</div><div class="line">			BufferedReader br = new BufferedReader(new FileReader(&quot;/WEB-INF/templates/&quot; + model));</div><div class="line">			String line = &quot;&quot;;</div><div class="line">			while((line = br.readLine()) != null)&#123;</div><div class="line">				buffer.append(line).append(System.getProperty(&quot;line.separator&quot;));// 保持原有换行格式</div><div class="line">			&#125;</div><div class="line">			br.close();</div><div class="line">		&#125; catch (FileNotFoundException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; catch (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		return buffer.toString();</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>当然，利用字符串模板填充数据的写法有些不同<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Configuration config  = new Configuration();</div><div class="line">StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();</div><div class="line">stringTemplateLoader.putTemplate(&quot;entity&quot;, &quot;this is a template of $&#123;entityName&#125;&quot;);</div><div class="line">config.setTemplateLoader(stringTemplateLoader);</div><div class="line"></div><div class="line">StringWriter stringWriter = new StringWriter();</div><div class="line">Template template = config.getTemplate(&quot;entity&quot;, &quot;UTF-8&quot;);</div><div class="line">Writer out = new BufferedWriter(stringWriter);</div><div class="line">template.process(rootMap, out);</div><div class="line">out.flush();</div><div class="line">out.close();</div><div class="line">return stringWriter.toString();</div></pre></td></tr></table></figure></p>
+<p>这样可以将其输入到html页面观看。如果需要的话，还可以随时修改模板，后台接收前端的字符串模板。如此，模板和数据都可以随意定制，岂不是更加灵活方便。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>有了以上的认知，我们可以做一个页面，输入数据库参数后，选中某个表，就可以生成关于改表的增删改查代码。或者在页面上添加字段，用这些字段来生成代码。这个就可以自由发挥了~</p>
+<p>帖几张我自己的页面截图（没啥样式，吃藕勿喷）<br><img src="/2017/12/04/使用Freemarker模板自动生成代码/20171204114016.png" alt="首页"><br>我已经将模板转换成字符串输出了，这样方便查看（其实直接看模板文件也一样= =!）<br><img src="/2017/12/04/使用Freemarker模板自动生成代码/20171204114512.png" alt="模板字符串"><br>点击获取表，后台就根据数据库属性查询列表，然后我们选择某一个表，前端自动填充”实体名”和”接口名”属性,一般情况无需修改，点击提交，当当~我们的代码就出来了<br><img src="/2017/12/04/使用Freemarker模板自动生成代码/20171204114917.png" alt="代码"></p>
+<p>当然还可以自定义字段，比如我们不选表，也就是说不用数据库作为来源，在页面上添加几个字段<br><img src="/2017/12/04/使用Freemarker模板自动生成代码/20171204115352.png" alt="添加字段1"></p>
+<p><img src="/2017/12/04/使用Freemarker模板自动生成代码/20171204115531.png" alt="添加字段2"></p>
+<p>如果你也使用spring mvc，可以和我一样，设定好多个模板后，一次性将controller-service-serviceImpl-dao-entity-mapping-test全部产生。后面甚至可以继续设定目录或包，产生的代码就可以直接使用啦。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>嗯，一句话，模板+数据=最终代码。</p>
+<p>模板根据目标代码制定，数据来源我们根据实际情况获取，如此便可diy自己的autocode。</p>
+<p>我的autocode地址：<a href="https://github.com/tenny-peng/autocode" target="_blank" rel="external">https://github.com/tenny-peng/autocode</a></p>
+<p>参考链接：<a href="http://www.cnblogs.com/yejg1212/p/4322452.html" target="_blank" rel="external">http://www.cnblogs.com/yejg1212/p/4322452.html</a><br>　　　　　<a href="http://blog.csdn.net/xiekuntarena/article/details/53032907" target="_blank" rel="external">http://blog.csdn.net/xiekuntarena/article/details/53032907</a><br>　　　　　<a href="http://blog.csdn.net/5iasp/article/details/27181365" target="_blank" rel="external">http://blog.csdn.net/5iasp/article/details/27181365</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/07/14/rsa之js加密java解密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2116,164 +2281,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/27/spring加载多个xml遇到的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/27/spring加载多个xml遇到的问题/" itemprop="url">
-                  spring加载多个xml遇到的问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T09:36:25+08:00">
-                2017-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="问题出现"><a href="#问题出现" class="headerlink" title="问题出现"></a>问题出现</h2><p>之前学习spring整合redis，spring整合activemq，单独测试没有问题。后来想把他们一起部署启动，结果报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Could not resolve placeholder &apos;redis.maxTotal&apos; in string value &quot;$&#123;redis.maxTotal&#125;&quot;</div></pre></td></tr></table></figure></p>
-<h2 id="查找原因"><a href="#查找原因" class="headerlink" title="查找原因"></a>查找原因</h2><p>查了一会找到了原因。因为我的spring-redis.xml和spring-activemq.xml都写了一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;context:property-placeholder location=&quot;classpath:conf/xxx.properties&quot; /&gt;</div></pre></td></tr></table></figure></p>
-<p>而Spring容器采用反射扫描的发现机制，在探测到Spring容器中有一个org.springframework.beans.factory.config.PropertyPlaceholderConfigurer的Bean就会停止对剩余PropertyPlaceholderConfigurer的扫描。</p>
-<p>而<context:property-placeholder>这个基于命名空间的配置，其实内部就是创建一个PropertyPlaceholderConfigurer Bean而已。换句话说，即Spring容器仅允许<strong>最多定义一个</strong>PropertyPlaceholderConfigurer(或<context:property-placeholder>)，其余的会被Spring<strong>忽略</strong>掉（其实Spring如果提供一个警告就好了）。</context:property-placeholder></context:property-placeholder></p>
-<p>这样的话，其实就只加载了第一个properties文件，后面的并没有加载，自然也就找不到’redis.maxTotal’了。</p>
-<h2 id="尝试解决"><a href="#尝试解决" class="headerlink" title="尝试解决"></a>尝试解决</h2><p>按照网上的办法，去掉每个xml单独的context:property-placeholder，再写一个xml文件一次性加载所有资源文件，并引入之前单独的所有xml文件。</p>
-<p>先将web文件的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">context-param&gt;</div><div class="line">	&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">	&lt;param-value&gt;</div><div class="line">        classpath:spring-activemq.xml,</div><div class="line">        classpath:spring-redis.xml</div><div class="line">	&lt;/param-value&gt;</div><div class="line">&lt;/context-param&gt;</div></pre></td></tr></table></figure></p>
-<p>改为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">context-param&gt;</div><div class="line">		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">		&lt;param-value&gt;</div><div class="line">			classpath:applicationContext.xml</div><div class="line">		&lt;/param-value&gt;</div><div class="line">	&lt;/context-param&gt;</div></pre></td></tr></table></figure></p>
-<p>编写这个applicationContext.xml如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">	xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">	xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</div><div class="line">	xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</div><div class="line">						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">						http://www.springframework.org/schema/context</div><div class="line">						http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:conf/*.properties&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;import resource=&quot;activemq/spring-activemq.xml&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;import resource=&quot;redis/spring-redis.xml&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
-<p>这样部署启动应该就可以了。</p>
-<h2 id="新的问题"><a href="#新的问题" class="headerlink" title="新的问题"></a>新的问题</h2><p>按道理应该启动成功，不过我这里又遇到另一个问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cannot convert value of type [org.springframework.data.redis.connection.jedis.JedisConnectionFactory] to required type [javax.jms.ConnectionFactory] for property &apos;connectionFactory&apos;: no matching editors or conversion strategy found</div></pre></td></tr></table></figure></p>
-<h2 id="再查原因"><a href="#再查原因" class="headerlink" title="再查原因"></a>再查原因</h2><p>查看自己的spring-redis.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;connectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;</div><div class="line">p:hostName=&quot;$&#123;redis.host&#125;&quot; p:port=&quot;$&#123;redis.port&#125;&quot; p:password=&quot;$&#123;redis.pass&#125;&quot; c:poolConfig-ref=&quot;poolConfig&quot;&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;  </div><div class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot; /&gt;</div><div class="line">    &lt;property name=&quot;keySerializer&quot; ref=&quot;keySerializer&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
-<p>并没有需要’javax.jms.ConnectionFactory’，根据问题在网上搜索，在一篇博客看到了’redis也有个bean叫connectionFactory’的字眼。于是想到自己应该也是bean name重复了。查看spring-activemq.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;connectionFactory&quot; class=&quot;org.springframework.jms.connection.SingleConnectionFactory&quot;&gt;  </div><div class="line">    &lt;property name=&quot;targetConnectionFactory&quot; ref=&quot;pooledConnectionFactory&quot;/&gt;  </div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 --&gt;  </div><div class="line">&lt;bean id=&quot;jmsTemplate&quot; class=&quot;org.springframework.jms.core.JmsTemplate&quot;&gt;  </div><div class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot;/&gt;  </div><div class="line">    &lt;property name=&quot;defaultDestinationName&quot; value=&quot;$&#123;activemq.queue.name&#125;&quot;/&gt;  </div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>问题就很明显了，spring-redis.xml和spring-activemq.xml都有connectionFactory这个bean。于是修改了spring-redis.xml中的bean name<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;redisConnectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot;</div><div class="line">p:hostName=&quot;$&#123;redis.host&#125;&quot; p:port=&quot;$&#123;redis.port&#125;&quot; p:password=&quot;$&#123;redis.pass&#125;&quot; c:poolConfig-ref=&quot;poolConfig&quot;&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;  </div><div class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;redisConnectionFactory&quot; /&gt;</div><div class="line">    &lt;property name=&quot;keySerializer&quot; ref=&quot;keySerializer&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
-<p>再次部署启动，OK。</p>
-<p>参考博客：<a href="http://www.iteye.com/topic/1131688" target="_blank" rel="external">http://www.iteye.com/topic/1131688</a><br>　　　　　<a href="http://blog.csdn.net/AlbertFly/article/details/51503079" target="_blank" rel="external">http://blog.csdn.net/AlbertFly/article/details/51503079</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2323,7 +2330,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2334,7 +2341,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2345,7 +2352,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

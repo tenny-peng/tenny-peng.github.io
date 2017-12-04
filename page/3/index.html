@@ -313,6 +313,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/05/hexo-next主题添加打赏功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/05/hexo-next主题添加打赏功能/" itemprop="url">
+                  hexo-next主题添加打赏功能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T14:38:24+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo-github博客/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo+github博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>next主题集成了打赏功能，使用起来比较简单。</p>
+<p>首先获取微信收款二维码和支付宝收款二维码：</p>
+<p>微信：点击右上角的加号”+”，点击”收付款”，点击”我要收款”，就可以看到自己的收款二维码了。还可以点击”设置金额”，之后保存图片(名字可修改为wechatpay.png)。</p>
+<p>支付宝： 同理，点击右上角的加号”+”，点击”收钱”,出现二维码，也可以设置金额，之后保存图片(名字可修改为ailpay.jpg)。</p>
+<p>我们可以在source目录下建立一个images文件夹，将上面保存的图片放入。</p>
+<p>微信和支付宝生成的二维码都有外框，不喜欢外框的话可以利用美图秀秀等软件进行剪裁。选定宽度和高度并勾选锁定剪裁尺寸，一般都是剪裁一个正方形，将剪裁框拖到合适地方，点击”剪裁按钮”，再Ctrl + s 保存即可（支付宝图片同理）。<br><img src="/2017/04/05/hexo-next主题添加打赏功能/20170408140902.png" alt="剪裁图片"></p>
+<p>找到主题next下的配置文件_config.yml，添加信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># reward</div><div class="line">reward_comment: 如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</div><div class="line">wechatpay: /images/wechatpay.png</div><div class="line">alipay: /images/alipay.jpg</div></pre></td></tr></table></figure></p>
+<p>hexo发布，文章下面就会出现一个赏字，点开效果如下：<br><img src="/2017/04/05/hexo-next主题添加打赏功能/20170405151647.png" alt="打赏效果"></p>
+<p>以上就成功添加了打赏功能(虽然基本不会有人打赏。。。)</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/05/多台电脑hexo部署到github的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1261,7 +1412,7 @@
 <p>这是我的<a href="https://tenny-peng.github.io" title="tenny&#39;s blog">博客</a>，欢迎访问。</p>
 <h3 id="邮件："><a href="#邮件：" class="headerlink" title="邮件："></a>邮件：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">An email &lt;example@example.com&gt; link.</div><div class="line">这是我的邮箱&lt;mpengtaoqi@163.com&gt;。</div></pre></td></tr></table></figure>
 <p>效果如下：</p>
-<p>这是我的邮箱<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#109;&#112;&#101;&#x6e;&#103;&#116;&#x61;&#x6f;&#113;&#x69;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;">&#109;&#112;&#101;&#x6e;&#103;&#116;&#x61;&#x6f;&#113;&#x69;&#64;&#49;&#x36;&#51;&#46;&#99;&#x6f;&#109;</a>。</p>
+<p>这是我的邮箱<a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#x6d;&#x70;&#x65;&#x6e;&#103;&#x74;&#x61;&#111;&#113;&#x69;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;">&#x6d;&#x70;&#x65;&#x6e;&#103;&#x74;&#x61;&#111;&#113;&#x69;&#64;&#x31;&#54;&#x33;&#x2e;&#x63;&#x6f;&#x6d;</a>。</p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>行内引用 (标题可选):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">![alt text](/path/img.jpg &quot;Title&quot;)</div><div class="line">这里出现一个引用的图片![图片替代文字](https://tenny-peng.github.io/images/avatar.jpg &quot;偷得浮生半日闲&quot;)</div></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
 <p>这里出现一个引用的图片<img src="https://tenny-peng.github.io/images/avatar.jpg" alt="图片替代文字" title="偷得浮生半日闲"></p>
@@ -1454,7 +1605,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1465,7 +1616,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1476,7 +1627,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

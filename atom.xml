@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tenny-peng.github.io/"/>
-  <updated>2017-12-04T07:25:58.327Z</updated>
+  <updated>2017-12-25T08:20:37.893Z</updated>
   <id>https://tenny-peng.github.io/</id>
   
   <author>
@@ -14,6 +14,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring项目properties属性加密解密处理</title>
+    <link href="https://tenny-peng.github.io/2017/12/25/spring%E9%A1%B9%E7%9B%AEproperties%E5%B1%9E%E6%80%A7%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E5%A4%84%E7%90%86/"/>
+    <id>https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/</id>
+    <published>2017-12-25T03:48:25.000Z</published>
+    <updated>2017-12-25T08:20:37.893Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。</p>
+<h3 id="解决方案1-0"><a href="#解决方案1-0" class="headerlink" title="解决方案1.0"></a>解决方案1.0</h3><p>首先我们自定义一个属性加载器，继承自spring的PropertyPlaceholderConfigurer。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 解密自定义加密属性</div><div class="line"> *</div><div class="line"> * @author tenny</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer &#123;</div><div class="line"></div><div class="line">    private List&lt;String&gt; encryptPropNames;</div><div class="line"></div><div class="line">    // 覆写转换方法，对自定义属性解密</div><div class="line">    @Override</div><div class="line">    protected String convertProperty(String propertyName, String propertyValue) &#123;</div><div class="line"></div><div class="line">        if (encryptPropNames.contains(propertyName)) &#123;</div><div class="line">            return AESUtil.decrypt(propertyValue);</div><div class="line">        &#125;</div><div class="line">        return propertyValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEncryptPropNames(List&lt;String&gt; encryptPropNames) &#123;</div><div class="line">        this.encryptPropNames = encryptPropNames;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后修改配置文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 自定义属性加载器，解密某些属性 --&gt;</div><div class="line">    &lt;bean id=&quot;placeholderConfig&quot; class=&quot;com.tenny.common.EncryptPropertyPlaceholderConfigurer&quot;&gt;</div><div class="line">        &lt;!-- 配置需解密的属性 --&gt;</div><div class="line">        &lt;property name=&quot;encryptPropNames&quot;&gt;</div><div class="line">           &lt;list&gt;</div><div class="line">               &lt;value&gt;jdbc.password&lt;/value&gt;</div><div class="line">               &lt;value&gt;redis.password&lt;/value&gt;</div><div class="line">           &lt;/list&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;property name=&quot;locations&quot;&gt;</div><div class="line">            &lt;list&gt;</div><div class="line">                &lt;value&gt;classpath:conf/jdbc.properties&lt;/value&gt;</div><div class="line">                &lt;value&gt;classpath:conf/redis.properties&lt;/value&gt;</div><div class="line">            &lt;/list&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>其中jdbc.properties中password属性加密存储<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">jdbc.driver=com.mysql.jdbc.Driver</div><div class="line">jdbc.url=jdbc:mysql://localhost:3306/news</div><div class="line">jdbc.username=root</div><div class="line">jdbc.password=3hj83jsf234hp3jd</div><div class="line">#定义初始连接数  </div><div class="line">jdbc.initialSize=0</div><div class="line">#定义最大连接数  </div><div class="line">jdbc.maxActive=20</div><div class="line">#定义最大空闲  </div><div class="line">jdbc.maxIdle=20</div><div class="line">#定义最小空闲  </div><div class="line">jdbc.minIdle=1</div><div class="line">#定义最长等待时间  </div><div class="line">jdbc.maxWait=60000</div></pre></td></tr></table></figure></p>
+<p>redis.properties同样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># Redis settings</div><div class="line">redis.host=localhost</div><div class="line">redis.port=6379</div><div class="line">redis.pass=4jd89jkn68943gf1</div><div class="line">redis.maxTotal=200</div><div class="line">redis.maxIdle=50</div><div class="line">redis.minIdle=300</div><div class="line">redis.maxWaitMillis=1000</div><div class="line">redis.testOnBorrow=true</div></pre></td></tr></table></figure></p>
+<p>至于加密解密工具AESUtil网上很多，这里就不贴了。</p>
+<p>项目启动时，由于覆写了convertProperty方法，而每个属性都会过一遍该方法，通过配置encryptPropNames的值，就可以灵活选择需要解密的字段了。</p>
+<h3 id="新的问题"><a href="#新的问题" class="headerlink" title="新的问题"></a>新的问题</h3><p>按理说到这里就满足需求了，然而tenny又遇到了一个问题。我们知道，加密解密工具AESUtil是需要key的，如果这个key也存在properties文件中呢。按上述方法，假如先读取到key再读取properties文件加密属性，是可以正常解析的。但假如先读取到需要解密的属性，这时候AESUtil所需key还是空，就会造成解密错误了。</p>
+<p>由于properties继承自Hashtable，key/value不保证进出顺序，故加载properties属性顺序不保证与文件所写一致，所以想通过把key属性写在最前面来解决是不行的。</p>
+<p>有一个解决方案是自定义一个OrderedProperties类继承自Properties，然后使用这个OrderedProperties来存放属性，保证读取顺序与写入顺序一致即可。我这里使用的是另外一种办法。</p>
+<h3 id="回顾之前方案"><a href="#回顾之前方案" class="headerlink" title="回顾之前方案"></a>回顾之前方案</h3><p>一路查看PropertyPlaceholderConfigurer继承链到PropertyResourceConfigurer，查看所有方法<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225143231.png" alt="PropertyResourceConfigurer所有方法"></p>
+<p>查看原convertProperty(String, String)方法，可以看到原方法只是将值原样返回了。<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225143351.png" alt="convertProperty原方法"></p>
+<p>那么为什么覆写convertProperty方法改写了值后就能得到改变后的值呢，我们再看convertProperties(Properties)方法<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225144146.png" alt="convertProperty原方法"></p>
+<p>也就是说先获取值，再经convertProperty方法获取另一个值，如果两者不同则以后者为准。所以我们之前覆写convertProperty(String, String)方法就可以自定义解密属性值了。</p>
+<p>再回到新的问题上，properties属性解密需要AESUtil，而AESUtil先需要key属性，怎么解决这个”死锁”问题呢。</p>
+<h3 id="解决方案2-0"><a href="#解决方案2-0" class="headerlink" title="解决方案2.0"></a>解决方案2.0</h3><p>看了上面的源码我们自然就想到了另一个办法，就是覆写convertProperties(Properties)方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 解密自定义加密属性</div><div class="line"> *</div><div class="line"> * @author tenny</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer &#123;</div><div class="line"></div><div class="line">    private List&lt;String&gt; encryptPropNames;</div><div class="line"></div><div class="line">    private String keyValue = null;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void convertProperties(Properties props) &#123;</div><div class="line">        // 1.先遍历全部属性，找到key属性值以初始化AESUtil</div><div class="line">        Enumeration&lt;?&gt; propertyNames = props.propertyNames();</div><div class="line">        while (propertyNames.hasMoreElements()) &#123;</div><div class="line">            String propertyName = (String) propertyNames.nextElement();</div><div class="line">            String propertyValue = props.getProperty(propertyName);</div><div class="line">            if(propertyName.equals(&quot;keyValue&quot;))&#123;</div><div class="line">                keyValue = propertyValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        AESUtil.key = keyValue;</div><div class="line">        // 2.回调原遍历方法</div><div class="line">        super.convertProperties(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 3.覆写转换方法，对自定义属性解密</div><div class="line">    @Override</div><div class="line">    protected String convertProperty(String propertyName, String propertyValue) &#123;</div><div class="line"></div><div class="line">        if (encryptPropNames.contains(propertyName)) &#123;</div><div class="line">            return SecUtil.decrypt(propertyValue);</div><div class="line">        &#125;</div><div class="line">        return propertyValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEncryptPropNames(List&lt;String&gt; encryptPropNames) &#123;</div><div class="line">        this.encryptPropNames = encryptPropNames;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如此一来的话，就解决了解密属性要AESUtil而AESUtil要key属性的”死锁”问题。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一般来说，大部分情况下解决方案1.0足矣。</p>
+<p>不过我这里比较特别一点，场景稍微有点麻烦。先是折腾了半天想办法如何按写入顺序读出属性，但是感觉把事情搞得更麻烦了，又得引入新的东西，最后还是放弃了这种方案。后来在上级老大的提示下尝试重写convertProperty更上层的convertProperties方法，于是对数据有了更强的掌控力，问题也解决了。</p>
+<p>当然缺点还是有的，第一次遍历了所有属性只是为了拿特定的一个属性，而后面又要全部遍历一次，感觉有点浪费吖。嘛，暂时先这样了。后面有啥好办法再修改咯。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。&lt;/p&gt;
+&lt;h3 id=&quot;解决方案1-0&quot;&gt;&lt;a href=
+    
+    </summary>
+    
+      <category term="properties" scheme="https://tenny-peng.github.io/categories/properties/"/>
+    
+    
+      <category term="spring" scheme="https://tenny-peng.github.io/tags/spring/"/>
+    
+      <category term="properties" scheme="https://tenny-peng.github.io/tags/properties/"/>
+    
+  </entry>
   
   <entry>
     <title>Markdown行首缩进方法</title>
@@ -1332,58 +1377,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;开始动手，Hello-World！！&quot;&gt;&lt;a href=&quot;#开始动手，Hello-World！！&quot; class=&quot;headerlink&quot; title=&quot;开始动手，Hello World！！&quot;&gt;&lt;/a&gt;开始动手，Hello World！！&lt;/h1&gt;&lt;p&gt;是时候编写你
-    
-    </summary>
-    
-      <category term="Java学习记录" scheme="https://tenny-peng.github.io/categories/Java%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="java" scheme="https://tenny-peng.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java是什么</title>
-    <link href="https://tenny-peng.github.io/2017/04/08/Java%E6%98%AF%E4%BB%80%E4%B9%88/"/>
-    <id>https://tenny-peng.github.io/2017/04/08/Java是什么/</id>
-    <published>2017-04-08T06:30:18.000Z</published>
-    <updated>2017-05-06T02:12:43.692Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Java-技术"><a href="#Java-技术" class="headerlink" title="Java 技术"></a>Java 技术</h1><p>Java技术既是一门编程语言，也是一个平台。</p>
-<h2 id="Java编程语言"><a href="#Java编程语言" class="headerlink" title="Java编程语言"></a>Java编程语言</h2><p>Java作为一门高级编程语言，具有如下特性：</p>
-<ul>
-<li>简单</li>
-<li>跨平台</li>
-<li>面向对象</li>
-<li>便携性</li>
-<li>分布式</li>
-<li>高性能</li>
-<li>多线程</li>
-<li>健壮的</li>
-<li>动态的</li>
-<li>安全的</li>
-</ul>
-<p>在Java程序中，所有的源文件是以”.java”结尾的普通文本文件，java编译器将源文件编译成”.class”文件。”.class”文件包含的并不是类似”0101011”的机器语言代码，而是称之为字节码(bytecodes)的东东，而这个字节码其实是java虚拟机的机器语言。通过java虚拟机，再将字节码转换为本地机器可识别的代码。</p>
-<p>编译图如下：</p>
-<p><img src="http://docs.oracle.com/javase/tutorial/figures/getStarted/getStarted-compiler.gif" alt="java编译图"></p>
-<p>因为java虚拟机可运行在不同的平台，所以我们的.class文件也可以运行在微软，Linux,苹果等不同平台。虚拟机的存在使得java实现了跨平台，也就是经常说的”一次编译，到处运行”。</p>
-<p><img src="http://docs.oracle.com/javase/tutorial/figures/getStarted/helloWorld.gif" alt="java跨平台"></p>
-<h2 id="Java平台"><a href="#Java平台" class="headerlink" title="Java平台"></a>Java平台</h2><p>平台是供程序运行的硬件或软件环境。我们常说的微软操作系统，Linux系统，苹果操作系统这些都属于平台。大部分的平台是操作系统和基础硬件的合集。而Java平台与大多数平台不同，它是一个纯的软件平台，运行于其他的基于硬件的平台上(例如Windows)。</p>
-<p>Java平台包含两部分：</p>
-<ul>
-<li>Java虚拟机</li>
-<li>Java应用程序接口(API)</li>
-</ul>
-<p>上面已经提到过java虚拟机，它是java平台的基础，与不同的操作系统对接。</p>
-<p>API是内置的许多有用的方法的集合。它将相关的类(class)和接口(interface)组合成库，这个库我们通常称之为包(package)。</p>
-<p><img src="http://docs.oracle.com/javase/tutorial/figures/getStarted/getStarted-jvm.gif" alt="java平台"></p>
-<p>作为一个平台独立的环境，Java平台的速度比传统编译(c++直接编译成机器指令，java编译后是字节码文件，还需要虚拟机翻译成机器指令)慢，。但是随着硬件的发展，java编译器和虚拟机的性能已大幅提升，其速度和传统编译已相差无几。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Java-技术&quot;&gt;&lt;a href=&quot;#Java-技术&quot; class=&quot;headerlink&quot; title=&quot;Java 技术&quot;&gt;&lt;/a&gt;Java 技术&lt;/h1&gt;&lt;p&gt;Java技术既是一门编程语言，也是一个平台。&lt;/p&gt;
-&lt;h2 id=&quot;Java编程语言&quot;&gt;&lt;a hr
     
     </summary>
     

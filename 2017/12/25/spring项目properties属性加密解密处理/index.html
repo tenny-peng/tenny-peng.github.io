@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git," />
+  <meta name="keywords" content="spring,properties," />
 
 
 
@@ -89,52 +89,23 @@
 
 
 
-<meta name="description" content="简介Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,
-可以有效、高速的处理从很小到非常大的项目版本管理。
-安装由于本人是Windows平台，所以这里安装的是Windows平台下的工具。
-点击https://git-scm.com/download/win下载
-如果网速太慢可以百度搜索“git下载”。
-下载完成之后一路next就可以了，  
-安装完成后，开始菜单找到">
+<meta name="description" content="前言出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。
+解决方案1.0首先我们自定义一个属性加载器，继承自spring的PropertyPlaceholderConfigurer。12345678910111213141516171819202122232425/** * 解密自定义加密属性 * * @author tenny * */public class Enc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git简单教程">
-<meta property="og:url" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/index.html">
+<meta property="og:title" content="spring项目properties属性加密解密处理">
+<meta property="og:url" content="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/index.html">
 <meta property="og:site_name" content="Tenny's Blog">
-<meta property="og:description" content="简介Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,
-可以有效、高速的处理从很小到非常大的项目版本管理。
-安装由于本人是Windows平台，所以这里安装的是Windows平台下的工具。
-点击https://git-scm.com/download/win下载
-如果网速太慢可以百度搜索“git下载”。
-下载完成之后一路next就可以了，  
-安装完成后，开始菜单找到">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403201939.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403203407.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403203655.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403204148.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403204148.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/0170403204526.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403205231.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170408134106.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403212928.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403210357.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403213141.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403213613.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403213822.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403214113.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403214855.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403215328.png">
-<meta property="og:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403215427.png">
-<meta property="og:updated_time" content="2017-04-08T05:44:17.661Z">
+<meta property="og:description" content="前言出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。
+解决方案1.0首先我们自定义一个属性加载器，继承自spring的PropertyPlaceholderConfigurer。12345678910111213141516171819202122232425/** * 解密自定义加密属性 * * @author tenny * */public class Enc">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/20171225143231.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/20171225143351.png">
+<meta property="og:image" content="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/20171225144146.png">
+<meta property="og:updated_time" content="2017-12-25T08:20:37.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git简单教程">
-<meta name="twitter:description" content="简介Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,
-可以有效、高速的处理从很小到非常大的项目版本管理。
-安装由于本人是Windows平台，所以这里安装的是Windows平台下的工具。
-点击https://git-scm.com/download/win下载
-如果网速太慢可以百度搜索“git下载”。
-下载完成之后一路next就可以了，  
-安装完成后，开始菜单找到">
-<meta name="twitter:image" content="https://tenny-peng.github.io/2017/04/03/Git简单教程/20170403201939.png">
+<meta name="twitter:title" content="spring项目properties属性加密解密处理">
+<meta name="twitter:description" content="前言出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。
+解决方案1.0首先我们自定义一个属性加载器，继承自spring的PropertyPlaceholderConfigurer。12345678910111213141516171819202122232425/** * 解密自定义加密属性 * * @author tenny * */public class Enc">
+<meta name="twitter:image" content="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/20171225143231.png">
 
 
 
@@ -162,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://tenny-peng.github.io/2017/04/03/Git简单教程/"/>
+  <link rel="canonical" href="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/"/>
 
 
 
 
 
-  <title> Git简单教程 | Tenny's Blog </title>
+  <title> spring项目properties属性加密解密处理 | Tenny's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -351,7 +322,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/03/Git简单教程/">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/12/25/spring项目properties属性加密解密处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tenny Peng">
@@ -372,7 +343,7 @@
             
             
               
-                Git简单教程
+                spring项目properties属性加密解密处理
               
             
           </h1>
@@ -387,8 +358,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T13:45:13+08:00">
-                2017-04-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T11:48:25+08:00">
+                2017-12-25
               </time>
             
 
@@ -410,8 +381,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/categories/properties/" itemprop="url" rel="index">
+                    <span itemprop="name">properties</span>
                   </a>
                 </span>
 
@@ -450,82 +421,26 @@
       
 
       
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目,</p>
-<p>可以有效、高速的处理从很小到非常大的项目版本管理。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>由于本人是Windows平台，所以这里安装的是Windows平台下的工具。</p>
-<p>点击<a href="https://git-scm.com/download/win" target="_blank" rel="external">https://git-scm.com/download/win</a>下载</p>
-<p>如果网速太慢可以百度搜索“git下载”。</p>
-<p>下载完成之后一路next就可以了，  </p>
-<p>安装完成后，开始菜单找到”git”-&gt;”Git Bash”，</p>
-<p>在命令行输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
-<p>看到类似如下结果，说明我们安装成功了。</p>
-<p><img src="/2017/04/03/Git简单教程/20170403201939.png" alt="git_bash_img"></p>
-<p>安装完成后，还需要一点设置，在打开的git bash命令行中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;Your Name&quot;</div><div class="line">$ git config --global user.email &quot;email@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p><strong>注意把上面改成自己的名字和邮箱地址</strong></p>
-<p>git config命令的–global参数，表示你这台机器上所有的Git仓库都会使用这个配置，</p>
-<p>当然也可以对某个仓库指定不同的用户名和Email地址。</p>
-<p>因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。</p>
-<h1 id="使用github"><a href="#使用github" class="headerlink" title="使用github"></a>使用github</h1><p>我们希望项目不只是在本地，只有有网，哪里都可以获取自己的项目，<br>GitHub 正是这样一个面向开源及私有软件项目的托管平台。<br>我们可以把自己的项目放在这个平台上，可以和其他人维护项目。</p>
-<p>后面会讲git的基本操作，你也可以直接到后面查看。作为一般流程，这里让我们先注册一个github账号</p>
-<p>进入<a href="https://github.com/" target="_blank" rel="external">github</a>网站,点击sign up</p>
-<p><img src="/2017/04/03/Git简单教程/20170403203407.png" alt="注册github"></p>
-<p>填写信息后点击”create an account” 按钮</p>
-<p><img src="/2017/04/03/Git简单教程/20170403203655.png" alt="注册github"></p>
-<p>之后进入到我们的首页</p>
-<p><img src="/2017/04/03/Git简单教程/20170403204148.png" alt="github首页"></p>
-<p>这样我们已经成功拥有了一个github账号，让我们正式开始吧~</p>
-<p>简单说下仓库的概念，仓库的英文名是repository，你可以简单理解成一个目录，<br>这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，<br>以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
-<p>点击上面的+号，新建一个仓库<br><img src="/2017/04/03/Git简单教程/20170403204148.png" alt="github首页"></p>
-<p>输入我们的仓库名称后，点击下面”create repository”按钮即可创建一个仓库<br><img src="/2017/04/03/Git简单教程/0170403204526.png" alt="仓库信息"></p>
-<p>我们可以看到这个仓库是空的，什么都没有。<br><img src="/2017/04/03/Git简单教程/20170403205231.png" alt="空仓库"></p>
-<p>接下来，我们回到本地git上。</p>
-<h1 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h1><p>由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以还需要一点设置：</p>
-<p>回到git bash命令窗口，创建SSH  key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</p>
-<p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p>
-<p>登录你的github，进入setting，点击”SSH and GPG keys”,点击右上角”New SSH Key”,tite随便填，Key文本框里粘贴id_rsa.pub文件的内容，最后点击”Add SSh Key”即可。<br><img src="/2017/04/03/Git简单教程/20170408134106.png" alt="填写公钥"></p>
-<p>可以看到我这里已经有两个了，一个家里一个公司，这样就可以两边同步信息了。</p>
-<p>为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-<p>接下来输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd e:</div></pre></td></tr></table></figure></p>
-<p>切换目录，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:tenny-peng/test.git</div></pre></td></tr></table></figure></p>
-<p>稍等一会，就可将github上的项目克隆到本地</p>
-<p><img src="/2017/04/03/Git简单教程/20170403212928.png" alt="本地仓库"></p>
-<p>这里我选的e盘根目录，你可以自己修改，<strong>注意：选择的目录下不可以有仓库同名目录</strong><br>如我的e盘下不能有test这个目录，不然在克隆时会报错。</p>
-<p><img src="/2017/04/03/Git简单教程/20170403210357.png" alt="克隆仓库"><br>这里有一个警告，说我们的仓库是空的，不用管它，我们马上会添加文件。</p>
-<h1 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h1><font color="red" size="5">使用Windows的童鞋要特别注意：</font>
-
-<p>千万不要使用Windows自带的记事本编辑任何文本文件。原因是Microsoft开发记事本的团队使用了<br>一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf<br>（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，<br>明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。建议你下载<br>Notepad++代替记事本，不但功能强大，而且免费！记得把notepad++的默认编码设置为UTF-8<br>without BOM即可。</p>
-<p>在仓库test文件目录下，我们先编写一个readme.txt文件，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Git is a version control system.</div><div class="line">Git is free software.</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403213141.png" alt="新建文件"></p>
-<p>这里我们可以看到test目录下有一个隐藏的.git目录(看不到可自行百度“windows查看隐藏文件方法”)，这个就说明此目录是由git管理的仓库了，如果删除了这个隐藏的目录，那个git也就不认识这个目录了，也不能对此目录下的文件进行管理了。</p>
-<p>回到命令行，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add readme.txt</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403213613.png" alt="添加文件"></p>
-<p>什么反馈信息也没有？那就对了，Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
-<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git status</div></pre></td></tr></table></figure></p>
-<p>可查看当前仓库状态</p>
-<p><img src="/2017/04/03/Git简单教程/20170403213822.png" alt="添加状态"></p>
-<p>我们发现提示有新文件，但是这样还不够。</p>
-<p>我们继续输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;add readme.txt&quot;</div></pre></td></tr></table></figure></p>
-<p>这样才把文件提交到仓库，再次输入”git status”查看状态</p>
-<p><img src="/2017/04/03/Git简单教程/20170403214113.png" alt="提交状态"></p>
-<p>简单解释一下git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
-<p>git commit命令执行成功后会告诉你，1个文件被改动（我们新添加的readme.txt文件），插入了两行内容（readme.txt有两行内容）。</p>
-<h1 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h1><p>这里我就在仓库里新增了一个文件，当然还会有修改，删除操作。其实这样就可以管理自己的项目了。但是，我们似乎忘记了github。对，我们需要的是随时随处可获取，所以我们需要把本地仓库的内容同步到github这个托管平台。</p>
-<p>当你从远程仓库克隆时，实际上Git自动把本地的master分支(分支后面再讲，简单理解为仓库的多个版本，默认一个主分支)和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。</p>
-<p>要查看远程库的信息，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote</div></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v</div></pre></td></tr></table></figure></p>
-<p>获取更详细信息</p>
-<p><img src="/2017/04/03/Git简单教程/20170403214855.png" alt="远程信息"></p>
-<p>上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。</p>
-<p>接下来我们把本地改动(这里新增了一个文件，对于git，新增，修改，删除，都属于改动)推送到远程仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/04/03/Git简单教程/20170403215328.png" alt="推送分支"></p>
-<p>刷新浏览器中我们的github主页，可以看到，readme.txt文件已经同步到远程仓库了。<br><img src="/2017/04/03/Git简单教程/20170403215427.png" alt="查看远程分支"></p>
-<font size="5">以上我们就使用git创建了自己的仓库，并将其同步到远程服务器上，以便我们在其它地方，或其他人获取。</font>
-
-<p><br><br>参考：</p>
-<p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的git教程</a></p>
-<p><a href="http://www.baike.com/wiki/GIT" target="_blank" rel="external">git互动百科</a></p>
-<p><a href="http://www.baike.com/wiki/github" target="_blank" rel="external">github互动百科</a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>出于安全考虑，项目的properties文件中某些属性需要加密存放，使用时解密。</p>
+<h3 id="解决方案1-0"><a href="#解决方案1-0" class="headerlink" title="解决方案1.0"></a>解决方案1.0</h3><p>首先我们自定义一个属性加载器，继承自spring的PropertyPlaceholderConfigurer。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 解密自定义加密属性</div><div class="line"> *</div><div class="line"> * @author tenny</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer &#123;</div><div class="line"></div><div class="line">    private List&lt;String&gt; encryptPropNames;</div><div class="line"></div><div class="line">    // 覆写转换方法，对自定义属性解密</div><div class="line">    @Override</div><div class="line">    protected String convertProperty(String propertyName, String propertyValue) &#123;</div><div class="line"></div><div class="line">        if (encryptPropNames.contains(propertyName)) &#123;</div><div class="line">            return AESUtil.decrypt(propertyValue);</div><div class="line">        &#125;</div><div class="line">        return propertyValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEncryptPropNames(List&lt;String&gt; encryptPropNames) &#123;</div><div class="line">        this.encryptPropNames = encryptPropNames;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后修改配置文件如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 自定义属性加载器，解密某些属性 --&gt;</div><div class="line">    &lt;bean id=&quot;placeholderConfig&quot; class=&quot;com.tenny.common.EncryptPropertyPlaceholderConfigurer&quot;&gt;</div><div class="line">        &lt;!-- 配置需解密的属性 --&gt;</div><div class="line">        &lt;property name=&quot;encryptPropNames&quot;&gt;</div><div class="line">           &lt;list&gt;</div><div class="line">               &lt;value&gt;jdbc.password&lt;/value&gt;</div><div class="line">               &lt;value&gt;redis.password&lt;/value&gt;</div><div class="line">           &lt;/list&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;property name=&quot;locations&quot;&gt;</div><div class="line">            &lt;list&gt;</div><div class="line">                &lt;value&gt;classpath:conf/jdbc.properties&lt;/value&gt;</div><div class="line">                &lt;value&gt;classpath:conf/redis.properties&lt;/value&gt;</div><div class="line">            &lt;/list&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>其中jdbc.properties中password属性加密存储<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">jdbc.driver=com.mysql.jdbc.Driver</div><div class="line">jdbc.url=jdbc:mysql://localhost:3306/news</div><div class="line">jdbc.username=root</div><div class="line">jdbc.password=3hj83jsf234hp3jd</div><div class="line">#定义初始连接数  </div><div class="line">jdbc.initialSize=0</div><div class="line">#定义最大连接数  </div><div class="line">jdbc.maxActive=20</div><div class="line">#定义最大空闲  </div><div class="line">jdbc.maxIdle=20</div><div class="line">#定义最小空闲  </div><div class="line">jdbc.minIdle=1</div><div class="line">#定义最长等待时间  </div><div class="line">jdbc.maxWait=60000</div></pre></td></tr></table></figure></p>
+<p>redis.properties同样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># Redis settings</div><div class="line">redis.host=localhost</div><div class="line">redis.port=6379</div><div class="line">redis.pass=4jd89jkn68943gf1</div><div class="line">redis.maxTotal=200</div><div class="line">redis.maxIdle=50</div><div class="line">redis.minIdle=300</div><div class="line">redis.maxWaitMillis=1000</div><div class="line">redis.testOnBorrow=true</div></pre></td></tr></table></figure></p>
+<p>至于加密解密工具AESUtil网上很多，这里就不贴了。</p>
+<p>项目启动时，由于覆写了convertProperty方法，而每个属性都会过一遍该方法，通过配置encryptPropNames的值，就可以灵活选择需要解密的字段了。</p>
+<h3 id="新的问题"><a href="#新的问题" class="headerlink" title="新的问题"></a>新的问题</h3><p>按理说到这里就满足需求了，然而tenny又遇到了一个问题。我们知道，加密解密工具AESUtil是需要key的，如果这个key也存在properties文件中呢。按上述方法，假如先读取到key再读取properties文件加密属性，是可以正常解析的。但假如先读取到需要解密的属性，这时候AESUtil所需key还是空，就会造成解密错误了。</p>
+<p>由于properties继承自Hashtable，key/value不保证进出顺序，故加载properties属性顺序不保证与文件所写一致，所以想通过把key属性写在最前面来解决是不行的。</p>
+<p>有一个解决方案是自定义一个OrderedProperties类继承自Properties，然后使用这个OrderedProperties来存放属性，保证读取顺序与写入顺序一致即可。我这里使用的是另外一种办法。</p>
+<h3 id="回顾之前方案"><a href="#回顾之前方案" class="headerlink" title="回顾之前方案"></a>回顾之前方案</h3><p>一路查看PropertyPlaceholderConfigurer继承链到PropertyResourceConfigurer，查看所有方法<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225143231.png" alt="PropertyResourceConfigurer所有方法"></p>
+<p>查看原convertProperty(String, String)方法，可以看到原方法只是将值原样返回了。<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225143351.png" alt="convertProperty原方法"></p>
+<p>那么为什么覆写convertProperty方法改写了值后就能得到改变后的值呢，我们再看convertProperties(Properties)方法<br><img src="/2017/12/25/spring项目properties属性加密解密处理/20171225144146.png" alt="convertProperty原方法"></p>
+<p>也就是说先获取值，再经convertProperty方法获取另一个值，如果两者不同则以后者为准。所以我们之前覆写convertProperty(String, String)方法就可以自定义解密属性值了。</p>
+<p>再回到新的问题上，properties属性解密需要AESUtil，而AESUtil先需要key属性，怎么解决这个”死锁”问题呢。</p>
+<h3 id="解决方案2-0"><a href="#解决方案2-0" class="headerlink" title="解决方案2.0"></a>解决方案2.0</h3><p>看了上面的源码我们自然就想到了另一个办法，就是覆写convertProperties(Properties)方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 解密自定义加密属性</div><div class="line"> *</div><div class="line"> * @author tenny</div><div class="line"> *</div><div class="line"> */</div><div class="line">public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer &#123;</div><div class="line"></div><div class="line">    private List&lt;String&gt; encryptPropNames;</div><div class="line"></div><div class="line">    private String keyValue = null;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void convertProperties(Properties props) &#123;</div><div class="line">        // 1.先遍历全部属性，找到key属性值以初始化AESUtil</div><div class="line">        Enumeration&lt;?&gt; propertyNames = props.propertyNames();</div><div class="line">        while (propertyNames.hasMoreElements()) &#123;</div><div class="line">            String propertyName = (String) propertyNames.nextElement();</div><div class="line">            String propertyValue = props.getProperty(propertyName);</div><div class="line">            if(propertyName.equals(&quot;keyValue&quot;))&#123;</div><div class="line">                keyValue = propertyValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        AESUtil.key = keyValue;</div><div class="line">        // 2.回调原遍历方法</div><div class="line">        super.convertProperties(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 3.覆写转换方法，对自定义属性解密</div><div class="line">    @Override</div><div class="line">    protected String convertProperty(String propertyName, String propertyValue) &#123;</div><div class="line"></div><div class="line">        if (encryptPropNames.contains(propertyName)) &#123;</div><div class="line">            return SecUtil.decrypt(propertyValue);</div><div class="line">        &#125;</div><div class="line">        return propertyValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setEncryptPropNames(List&lt;String&gt; encryptPropNames) &#123;</div><div class="line">        this.encryptPropNames = encryptPropNames;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如此一来的话，就解决了解密属性要AESUtil而AESUtil要key属性的”死锁”问题。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一般来说，大部分情况下解决方案1.0足矣。</p>
+<p>不过我这里比较特别一点，场景稍微有点麻烦。先是折腾了半天想办法如何按写入顺序读出属性，但是感觉把事情搞得更麻烦了，又得引入新的东西，最后还是放弃了这种方案。后来在上级老大的提示下尝试重写convertProperty更上层的convertProperties方法，于是对数据有了更强的掌控力，问题也解决了。</p>
+<p>当然缺点还是有的，第一次遍历了所有属性只是为了拿特定的一个属性，而后面又要全部遍历一次，感觉有点浪费吖。嘛，暂时先这样了。后面有啥好办法再修改咯。</p>
 
       
     </div>
@@ -576,7 +491,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+            <a href="/tags/properties/" rel="tag"># properties</a>
           
         </div>
       
@@ -589,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/03/MarkDown基础语法/" rel="next" title="Markdown基础语法">
-                <i class="fa fa-chevron-left"></i> Markdown基础语法
+              <a href="/2017/12/04/Markdown行首缩进方法/" rel="next" title="Markdown行首缩进方法">
+                <i class="fa fa-chevron-left"></i> Markdown行首缩进方法
               </a>
             
           </div>
@@ -598,10 +515,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/03/MarkDown引用本地图片/" rel="prev" title="hexo引用本地图片">
-                hexo引用本地图片 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -737,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用github"><span class="nav-number">3.</span> <span class="nav-text">使用github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#克隆仓库"><span class="nav-number">4.</span> <span class="nav-text">克隆仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加文件"><span class="nav-number">5.</span> <span class="nav-text">添加文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#推送"><span class="nav-number">6.</span> <span class="nav-text">推送</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案1-0"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的问题"><span class="nav-number">1.2.</span> <span class="nav-text">新的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回顾之前方案"><span class="nav-number">1.3.</span> <span class="nav-text">回顾之前方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案2-0"><span class="nav-number">1.4.</span> <span class="nav-text">解决方案2.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

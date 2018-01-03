@@ -313,6 +313,174 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/06/19/MyBatis分页插件PageHelper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tenny Peng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tenny's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/19/MyBatis分页插件PageHelper/" itemprop="url">
+                  MyBatis分页插件PageHelper
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T09:55:19+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PageHelper/" itemprop="url" rel="index">
+                    <span itemprop="name">PageHelper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>PageHelper是一个Mybatis的分页插件，可以方便地对查询结果进行分页和排序。</p>
+<h1 id="在spring-mybatis-中使用-pagehelper"><a href="#在spring-mybatis-中使用-pagehelper" class="headerlink" title="在spring + mybatis 中使用 pagehelper"></a>在spring + mybatis 中使用 pagehelper</h1><h2 id="1-maven添加依赖"><a href="#1-maven添加依赖" class="headerlink" title="1. maven添加依赖"></a>1. maven添加依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;!-- mybatis 分页插件 --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.1.4&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h2 id="2-编写mybatis-config-xml"><a href="#2-编写mybatis-config-xml" class="headerlink" title="2. 编写mybatis-config.xml"></a>2. 编写mybatis-config.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;  </div><div class="line">&lt;!DOCTYPE configuration  </div><div class="line">PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;  </div><div class="line">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;  </div><div class="line">&lt;!-- 配置管理器 --&gt;  </div><div class="line">&lt;configuration&gt;</div><div class="line">    &lt;plugins&gt;  </div><div class="line">        &lt;!-- com.github.pagehelper为PageHelper类所在包名 --&gt;  </div><div class="line">        &lt;plugin interceptor=&quot;com.github.pagehelper.PageHelper&quot;&gt;  </div><div class="line">            &lt;!-- 4.0.0以后版本可以不设置该参数 --&gt;  </div><div class="line">            &lt;property name=&quot;dialect&quot; value=&quot;mysql&quot;/&gt;  </div><div class="line">            &lt;!-- 该参数默认为false --&gt;  </div><div class="line">            &lt;!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 --&gt;  </div><div class="line">            &lt;!-- 和startPage中的pageNum效果一样--&gt;  </div><div class="line">            &lt;property name=&quot;offsetAsPageNum&quot; value=&quot;true&quot;/&gt;  </div><div class="line">            &lt;!-- 该参数默认为false --&gt;  </div><div class="line">            &lt;!-- 设置为true时，使用RowBounds分页会进行count查询 --&gt;  </div><div class="line">            &lt;property name=&quot;rowBoundsWithCount&quot; value=&quot;true&quot;/&gt;  </div><div class="line">            &lt;!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 --&gt;  </div><div class="line">            &lt;!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）--&gt;  </div><div class="line">            &lt;property name=&quot;pageSizeZero&quot; value=&quot;true&quot;/&gt;  </div><div class="line">            &lt;!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 --&gt;  </div><div class="line">            &lt;!-- 启用合理化时，如果pageNum&lt;1会查询第一页，如果pageNum&gt;pages会查询最后一页 --&gt;  </div><div class="line">            &lt;!-- 禁用合理化时，如果pageNum&lt;1或pageNum&gt;pages会返回空数据 --&gt;  </div><div class="line">            &lt;property name=&quot;reasonable&quot; value=&quot;true&quot;/&gt;  </div><div class="line">            &lt;!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 --&gt;  </div><div class="line">            &lt;!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 --&gt;  </div><div class="line">            &lt;!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,orderBy,不配置映射的用默认值 --&gt;  </div><div class="line">            &lt;!-- 不理解该含义的前提下，不要随便复制该配置 --&gt;  </div><div class="line">            &lt;property name=&quot;params&quot; value=&quot;pageNum=start;pageSize=limit;&quot;/&gt;  </div><div class="line">            &lt;!-- 支持通过Mapper接口参数来传递分页参数 --&gt;  </div><div class="line">            &lt;property name=&quot;supportMethodsArguments&quot; value=&quot;true&quot;/&gt;  </div><div class="line">            &lt;!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page --&gt;  </div><div class="line">            &lt;property name=&quot;returnPageInfo&quot; value=&quot;check&quot;/&gt;  </div><div class="line">        &lt;/plugin&gt;  </div><div class="line">    &lt;/plugins&gt;  </div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h2 id="3-在spring-mybatis配置文件中引入上述配置"><a href="#3-在spring-mybatis配置文件中引入上述配置" class="headerlink" title="3. 在spring-mybatis配置文件中引入上述配置"></a>3. 在spring-mybatis配置文件中引入上述配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 --&gt;  </div><div class="line">&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;  </div><div class="line">    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</div><div class="line">    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis/mybatis-config.xml&quot; /&gt;  </div><div class="line">    &lt;!-- 自动扫描mapping.xml文件 --&gt;  </div><div class="line">    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:com/demo/mapping/*.xml&quot;&gt;&lt;/property&gt;  </div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h2 id="4-业务逻辑代码"><a href="#4-业务逻辑代码" class="headerlink" title="4. 业务逻辑代码"></a>4. 业务逻辑代码</h2><ol>
+<li><p>mapper.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;getAll&quot; resultMap=&quot;BaseResultMap&quot;&gt;</div><div class="line">    SELECT </div><div class="line">    &lt;include refid=&quot;Base_Column_List&quot; /&gt;</div><div class="line">    FROM city</div><div class="line">    WHERE 1 = 1</div><div class="line">    &lt;if test=&quot;pattern != null and pattern != &apos;&apos;&quot;&gt;</div><div class="line">        AND (</div><div class="line">            name like CONCAT(&apos;%&apos;, #&#123;pattern&#125;, &apos;%&apos;)</div><div class="line">            OR</div><div class="line">            countrycode like CONCAT(&apos;%&apos;, #&#123;pattern&#125;, &apos;%&apos;)</div><div class="line">            OR</div><div class="line">            district like CONCAT(&apos;%&apos;, #&#123;pattern&#125;, &apos;%&apos;)</div><div class="line">            OR</div><div class="line">            population like CONCAT(&apos;%&apos;, #&#123;pattern&#125;, &apos;%&apos;)</div><div class="line">        )</div><div class="line">    &lt;/if&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>dao</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public List&lt;Map&lt;String,Object&gt;&gt; getAll(Map&lt;String,Object&gt; params);</div></pre></td></tr></table></figure>
+</li>
+<li><p>service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public List&lt;Map&lt;String, Object&gt;&gt; getAll(Map&lt;String,Object&gt; params);</div></pre></td></tr></table></figure>
+</li>
+<li><p>serviceImpl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public List&lt;Map&lt;String, Object&gt;&gt; getAll(Map&lt;String,Object&gt; params) &#123;</div><div class="line">    return dao.getAll(params);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>controller</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// 设置分页及排序参数：pageNum,页数，从1开始；pageSize，页面大小，每页查询数据量，如10；orderBy，排序字段及顺序，如&quot;name desc&quot;</div><div class="line">PageHelper.startPage(pageNum, pageSize);</div><div class="line">PageHelper.orderBy(orderBy);</div><div class="line"></div><div class="line">// 业务模糊查询参数</div><div class="line">Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</div><div class="line">params.put(&quot;pattern&quot;, patternStr);</div><div class="line"></div><div class="line">// 查询</div><div class="line">List&lt;Map&lt;String, Object&gt;&gt; dataList = cityService.getAll(params);</div><div class="line">PageInfo&lt;Map&lt;String, Object&gt;&gt; pageInfo = new PageInfo&lt;Map&lt;String, Object&gt;&gt;(dataList);</div><div class="line"></div><div class="line">// 结果</div><div class="line">pageInfo.getTotal();// 总结果数，如4079</div><div class="line">pageInfo.getList();// 数据结果，本次查询返回结果，如10个</div></pre></td></tr></table></figure>
+</li>
+<li><p>ajax请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&quot;ajax&quot;: &#123;</div><div class="line">    &quot;url&quot;: &quot;city/getall&quot;,</div><div class="line">    &quot;type&quot;: &quot;POST&quot;,</div><div class="line">    &quot;data&quot;: &#123;</div><div class="line">        pageNum: 1;		//查询第一页</div><div class="line">        pageSize: 10;	//查询10条记录</div><div class="line">        orderColumn: &quot;name&quot;;	// 后台的orderBy通过这里的orderColumn + orderDir拼接而成。</div><div class="line">        orderDir: &quot;desc&quot;;	//但是为了防止sql注入及非法参数，最好后台增加方法判断参数合法性，并返回合法值。</div><div class="line">        pattern: &quot;tenny&quot;;	//业务相关参数，模糊查询</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h2><p>通过日志可以看到，插件对sql做了处理：1.先查询一条总数，2.在原sql上加入分页条件进行查询。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2017-06-19 11:15:38,569 DEBUG [com.demo.dao.ICityDao.getAll_COUNT] - ==&gt;  Preparing: SELECT count(0) FROM city WHERE 1 = 1 </div><div class="line">2017-06-19 11:15:38,601 DEBUG [com.demo.dao.ICityDao.getAll_COUNT] - ==&gt; Parameters: </div><div class="line">2017-06-19 11:15:38,841 DEBUG [com.demo.dao.ICityDao.getAll_COUNT] - &lt;==      Total: 1</div><div class="line">2017-06-19 11:15:38,850 DEBUG [com.demo.dao.ICityDao.getAll] - ==&gt;  Preparing: SELECT id, name, countrycode, district, population FROM city WHERE 1 = 1 order by id asc limit ?,? </div><div class="line">2017-06-19 11:15:38,850 DEBUG [com.demo.dao.ICityDao.getAll] - ==&gt; Parameters: 0(Integer), 10(Integer)</div><div class="line">2017-06-19 11:15:38,854 DEBUG [com.demo.dao.ICityDao.getAll] - &lt;==      Total: 10</div></pre></td></tr></table></figure></p>
+<p>pageInfo封装了查询条件及结果集：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PageInfo&#123;pageNum=1, pageSize=10, size=10, startRow=1, endRow=10, total=4079, pages=408, list=Page&#123;count=true, pageNum=1, pageSize=10, startRow=0, endRow=10, total=4079, pages=408, countSignal=false, orderBy=&apos;id asc&apos;, orderByOnly=false, reasonable=true, pageSizeZero=true&#125;, firstPage=1, prePage=0, nextPage=2, lastPage=8, isFirstPage=true, isLastPage=false, hasPreviousPage=false, hasNextPage=true, navigatePages=8, navigatepageNums=[1, 2, 3, 4, 5, 6, 7, 8]&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/05/04/zookeeper入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2061,164 +2229,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://tenny-peng.github.io/2017/04/08/HelloWorld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Tenny Peng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tenny's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/08/HelloWorld/" itemprop="url">
-                  Hello World!
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-08T17:34:50+08:00">
-                2017-04-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java学习记录/" itemprop="url" rel="index">
-                    <span itemprop="name">Java学习记录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="开始动手，Hello-World！！"><a href="#开始动手，Hello-World！！" class="headerlink" title="开始动手，Hello World！！"></a>开始动手，Hello World！！</h1><p>是时候编写你自己的第一个Java应用了。</p>
-<h2 id="下载JDK"><a href="#下载JDK" class="headerlink" title="下载JDK"></a>下载JDK</h2><p>你可以到这里<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">下载</a>JDK并安装。</p>
-<p>注意：下载的是<strong>JDK</strong>，而<em>不是</em>JRE。JRE是java运行环境，用于运行java程序；JDK是java开发工具包，用于开发java程序，其中包含了JRE，所以我们下载JDK就好。</p>
-<p>安装完成后，win + r 输入cmd，打开命令行窗口，输入”java -version”，看到类似如下结果就说明安装成功了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C:\Users\Administrator&gt;java -version</div><div class="line">java version &quot;1.8.0_102&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_102-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)</div></pre></td></tr></table></figure></p>
-<h2 id="编辑工具"><a href="#编辑工具" class="headerlink" title="编辑工具"></a>编辑工具</h2><p>这里用windows自带的记事本就可以。</p>
-<h2 id="创建源文件"><a href="#创建源文件" class="headerlink" title="创建源文件"></a>创建源文件</h2><p>在D盘新建一个目录myapplication(你也可以自己选择其他盘符及目录)，新建一个记事本文档，将下面代码粘贴或手动输入到文本里：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * The HelloWorldApp class implements an application that</div><div class="line"> * simply prints &quot;Hello World!&quot; to standard output.</div><div class="line"> */</div><div class="line">class HelloWorldApp &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        System.out.println(&quot;Hello World!&quot;); // Display the string.</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>注意：Java严格<strong>区分大小写</strong>，HelloWorldApp不等于helloWorldapp。</p>
-<p>将该文件保存为HelloWorldApp.java。</p>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>win + r，输入cmd，打开命令行窗口，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd d:\myapplication</div></pre></td></tr></table></figure></p>
-<p>切换到HelloWorldApp.java文件所在目录。</p>
-<p>切换目录使用如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">C:\&gt;D:    //切换到D盘根目录</div><div class="line"></div><div class="line">D:\&gt;cd myapplication    //切换到当前目录下的myapplication目录</div><div class="line"></div><div class="line">D:\myapplication&gt;     //完成切换。。</div></pre></td></tr></table></figure></p>
-<p>继续输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javac HelloWorldApp.java</div></pre></td></tr></table></figure></p>
-<p>如果没有任何信息，应该就编译成功了，查看myapplication目录，发现多出一个HelloWorldApp.class文件，这个就是字节码文件。<br>如果出现错误提示，请检查文件名和文件内容是否和上述一致。</p>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>输入java HelloWorldApp运行程序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D:\myapplication&gt;java HelloWorldApp</div><div class="line">Hello World!</div></pre></td></tr></table></figure></p>
-<p>看到打印出了”Hello World!”说明我们得程序运行成功了。<br>如果提示错误，请检查文件名和文件内容是否和上述一致。</p>
-<p>至此，第一个java应用程序就完成了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2268,7 +2278,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2339,7 +2349,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

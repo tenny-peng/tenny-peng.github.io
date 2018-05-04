@@ -471,7 +471,7 @@
     <link href="https://tenny-peng.github.io/2017/06/19/hessian%E5%85%A5%E9%97%A8%E4%BD%BF%E7%94%A8/"/>
     <id>https://tenny-peng.github.io/2017/06/19/hessian入门使用/</id>
     <published>2017-06-19T08:11:24.000Z</published>
-    <updated>2018-05-04T08:58:03.272Z</updated>
+    <updated>2018-05-04T09:19:55.291Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Hessian是caucho公司开发的一种基于二进制RPC协议（Remote Procedure Call protocol）的轻量级远程调用框架。</p>
 <p>在Java中使用Hessian：</p>
@@ -559,6 +559,7 @@
 </li>
 </ol>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>分别启动服务端（端口为8080）和客户端（端口为8081）项目，浏览器地址访问   <a href="http://localhost:8081/SpringHessianClient/hello/sayHello" target="_blank" rel="external">http://localhost:8081/SpringHessianClient/hello/sayHello</a> 就能看到结果了。<br>其中页面显示<code>hello tenny</code>，服务端控制台打印<code>service result: hello tenny</code>，客户端控制台打印<code>client result: hello tenny</code>。</p>
+<h2 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h2><p>SpringHessianService项目下载：<a href="https://github.com/tenny-peng/SpringHessianService" target="_blank" rel="external">https://github.com/tenny-peng/SpringHessianService</a><br>SpringHessianClient项目下载：<a href="https://github.com/tenny-peng/SpringHessianClient" target="_blank" rel="external">https://github.com/tenny-peng/SpringHessianClient</a></p>
 ]]></content>
     
     <summary type="html">
